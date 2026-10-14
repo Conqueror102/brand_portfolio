@@ -4,5 +4,106 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Blue/silver palette with Manrope headings and DM Sans body typography. */
+    --color-brand-navy: #142D4E;
+    --color-brand-blue: #245A81;
+    --color-brand-blue-hover: #1B4665;
+    --color-brand-mist: #EAF0F5;
+    --color-brand-silver: #C5CBD3;
+    --color-brand-ash: #F3F4F6;
+    --color-brand-white: #FFFFFF;
+    --color-brand-ink: #202B38;
+    --color-brand-muted: #596675;
+    --color-brand-border: #DCE1E7;
+    --color-brand-control: #788594;
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+    body {
+        font-family: var(--font-sans);
+    }
+}
+
+@layer components {
+    .brand-display {
+        font-family: var(--font-display);
+        font-size: clamp(2.75rem, 6vw, 5.5rem);
+        font-weight: 800;
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+    }
+
+    .brand-heading {
+        font-family: var(--font-display);
+        font-size: clamp(1.875rem, 3.5vw, 3rem);
+        font-weight: 700;
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+    }
+
+    .brand-body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.65;
+    }
+}
+
+/* Reference-led homepage hero. */
+@layer components {
+.portfolio-page { background: var(--color-brand-mist); color: var(--color-brand-ink); padding: 28px; }
+.site-shell { max-width: 1480px; margin: auto; background: white; min-height: calc(100svh - 56px); }
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 32px 5%; }
+.wordmark { font-family: var(--font-display); font-size: 22px; font-weight: 800; line-height: 1; letter-spacing: -.07em; color: var(--color-brand-navy); text-decoration: none; }
+.wordmark span { display: block; }
+.desktop-nav { display: flex; align-items: center; gap: 24px; font-size: 13px; }
+.desktop-nav a, .desktop-nav button { text-decoration: none; cursor: pointer; padding: 8px 0; }
+.desktop-nav [aria-current] { color: var(--color-brand-blue); border-bottom: 1px solid; }
+.pill { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; border-radius: 99px; padding: 7px 7px 7px 22px; background: var(--color-brand-navy); color: white; font-weight: 500; font-size: 13px; cursor: pointer; min-height: 44px; }
+.pill:hover { background: var(--color-brand-blue-hover); }
+.arrow-disc { display: grid; place-items: center; background: var(--color-brand-blue); border-radius: 50%; width: 34px; height: 34px; }
+.icon { width: 22px; height: 22px; object-fit: contain; }
+.hero { display: grid; grid-template-columns: 1.05fr 1.08fr .85fr; align-items: center; gap: 4%; padding: 54px 5% 64px; }
+.eyebrow { font-size: 13px; margin-bottom: 22px; color: var(--color-brand-muted); }
+.hero h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4.35vw, 66px); letter-spacing: -.065em; line-height: 1.03; color: var(--color-brand-navy); }
+.hero h1 span { color: var(--color-brand-blue); }
+.hero-description { font-size: 15px; line-height: 1.7; color: var(--color-brand-muted); max-width: 310px; margin: 26px 0 30px; }
+.hero-cta { background: var(--color-brand-blue); }
+.hero-cta .arrow-disc { background: var(--color-brand-navy); }
+.text-link { display: block; margin-top: 22px; font-size: 13px; text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.portrait-card { margin: 0; padding: 12px 12px 0; border-radius: 18px; background: white; box-shadow: 0 12px 40px #142d4e0c; }
+.portrait-placeholder, .hero-portrait { width: 100%; aspect-ratio: 4/5; border-radius: 14px; object-fit: cover; background: var(--color-brand-ash); }
+.portrait-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; border: 1px solid var(--color-brand-border); }
+.portrait-initials { font-family: var(--font-display); font-weight: 800; font-size: clamp(64px, 8vw, 120px); letter-spacing: -.08em; color: var(--color-brand-silver); }
+.portrait-note { font-size: 10px; letter-spacing: .16em; color: var(--color-brand-muted); }
+.portrait-card figcaption { text-align: center; font-size: 12px; padding: 18px 0; }
+.role-kicker { border-left: 2px solid var(--color-brand-silver); padding-left: 12px; font-size: 13px; line-height: 1.5; color: var(--color-brand-muted); margin-bottom: 24px; }
+.hero-positioning h2 { font-family: var(--font-display); font-size: clamp(20px, 2.15vw, 32px); font-weight: 800; line-height: 1.12; letter-spacing: -.045em; color: var(--color-brand-navy); }
+.hero-positioning h2 span { color: var(--color-brand-muted); }
+.hero-perspective { margin-top: 44px; }
+.small-label { font-size: 9px; letter-spacing: .13em; color: var(--color-brand-muted); }
+.hero-perspective p { font-size: 14px; line-height: 1.6; margin-top: 10px; }
+.leadership-strip { display: flex; justify-content: space-between; align-items: center; gap: 28px; margin: 0 5%; padding: 30px 0; border-top: 1px solid var(--color-brand-border); }
+.strip-label, .strip-thought { font-size: 12px; line-height: 1.5; color: var(--color-brand-muted); }
+.affiliation { display: block; font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -.04em; color: var(--color-brand-navy); }
+.affiliation-role { display: block; margin-top: 5px; font-size: 11px; color: var(--color-brand-muted); }
+.preview-footer { display: flex; justify-content: space-between; padding: 20px 5%; font-size: 10px; color: var(--color-brand-muted); }
+.preview-footer a { text-decoration: underline; }
+.mobile-nav { display: none; position: relative; }
+.mobile-nav summary { cursor: pointer; padding: 12px; list-style: none; }
+.mobile-nav summary::-webkit-details-marker { display: none; }
+.mobile-nav nav { position: absolute; top: 50px; right: 0; width: 210px; z-index: 10; background: white; border: 1px solid var(--color-brand-border); padding: 14px; border-radius: 12px; box-shadow: 0 10px 30px #142d4e15; }
+.mobile-nav nav > * { display: block; padding: 12px; width: 100%; text-align: left; font-size: 14px; cursor: pointer; }
+.skip-link { position: absolute; left: 20px; top: -100px; padding: 12px; background: white; z-index: 20; }
+.skip-link:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--color-brand-blue); outline-offset: 5px; }
+dialog { margin: auto; padding: 32px; max-width: min(520px, calc(100% - 32px)); border: 1px solid var(--color-brand-border); border-radius: 18px; color: var(--color-brand-ink); }
+dialog::backdrop { background: #142d4e77; }
+.dialog-close { display: block; margin: 0 0 24px auto; cursor: pointer; padding: 8px; text-decoration: underline; }
+#dialog-description { margin-top: 20px; line-height: 1.65; color: var(--color-brand-muted); }
+@media (min-width: 1500px) { .hero { padding-top: 75px; padding-bottom: 85px; } }
+@media (max-width: 1050px) { .desktop-nav { gap: 14px; } .hero { gap: 3%; } .header-cta { gap: 12px; } .hero h1 { font-size: 4.2vw; } }
+@media (max-width: 800px) { .portfolio-page { padding: 14px; } .desktop-nav, .header-cta { display: none; } .mobile-nav { display: block; } .site-header { padding: 24px 6%; } .hero { grid-template-columns: 1fr 1fr; gap: 28px; padding: 30px 6% 40px; } .hero h1 { font-size: clamp(32px, 6vw, 48px); } .hero-positioning { grid-column: 1/-1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; } .role-kicker { grid-column: 1/-1; margin: 0; } .hero-perspective { margin: 0; } .leadership-strip { flex-wrap: wrap; } .strip-thought { display: none; } }
+@media (max-width: 540px) { .portfolio-page { padding: 8px; } .hero { grid-template-columns: 1fr; } .hero h1 { font-size: clamp(42px, 11vw, 60px); } .hero-description { max-width: 360px; } .portrait-card { max-width: 380px; width: 100%; margin: 6px auto 18px; } .portrait-initials { font-size: 100px; } .hero-positioning h2 { font-size: 24px; } .hero-perspective p { font-size: 13px; } .leadership-strip { align-items: flex-start; gap: 24px; } .strip-label { flex-basis: 100%; } .affiliation { font-size: 18px; } }
 }
