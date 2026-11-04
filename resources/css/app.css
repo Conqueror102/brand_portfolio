@@ -12,6 +12,7 @@
 @import './tome.css';
 @import './work.css';
 @import './prints.css';
+@import './engagements.css';
 @import './motion.css';
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

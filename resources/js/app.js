@@ -775,3 +775,28 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         sx = null;
     });
 })();
+
+// Selected engagements: one panel open at a time. Hover opens on desktop; tap or Enter everywhere.
+(() => {
+    const rail = document.querySelector('[data-eng]');
+    if (! rail) return;
+    const items = [...rail.querySelectorAll('[data-eng-item]')];
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 901px)');
+    let timer;
+    const open = (item) => {
+        items.forEach((el) => {
+            const on = el === item;
+            el.classList.toggle('is-open', on);
+            el.querySelector('[data-eng-toggle]').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+    };
+    items.forEach((item) => {
+        item.querySelector('[data-eng-toggle]').addEventListener('click', () => open(item));
+        item.addEventListener('mouseenter', () => {
+            if (! fine.matches) return;
+            clearTimeout(timer);
+            timer = setTimeout(() => open(item), 120);
+        });
+        item.addEventListener('mouseleave', () => clearTimeout(timer));
+    });
+})();
