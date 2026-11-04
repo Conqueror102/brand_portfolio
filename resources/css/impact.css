@@ -1,0 +1,45 @@
+/* Leadership & Impact: story card and evidence card, below Meet Modupe. */
+@layer components {
+.impact { --impact-radius: 22px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; max-width: 1440px; margin: 0 auto; padding: 0 4.4% clamp(56px, 7vw, 100px); }
+
+.impact-story { position: relative; overflow: hidden; border-radius: var(--impact-radius); min-height: 560px; padding: clamp(28px, 3.4vw, 48px); display: flex; flex-direction: column; color: #F4F1EC;
+    background:
+        radial-gradient(70% 55% at 78% 22%, #D9AD9366 0%, transparent 70%),
+        linear-gradient(180deg, #102440D9 0%, #102440B3 45%, #0B1A30F2 100%),
+        var(--bg-impact) 70% 50% / cover no-repeat; }
+.impact-story::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 calc(25% - 1px), #FFFFFF0F calc(25% - 1px) 25%); pointer-events: none; }
+.impact-story > * { position: relative; z-index: 1; }
+.impact-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #E9D2C2; }
+.impact-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #D9AD93; }
+.impact-story h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 4.2vw, 66px); line-height: 1.02; letter-spacing: -.05em; margin-top: 22px; max-width: 9.5em; }
+.impact-story h2 em { color: #E9C7B0; }
+.impact-milestone { margin-top: auto; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; padding-top: 26px; border-top: 1px solid #FFFFFF2E; }
+.impact-year { font-family: var(--font-display); font-size: clamp(40px, 3.6vw, 56px); letter-spacing: -.05em; line-height: .9; }
+.impact-milestone p:last-child { font-size: 16px; line-height: 1.6; color: #E6E9ED; max-width: 30em; }
+
+.impact-evidence { border-radius: var(--impact-radius); background: #EFE8DF; padding: clamp(28px, 3.4vw, 48px); display: flex; flex-direction: column; }
+.impact-row { display: grid; grid-template-columns: minmax(120px, .7fr) minmax(0, 1.6fr); gap: 24px; padding: 26px 0; border-bottom: 1px solid #D6CCC0; }
+.impact-row:first-child { padding-top: 0; }
+.impact-row h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2vw, 30px); line-height: 1.05; letter-spacing: -.04em; }
+.impact-row p { font-size: 15px; line-height: 1.65; color: #34465A; }
+.impact-row p + p { margin-top: 12px; }
+.impact-row strong { color: var(--color-brand-navy); font-weight: 600; }
+.impact-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.impact-tags li { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-brand-navy); background: #FCFAF7; border: 1px solid #CFC3B5; border-radius: 99px; padding: 6px 12px; }
+.impact-cta { margin-top: auto; align-self: flex-end; display: inline-flex; align-items: center; gap: 18px; background: var(--color-brand-navy); color: #FFFFFF; border-radius: 99px; padding: 8px 8px 8px 24px; font-size: 14px; }
+.impact-evidence .impact-cta { margin-top: 32px; }
+.impact-cta span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #D9AD93; }
+.impact-cta .icon { width: 18px; height: 18px; }
+.impact-cta:hover { background: var(--color-brand-blue-hover); }
+
+@media (max-width: 999px) {
+.impact { grid-template-columns: 1fr; }
+.impact-story { min-height: 480px; }
+}
+@media (max-width: 650px) {
+.impact { padding: 0 6% 48px; gap: 12px; }
+.impact-milestone { grid-template-columns: 1fr; gap: 12px; }
+.impact-row { grid-template-columns: 1fr; gap: 12px; }
+.impact-cta { align-self: stretch; justify-content: space-between; }
+}
+}

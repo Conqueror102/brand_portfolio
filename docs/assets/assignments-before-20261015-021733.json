@@ -1,0 +1,83 @@
+{
+    "content": {
+        "home.meet_photo": null,
+        "home.mentorship_image": null,
+        "speaking.image": null,
+        "programmes.feature_image": null,
+        "mentorship.image": null,
+        "impact.image": null,
+        "book.cover": null,
+        "podcast.artwork": null,
+        "seo.share_image": null
+    },
+    "articles": [
+        {
+            "id": 1,
+            "title": "From founder-dependent to future-ready: building a firm that outlasts its founders",
+            "cover_image": "images/scenes/terraces.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Succession is a system, not a moment",
+            "cover_image": "images/scenes/light.jpg"
+        },
+        {
+            "id": 3,
+            "title": "The quiet operations behind exceptional client service",
+            "cover_image": "images/scenes/steps.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Why aspiration stalls, and the discipline that moves it",
+            "cover_image": "images/scenes/horizon.jpg"
+        },
+        {
+            "id": 5,
+            "title": "What the next generation of lawyers expects from the firm",
+            "cover_image": "images/scenes/arches.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Leading with quiet confidence",
+            "cover_image": "images/scenes/terraces.jpg"
+        }
+    ],
+    "moments": [
+        {
+            "id": 60,
+            "title": "Sample: keynote at a leadership summit",
+            "image": "images/scenes/light.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        },
+        {
+            "id": 61,
+            "title": "Sample: panel on succession planning",
+            "image": "images/scenes/steps.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        },
+        {
+            "id": 62,
+            "title": "Sample: mentorship cohort opening",
+            "image": "images/scenes/arches.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        },
+        {
+            "id": 63,
+            "title": "Sample: fireside chat with managing partners",
+            "image": "images/scenes/terraces.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        },
+        {
+            "id": 64,
+            "title": "Sample: workshop on firm operations",
+            "image": "images/scenes/horizon.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        },
+        {
+            "id": 65,
+            "title": "Sample: award evening",
+            "image": "images/scenes/navy-steps.jpg",
+            "subtitle": "Replace in Admin → Lists → Photo reel"
+        }
+    ]
+}

@@ -9,11 +9,14 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
             fonts: [
-                bunny('Manrope', {
-                    weights: [700, 800],
+                bunny('Bodoni Moda', {
+                    weights: [400, 500],
+                    styles: ['normal', 'italic'],
+                    optimizedFallbacks: false,
                 }),
                 bunny('DM Sans', {
                     weights: [400, 500, 600],
+                    optimizedFallbacks: false,
                 }),
             ],
         }),

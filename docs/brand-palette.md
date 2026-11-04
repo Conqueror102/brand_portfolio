@@ -1,33 +1,37 @@
-# Blue and silver brand palette
+# Modupe Olusoga — editorial design system
 
-Working palette established from the user's blue and ash/silver direction. The approved font pairing is Manrope for headings and DM Sans for supporting text. It is a visual approximation; the exact reference font is unidentified.
+Selected direction: refined third Product Design concept, approved 14 October 2026. Earlier card layouts and typography experiments are superseded.
 
-## Typography and UI reference
+## Visual system
 
-Reference supplied on 14 October 2026: eacff09930c72b63a4c304295eca4549.jpg. Adopt its spacious white canvas, portrait-led composition, strong sans-serif name treatment, rounded image cards, pill buttons and contrasting lower feature section. Translate lime accents to brand blue and the charcoal feature section to navy. Adapt the content to Modupe's positioning; do not reuse the reference's people, logos, statistics or claims.
+A warm near-white canvas, deep ink typography, quiet silver-blue architectural layers and a restrained apricot accent. The owner is the focal point. Horizontal navigation, an oversized name with an offset italic surname, and a slim editorial footer replace the card grid.
 
-Manrope weights: 700 for section headings and 800 for prominent headlines. DM Sans weights: 400 for body copy, 500 for navigation/buttons and 600 for supporting emphasis. Font loading uses the existing Laravel Vite Bunny font integration and Blade @fonts directive. Families: Manrope and DM Sans.
+| Use | Colour |
+| --- | --- |
+| Primary ink | #102440 |
+| Secondary slate | #435565 |
+| Muted text | #526170 |
+| Base canvas | #FCFAF7 |
+| Fine dividers | #C1C7CF |
+| Accent dot | #D9AD93 |
 
-Reusable CSS classes: brand-display (responsive large headings), brand-heading (section titles) and brand-body (reading text). Tailwind font-sans resolves to DM Sans; font-display resolves to Manrope. Uppercase is optional for the hero name, not imposed on all headings. Keep body text at comfortable sizes rather than reproducing the screenshot's tiny supporting text.
+## Typography
 
-| Token | Hex | Use |
-| --- | --- | --- |
-| brand-navy | #142D4E | Headings, footer, occasional dark feature sections |
-| brand-blue | #245A81 | Primary buttons, links and selective emphasis |
-| brand-blue-hover | #1B4665 | Hover/active treatment for blue actions |
-| brand-mist | #EAF0F5 | Quiet blue-tinted panels and selected states |
-| brand-silver | #C5CBD3 | Decorative accents and small graphic details |
-| brand-ash | #F3F4F6 | Alternating section backgrounds |
-| brand-white | #FFFFFF | Main canvas, cards and text on navy/blue |
-| brand-ink | #202B38 | Main body text |
-| brand-muted | #596675 | Secondary text on white/ash/mist |
-| brand-border | #DCE1E7 | Decorative separators |
-| brand-control | #788594 | Input boundaries on white/ash/mist |
+Bodoni Moda 400/500 normal and italic for the brand, main name and headings. DM Sans 400/500/600 for supporting text, navigation and forms. The existing Laravel Vite font integration downloads local font assets. Main name uses 500 with an offset italic surname. Supporting text remains sans-serif.
 
-Aim for predominantly white/ash surfaces, with navy typography and selective blue actions. Silver is a flat cool neutral; metallic effects are optional decorative details, not a requirement. Avoid large areas of grey text or silver text on white.
+## Artwork
 
-Tailwind tokens live in resources/css/app.css; examples: bg-brand-ash, text-brand-navy, bg-brand-blue, hover:bg-brand-blue-hover and border-brand-control.
+Generated with the built-in image tool, using the approved revised concept as reference:
 
-Use white labels on blue/navy buttons. Use blue links on light surfaces with an underline or another non-colour cue. Use a blue focus outline on light surfaces and white on dark surfaces, with enough offset to separate it from the control. Decorative borders must not be the only means of identifying a form control.
+- public/images/editorial-background.png — 1586×992, quiet near-white architectural terraces. Prompt: extract only the reference's architectural environment; no people, furniture, text or UI; preserve pale silver-blue/apricot planes and generous blank typography space.
+- public/images/editorial-portrait.png — 1100×1429 transparent portrait and chair. Prompt: isolate the selected concept woman's portrait, preserving her braided updo, seated pose, cream blouse and navy outfit; no text, architecture or interface; transparent background.
 
-This establishes tokens for upcoming components; it does not restyle the starter welcome page. Semantic success/error/warning colours will be defined with the form components, with text/icons accompanying colour.
+This is a generated concept portrait, not Modupe's real photograph. Replace with approved photography before publication. The illustration and all text are separate assets/elements so content remains editable and responsive.
+
+## Responsive composition
+
+On desktop, the frame fits the viewport above 490px in height. Title scale adapts to width; the portrait uses contain sizing within the hero height, centred in its right-hand area. This preserves the full portrait without spilling into the footer. On mobile, content stacks and scrolls naturally.
+
+## Interaction scope
+
+Navigation opens accessible dialogs with approved brief content. The speaking/connection enquiry form validates and persists to the local database before confirmation. Email delivery, admin review, production policy content and full destination pages remain future stages. The UI explicitly identifies the form as a development preview.

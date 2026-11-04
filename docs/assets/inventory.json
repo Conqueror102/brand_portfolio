@@ -1,0 +1,287 @@
+{
+    "image_fields": [
+        {
+            "key": "profile.portrait",
+            "label": "Main portrait",
+            "default": "images/editorial-portrait.png",
+            "current": "images/editorial-portrait.png"
+        },
+        {
+            "key": "home.meet_photo",
+            "label": "Second photo",
+            "default": "images/library-demo.jpg",
+            "current": "images/library-demo.jpg"
+        },
+        {
+            "key": "home.mentorship_image",
+            "label": "Image",
+            "default": "images/scenes/steps.jpg",
+            "current": "images/scenes/steps.jpg"
+        },
+        {
+            "key": "speaking.image",
+            "label": "Image",
+            "default": "images/scenes/terraces.jpg",
+            "current": "images/scenes/terraces.jpg"
+        },
+        {
+            "key": "programmes.feature_image",
+            "label": "Mentorship card image",
+            "default": "images/scenes/navy-steps.jpg",
+            "current": "images/scenes/navy-steps.jpg"
+        },
+        {
+            "key": "mentorship.image",
+            "label": "Image",
+            "default": "images/scenes/steps.jpg",
+            "current": "images/scenes/steps.jpg"
+        },
+        {
+            "key": "impact.image",
+            "label": "Image",
+            "default": "images/scenes/arches.jpg",
+            "current": "images/scenes/arches.jpg"
+        },
+        {
+            "key": "book.cover",
+            "label": "Cover image",
+            "default": null,
+            "current": null
+        },
+        {
+            "key": "podcast.artwork",
+            "label": "Show artwork",
+            "default": null,
+            "current": null
+        },
+        {
+            "key": "seo.share_image",
+            "label": "Image when shared",
+            "default": "images/editorial-portrait.png",
+            "current": "images/editorial-portrait.png"
+        }
+    ],
+    "articles": [
+        {
+            "id": 1,
+            "title": "From founder-dependent to future-ready: building a firm that outlasts its founders",
+            "category": "institution-building",
+            "cover_image": "images/scenes/terraces.jpg",
+            "is_sample": true,
+            "status": "published"
+        },
+        {
+            "id": 2,
+            "title": "Succession is a system, not a moment",
+            "category": "governance-succession",
+            "cover_image": "images/scenes/light.jpg",
+            "is_sample": true,
+            "status": "published"
+        },
+        {
+            "id": 3,
+            "title": "The quiet operations behind exceptional client service",
+            "category": "people-performance",
+            "cover_image": "images/scenes/steps.jpg",
+            "is_sample": true,
+            "status": "published"
+        },
+        {
+            "id": 4,
+            "title": "Why aspiration stalls, and the discipline that moves it",
+            "category": "intentional-execution",
+            "cover_image": "images/scenes/horizon.jpg",
+            "is_sample": true,
+            "status": "published"
+        },
+        {
+            "id": 5,
+            "title": "What the next generation of lawyers expects from the firm",
+            "category": "professional-services",
+            "cover_image": "images/scenes/arches.jpg",
+            "is_sample": true,
+            "status": "published"
+        },
+        {
+            "id": 6,
+            "title": "Leading with quiet confidence",
+            "category": "leadership",
+            "cover_image": "images/scenes/terraces.jpg",
+            "is_sample": true,
+            "status": "published"
+        }
+    ],
+    "items": [
+        {
+            "id": 60,
+            "type": "moments",
+            "title": "Sample: keynote at a leadership summit",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/light.jpg",
+            "is_published": true
+        },
+        {
+            "id": 61,
+            "type": "moments",
+            "title": "Sample: panel on succession planning",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/steps.jpg",
+            "is_published": true
+        },
+        {
+            "id": 62,
+            "type": "moments",
+            "title": "Sample: mentorship cohort opening",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/arches.jpg",
+            "is_published": true
+        },
+        {
+            "id": 63,
+            "type": "moments",
+            "title": "Sample: fireside chat with managing partners",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/terraces.jpg",
+            "is_published": true
+        },
+        {
+            "id": 64,
+            "type": "moments",
+            "title": "Sample: workshop on firm operations",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/horizon.jpg",
+            "is_published": true
+        },
+        {
+            "id": 65,
+            "type": "moments",
+            "title": "Sample: award evening",
+            "subtitle": "Replace in Admin → Lists → Photo reel",
+            "body": null,
+            "category": null,
+            "image": "images/scenes/navy-steps.jpg",
+            "is_published": true
+        },
+        {
+            "id": 22,
+            "type": "organisations",
+            "title": "Streamsowers & Köhn",
+            "subtitle": "Chief Operating Officer",
+            "body": "Partnering with the firm’s leadership on strategy, institutional structures and the operational functions that support its people, clients and business objectives.",
+            "category": null,
+            "image": null,
+            "is_published": true
+        },
+        {
+            "id": 23,
+            "type": "organisations",
+            "title": "Association of Law Firm Administrators Nigeria (ALAN)",
+            "subtitle": "President, 2026–2029",
+            "body": "Advancing the development and professionalisation of law firm management and business professionals in Nigeria’s legal services industry.",
+            "category": null,
+            "image": null,
+            "is_published": true
+        },
+        {
+            "id": 24,
+            "type": "organisations",
+            "title": "International Bar Association",
+            "subtitle": "Law Firm Management Committee",
+            "body": "Serving as African Regional Forum Liaison Officer and contributing to international conversations on law firm management, technology, AI and the future of professional services.",
+            "category": null,
+            "image": null,
+            "is_published": true
+        },
+        {
+            "id": 25,
+            "type": "organisations",
+            "title": "The Strides Platform",
+            "subtitle": "Founder initiative",
+            "body": "A development and community platform supporting professionals through career, leadership, personal development and growth.",
+            "category": null,
+            "image": null,
+            "is_published": true
+        },
+        {
+            "id": 26,
+            "type": "organisations",
+            "title": "Project CHAM",
+            "subtitle": "Social impact",
+            "body": "Childhood cancer awareness, support and advocacy, including support for children and families affected by childhood cancer.",
+            "category": null,
+            "image": null,
+            "is_published": true
+        }
+    ],
+    "collections": {
+        "engagements": {
+            "label": "Speaking engagements",
+            "seed": []
+        },
+        "organisations": {
+            "label": "Organisations & initiatives",
+            "seed": [
+                {
+                    "icon": "columns",
+                    "title": "Streamsowers & Köhn",
+                    "subtitle": "Chief Operating Officer",
+                    "body": "Partnering with the firm’s leadership on strategy, institutional structures and the operational functions that support its people, clients and business objectives."
+                },
+                {
+                    "icon": "scale",
+                    "title": "Association of Law Firm Administrators Nigeria (ALAN)",
+                    "subtitle": "President, 2026–2029",
+                    "body": "Advancing the development and professionalisation of law firm management and business professionals in Nigeria’s legal services industry."
+                },
+                {
+                    "icon": "globe",
+                    "title": "International Bar Association",
+                    "subtitle": "Law Firm Management Committee",
+                    "body": "Serving as African Regional Forum Liaison Officer and contributing to international conversations on law firm management, technology, AI and the future of professional services."
+                },
+                {
+                    "icon": "steps",
+                    "title": "The Strides Platform",
+                    "subtitle": "Founder initiative",
+                    "body": "A development and community platform supporting professionals through career, leadership, personal development and growth."
+                },
+                {
+                    "icon": "heart",
+                    "title": "Project CHAM",
+                    "subtitle": "Social impact",
+                    "body": "Childhood cancer awareness, support and advocacy, including support for children and families affected by childhood cancer."
+                }
+            ]
+        },
+        "programmes": {
+            "label": "Other programmes",
+            "seed": []
+        },
+        "moments": {
+            "label": "Photo reel (in public)",
+            "seed": []
+        },
+        "media_items": {
+            "label": "Media appearances",
+            "seed": []
+        },
+        "resources": {
+            "label": "Downloads & resources",
+            "seed": []
+        },
+        "podcast_episodes": {
+            "label": "Podcast episodes",
+            "seed": []
+        }
+    }
+}

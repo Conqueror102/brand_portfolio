@@ -1,7 +1,7 @@
 # Modupe Olusoga website — working build plan
 
 Status: proposed architecture and scope; implementation has not started.
-Colour foundation: blue with ash/silver, defined in brand-palette.md and resources/css/app.css. The approved typography pairs Manrope headings with DM Sans supporting text, inspired by the UI reference supplied on 14 October 2026. Public page implementation has not started.
+Colour foundation: blue with ash/silver, defined in brand-palette.md and resources/css/app.css. The approved editorial direction uses Bodoni Moda normal/italic headings and DM Sans supporting text, with quiet architectural artwork. The homepage header and hero are implemented; remaining public pages are planned.
 
 ## 1. Direction and working agreement
 

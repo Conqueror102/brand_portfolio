@@ -1,6 +1,6 @@
 @props(['name'])
 @php
-    $icons = ['arrow-up-right' => 'arrow-up-right.png', 'menu' => 'menu.png'];
+    $icons = ['arrow-up-right' => 'arrow-up-right.png', 'menu' => 'menu.png', 'arrow-right' => 'arrow-right.png', 'arrow-right-white' => 'arrow-right-white.png'];
     $file = $icons[$name] ?? null;
 @endphp
 @if ($file)

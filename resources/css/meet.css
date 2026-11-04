@@ -1,0 +1,63 @@
+/* Meet Modupe: bento section directly below the hero. */
+@layer components {
+.meet { --meet-radius: 18px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: minmax(360px, auto) minmax(250px, auto); gap: 16px; max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 100px) 4.4%; }
+.meet > * { border-radius: var(--meet-radius); overflow: hidden; position: relative; }
+
+.meet-intro { grid-column: 1 / 7; background: #F4E8DE; padding: clamp(32px, 4vw, 56px); display: flex; flex-direction: column; }
+.meet-eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-brand-muted); display: flex; align-items: center; gap: 12px; }
+.meet-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #D9AD93; }
+.meet-intro h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(36px, 3.6vw, 58px); line-height: 1.02; letter-spacing: -.05em; margin-top: 22px; max-width: 12em; }
+.meet-intro > p:not(.meet-eyebrow) { font-size: 16px; line-height: 1.6; color: var(--color-brand-blue); margin-top: 16px; max-width: 30em; }
+.meet-pill { display: inline-flex; align-items: center; gap: 14px; align-self: flex-start; margin-top: auto; border-radius: 99px; background: var(--color-brand-navy); color: #FFFFFF; padding: 8px 8px 8px 22px; font-size: 14px; }
+.meet-intro .meet-pill { margin-top: 36px; }
+.meet-pill .icon { width: 30px; height: 30px; padding: 7px; border-radius: 50%; background: #FFFFFF1F; }
+.meet-pill:hover { background: var(--color-brand-blue-hover); }
+
+.meet-portrait { grid-column: 7 / 13; margin: 0; background: var(--bg-portrait-context) 30% 60% / cover no-repeat; display: flex; align-items: flex-end; justify-content: center; min-height: 360px; }
+.meet-portrait img { height: 100%; max-height: 420px; width: auto; object-fit: contain; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+.meet-portrait figcaption { position: absolute; right: 12px; top: 12px; font-size: 9px; color: var(--color-brand-muted); background: #FCFAF7B3; padding: 3px 6px; }
+
+.meet-photo { grid-column: 1 / 5; overflow: visible; }
+.meet-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--meet-radius); filter: saturate(.75) sepia(.12); }
+.meet-badge { position: absolute; top: 0; right: 0; display: grid; justify-items: center; background: #DDE3EA; padding: 14px 20px; border-radius: 0 var(--meet-radius) 0 var(--meet-radius); box-shadow: 0 0 0 8px var(--color-brand-ash); text-align: center; }
+.meet-badge strong { font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -.04em; line-height: 1.1; }
+.meet-badge span { font-size: 12px; color: var(--color-brand-blue); }
+
+.meet-perspective { grid-column: 5 / 10; background: #DDE3EA; padding: clamp(26px, 3vw, 38px); display: flex; flex-direction: column; }
+.meet-perspective-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.meet-perspective h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 2.4vw, 36px); letter-spacing: -.04em; }
+.meet-arrow { padding: 4px; }
+.meet-arrow .icon { width: 30px; height: 30px; transform: rotate(-45deg); transition: transform .2s ease; }
+.meet-arrow:hover .icon { transform: rotate(-45deg) translateX(4px); }
+.meet-perspective-title { font-weight: 600; font-size: 15px; margin-top: auto; padding-top: 28px; }
+.meet-perspective p:not(.meet-perspective-title) { font-size: 14px; line-height: 1.6; color: var(--color-brand-blue); margin-top: 6px; max-width: 34em; }
+.meet-perspective ul { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.meet-perspective li { font-size: 12px; border: 1px solid #B7C0CA; border-radius: 99px; padding: 6px 12px; }
+
+.meet-connect { grid-column: 10 / 13; background: var(--color-brand-navy); color: #F4F1EC; padding: clamp(24px, 2.4vw, 32px); display: flex; flex-direction: column; }
+.meet-connect::before { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #D9AD9340, transparent 70%); }
+.meet-connect h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2vw, 30px); letter-spacing: -.04em; line-height: 1.1; position: relative; }
+.meet-connect p { font-size: 14px; line-height: 1.6; color: #C9D0D7; margin: 10px 0 28px; position: relative; }
+.meet-pill-light { background: #F4E8DE; color: var(--color-brand-navy); margin-top: auto; position: relative; }
+.meet-connect .meet-pill-light { margin-top: auto; }
+.meet-pill-light:hover { background: #FFFFFF; }
+.meet-pill-light .icon { background: #10244014; }
+
+@media (max-width: 1100px) {
+.meet { grid-template-rows: auto; }
+.meet-photo { grid-column: 1 / 6; min-height: 250px; }
+.meet-perspective { grid-column: 6 / 13; }
+.meet-connect { grid-column: 1 / 13; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.meet-connect p { margin: 0; }
+.meet-connect .meet-pill-light { margin: 0 0 0 auto; }
+}
+@media (max-width: 760px) {
+.meet { grid-template-columns: 1fr; padding: 48px 6%; gap: 12px; }
+.meet > * { grid-column: 1 / -1 !important; }
+.meet-portrait { min-height: 380px; }
+.meet-photo { min-height: 220px; }
+.meet-connect { flex-direction: column; align-items: flex-start; }
+.meet-connect .meet-pill-light { margin: 20px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { .meet-arrow .icon { transition: none; } }
+}

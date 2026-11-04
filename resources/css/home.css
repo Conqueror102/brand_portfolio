@@ -1,0 +1,71 @@
+/* Homepage sections below Featured Insights: speaking, mentorship, testimonials, book. */
+@layer components {
+.insight-feature-art[style*='--cover'] { background: radial-gradient(60% 80% at 80% 20%, #D9AD9355, transparent 70%), linear-gradient(180deg, #102440B3, #102440E0), var(--cover) center / cover no-repeat; }
+
+/* Speaking */
+.home-speaking { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 16px; padding-bottom: clamp(40px, 5vw, 72px); }
+.home-speaking-intro { display: flex; flex-direction: column; }
+.home-speaking-intro .display { margin-top: 22px; color: #F4F1EC; }
+.home-speaking-intro .display em { color: #E9C7B0; }
+.home-speaking-intro .body-copy { margin-top: 20px; max-width: 30em; }
+.home-formats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 34px; }
+.home-formats li { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: #FFFFFF0F; border: 1px solid #FFFFFF1A; font-size: 14px; color: #E7E9EC; }
+.home-formats .line-icon { width: 22px; height: 22px; color: #E9C7B0; flex-shrink: 0; }
+.home-speaking-intro .actions { margin-top: auto; padding-top: 34px; }
+.home-speaking-intro .link-arrow { border-color: #FFFFFF55; color: #F4F1EC; }
+.home-topics { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Mentorship */
+.home-mentorship { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 16px; }
+.home-mentorship-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.home-mentorship-copy .display { margin-top: 24px; max-width: 15em; }
+.status-pill { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 7px 14px; border-radius: 99px; background: #FFFFFF; color: var(--ink); }
+.status-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #3E7B52; }
+.status-forthcoming::before { background: var(--apricot); }
+.status-closed::before, .status-in_progress::before { background: #8E9AA6; }
+.journey { display: grid; grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr)); margin-top: 38px; border-top: 1px solid #D9C8B9; }
+.journey li { position: relative; padding: 18px 12px 0 0; font-family: var(--font-display); font-size: clamp(16px, 1.35vw, 20px); letter-spacing: -.02em; }
+.journey li::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--apricot); }
+.journey li:last-child::before { background: var(--ink); }
+.journey span { display: block; font-family: var(--font-sans); font-size: 11px; letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 34px; }
+.facts div { background: #FFFFFF99; border-radius: 14px; padding: 16px 18px; }
+.facts dt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin-top: 6px; font-family: var(--font-display); font-size: clamp(17px, 1.4vw, 21px); letter-spacing: -.02em; }
+.home-mentorship-art { min-height: 520px; }
+.frame-badge-top { top: 18px; bottom: auto; left: auto; right: 18px; }
+.frame-badge .line-icon { width: 24px; height: 24px; color: var(--ink); flex-shrink: 0; }
+
+/* Book */
+.home-book-card { display: grid; grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.book-cover { aspect-ratio: 2 / 3; max-width: 300px; width: 100%; justify-self: center; border-radius: 4px 12px 12px 4px; padding: 30px 26px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EC; background: radial-gradient(70% 50% at 80% 10%, #D9AD9344, transparent 70%), linear-gradient(160deg, #1B355A, #0B1A30); box-shadow: inset 6px 0 0 #00000033, inset 9px 0 0 #FFFFFF14, 0 30px 50px -24px #10244088, 0 12px 20px -14px #10244066; transform: rotate(-3deg); transition: transform .4s ease; }
+.home-book-card:hover .book-cover { transform: rotate(0); }
+.book-cover-author { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: #E9C7B0; }
+.book-cover-rule { width: 40px; height: 1px; background: #E9C7B0; }
+.book-cover-title { font-family: var(--font-display); font-size: clamp(24px, 2.2vw, 32px); line-height: 1.08; letter-spacing: -.04em; }
+.book-cover-title em { display: block; color: #E9C7B0; }
+.home-book-copy .display { margin-top: 18px; }
+.home-book-copy .body-copy { margin-top: 18px; max-width: 34em; }
+.home-book-copy .tags { margin-top: 24px; }
+
+.btn-ghost-dark { background: transparent; color: #F4F1EC; border: 1px solid #FFFFFF40; }
+.btn-ghost-dark:hover { background: #FFFFFF14; }
+
+@media (max-width: 999px) {
+.home-speaking, .home-mentorship, .home-book-card { grid-template-columns: 1fr; }
+.home-mentorship-art { min-height: 420px; }
+}
+@media (max-width: 650px) {
+.home-topics, .home-formats, .facts { grid-template-columns: 1fr; }
+.journey { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid #D9C8B9; margin-left: 4px; }
+.journey li { padding: 0 0 16px 22px; }
+.journey li::before { top: 6px; left: -5px; }
+.home-mentorship-art { min-height: 360px; }
+.book-cover { max-width: 220px; }
+}
+@media (prefers-reduced-motion: reduce) { .book-cover { transition: none; } }
+}
+@layer components {
+.quote-mark { display: block; height: 34px; font-family: var(--font-display); font-size: 84px; line-height: .9; color: var(--apricot); }
+.card-navy .quote-mark { color: #E9C7B0; }
+}

@@ -1,0 +1,380 @@
+<?php
+
+/*
+| Editable page content. Each group is one screen under Admin → Pages.
+| Types: text, textarea, rich (*word* = italic accent), longtext (paragraphs, "## " headings, "> " quotes),
+| image (media library), link (/path or https://), toggle, lines (one item per line), sections (homepage order).
+| Defaults are the launch copy; anything saved in the admin overrides them.
+*/
+
+$f = fn (string $label, string $type = 'text', mixed $default = null, ?string $section = null, ?string $hint = null) => compact('label', 'type', 'default', 'section', 'hint');
+
+$groups = [
+    'profile' => [
+        'label' => 'Profile', 'icon' => 'people', 'preview' => '/about',
+        'description' => 'Name, positioning, biographies and portrait used across the website.',
+        'fields' => [
+            'given_name' => $f('First name', 'text', 'Modupe', 'Name'),
+            'surname' => $f('Surname', 'text', 'Olusoga', 'Name'),
+            'positioning' => $f('Positioning line', 'text', 'Institutional Leader | Professional Services Executive | Author | Speaker | Certified Coach', 'Name'),
+            'tagline' => $f('Tagline', 'text', 'Clarity for people. Continuity for institutions.', 'Name'),
+            'portrait' => $f('Main portrait', 'image', 'images/editorial-portrait.png', 'Portrait', 'A cut-out portrait on a transparent background works best in the hero.'),
+            'portrait_alt' => $f('Portrait description (alt text)', 'text', 'Generated concept portrait for design preview; to be replaced with Modupe’s photograph', 'Portrait'),
+            'portrait_note' => $f('Small label on the portrait', 'text', '', 'Portrait', 'Leave empty to hide. Remove once the real photograph is in place.'),
+            'short_bio' => $f('Short biography', 'textarea', 'Institutional leader, professional services executive, author, speaker and certified coach. Her work connects two ideas: building institutions that thrive beyond individuals, and helping people turn aspiration into deliberate action.', 'Biographies'),
+            'long_bio' => $f('Full biography', 'longtext', "Modupe Olusoga is an institutional leader and professional services executive whose work spans strategy, people, governance and organisational performance.\n\nShe serves as Chief Operating Officer of Streamsowers & Köhn, partnering with the firm’s leadership on strategy, institutional structures and the operational functions that support its people, clients and business objectives. She was elected President of the Association of Law Firm Administrators Nigeria (ALAN) for the 2026–2029 term.\n\nInternationally, she contributes to the International Bar Association’s Law Firm Management Committee as African Regional Forum Liaison Officer, joining conversations on law firm management, technology, AI and the future of professional services.", 'Biographies', 'The first paragraph is shown larger.'),
+        ],
+    ],
+
+    'home' => [
+        'label' => 'Homepage', 'icon' => 'home', 'preview' => '/',
+        'description' => 'Hero text, buttons and every homepage section. Reorder or hide sections at the top.',
+        'fields' => [
+            'sections' => $f('Sections below the hero', 'sections', 'affiliations:1,moments:1,proof:1,meet:1,journey:1,work:1,offers:1,idea:1,speaking:1,impact:1,insights:1,mentorship:1,testimonials:1,book:1,cta:1', 'Layout'),
+            'meta' => $f('Search description', 'textarea', 'Modupe Olusoga — institutional leader, author, speaker and certified coach. Clarity for people. Continuity for institutions.', 'Layout'),
+            'hero_line1' => $f('Hero line 1', 'text', 'Building institutions', 'Hero'),
+            'hero_line2' => $f('Hero line 2 (shown in italic)', 'text', 'that outlast their founders.', 'Hero'),
+            'hero_summary' => $f('Hero summary', 'textarea', 'Two decades turning strategy into structure, and structure into results, for law firms and professional services organisations in Nigeria and beyond.', 'Hero'),
+            'affiliations_label' => $f('Label', 'text', 'Two decades across', 'Affiliations band', 'The organisations themselves are under Lists → Affiliations band.'),
+            'proof_eyebrow' => $f('Label', 'text', 'The record', 'Proof band'),
+            'proof_title' => $f('Heading', 'rich', 'Results, *not rhetoric.*', 'Proof band', 'The figures are under Lists → Proof figures.'),
+            'proof_text' => $f('Text', 'textarea', 'Every figure here comes from work she led. Leadership, measured.', 'Proof band'),
+            'journey_eyebrow' => $f('Label', 'text', 'The journey', 'Career journey'),
+            'journey_title' => $f('Heading', 'rich', 'Twenty years. *One through-line.*', 'Career journey', 'The roles are under Lists → Career journey.'),
+            'journey_text' => $f('Text', 'textarea', 'From a banking hall in Kano to the boardroom of a leading commercial law firm, every role has been about the same thing: building the structures that let people and institutions perform.', 'Career journey'),
+            'work_eyebrow' => $f('Label', 'text', 'Selected work', 'Selected work'),
+            'work_title' => $f('Heading', 'rich', 'Proof of *practice.*', 'Selected work', 'The case studies are under Lists → Selected work.'),
+            'work_text' => $f('Text', 'textarea', 'Transformation stories from the firms and platforms she has helped build.', 'Selected work'),
+            'offers_eyebrow' => $f('Label', 'text', 'Work with Modupe', 'Ways to work together'),
+            'offers_title' => $f('Heading', 'rich', 'Where she can *move the needle.*', 'Ways to work together', 'The offers are under Lists → Ways to work together.'),
+            'offers_text' => $f('Text', 'textarea', 'For firms building to last, and for the people leading them.', 'Ways to work together'),
+            'idea_quote' => $f('Quote', 'rich', 'Growth is an outcome. *Scaling is a capability.*', 'Big idea'),
+            'idea_source' => $f('Source', 'text', 'Modupe Olusoga, Managing Partners’ Roundtable 5.0', 'Big idea'),
+            'idea_image' => $f('Line illustration', 'image', 'images/authority/lineart-institution.webp', 'Big idea', 'A transparent line drawing works best.'),
+            'idea_link_label' => $f('Link', 'text', 'Read the white paper', 'Big idea'),
+            'idea_link' => $f('Link destination', 'link', 'http://bit.ly/ALANMPR5', 'Big idea'),
+            'recognition_title' => $f('Heading', 'rich', 'Recognition & *appointments.*', 'Big idea', 'Shown beside the big idea. The items are under Lists → Recognition.'),
+            'hero_cta_label' => $f('Main button', 'text', 'Invite me to speak', 'Hero'),
+            'hero_cta_link' => $f('Main button link', 'link', '/contact?type=speaking', 'Hero'),
+            'hero_link_label' => $f('Second link', 'text', 'Explore insights', 'Hero'),
+            'hero_link_link' => $f('Second link destination', 'link', '#insights', 'Hero'),
+            'moments_eyebrow' => $f('Label', 'text', 'In public', 'Photo reel', 'The photos themselves are under Lists → Photo reel.'),
+            'moments_title' => $f('Heading', 'rich', 'In the room, *on the stage.*', 'Photo reel'),
+            'meet_eyebrow' => $f('Label', 'text', 'Meet Modupe', 'Meet Modupe'),
+            'meet_title' => $f('Heading', 'text', 'Institutions that last. People who execute.', 'Meet Modupe'),
+            'meet_text' => $f('Text', 'textarea', 'Her work joins two ideas: building organisations that thrive beyond the people who founded them, and helping professionals move from aspiration to deliberate, sustained execution.', 'Meet Modupe'),
+            'meet_button_label' => $f('Button', 'text', 'Explore my work', 'Meet Modupe'),
+            'meet_button_link' => $f('Button link', 'link', '/about', 'Meet Modupe'),
+            'meet_photo' => $f('Second photo', 'image', 'images/generated/meet-editorial.webp', 'Meet Modupe'),
+            'meet_badge_value' => $f('Badge figure', 'text', '2026–29', 'Meet Modupe'),
+            'meet_badge_label' => $f('Badge label', 'text', 'ALAN President', 'Meet Modupe'),
+            'meet_perspective_title' => $f('Perspective heading', 'text', 'Two connected ideas', 'Meet Modupe'),
+            'meet_perspective_text' => $f('Perspective text', 'textarea', 'Governance, succession and institution building for organisations, and clarity, discipline and consistency for the people who lead them.', 'Meet Modupe'),
+            'meet_roles' => $f('Roles listed', 'lines', "Chief Operating Officer, Streamsowers & Köhn\nPresident, ALAN (2026–2029)\nIBA Law Firm Management Committee\nFounder, The Strides Platform & Project CHAM", 'Meet Modupe'),
+            'meet_connect_title' => $f('Dark card heading', 'text', 'Let’s work together', 'Meet Modupe'),
+            'meet_connect_text' => $f('Dark card text', 'text', 'Keynotes, leadership sessions and mentorship.', 'Meet Modupe'),
+            'meet_connect_label' => $f('Dark card button', 'text', 'Invite me to speak', 'Meet Modupe'),
+            'meet_connect_link' => $f('Dark card button link', 'link', '/contact?type=speaking', 'Meet Modupe'),
+            'impact_eyebrow' => $f('Label', 'text', 'Leadership & Impact', 'Leadership & Impact'),
+            'impact_title' => $f('Heading', 'rich', 'Leadership that builds *what lasts.*', 'Leadership & Impact', 'Wrap words in *asterisks* for the italic accent.'),
+            'impact_year' => $f('Milestone year', 'text', '2026', 'Leadership & Impact'),
+            'impact_milestone' => $f('Milestone text', 'textarea', 'Elected President of the Association of Law Firm Administrators Nigeria for the 2026–2029 term, advancing the professionalisation of law firm management.', 'Leadership & Impact'),
+            'impact_row1_title' => $f('First column heading', 'text', 'Where she leads', 'Leadership & Impact'),
+            'impact_row1_text' => $f('First column text', 'longtext', "As Chief Operating Officer of Streamsowers & Köhn, she shapes strategy, governance and the operations behind the firm’s people and clients.\n\nInternationally, she contributes to the IBA Law Firm Management Committee as African Regional Forum Liaison Officer.", 'Leadership & Impact'),
+            'impact_tags' => $f('Focus tags', 'lines', "Governance\nSuccession\nPeople", 'Leadership & Impact'),
+            'impact_row2_title' => $f('Second column heading', 'text', 'Beyond the firm', 'Leadership & Impact'),
+            'impact_row2_text' => $f('Second column text', 'longtext', "*The Strides Platform* supports professionals through career, leadership and personal growth.\n\n*Project CHAM* advances childhood cancer awareness, support and advocacy for children and families.", 'Leadership & Impact', 'Wrap a name in *asterisks* to make it bold.'),
+            'impact_button_label' => $f('Button', 'text', 'Explore her work', 'Leadership & Impact'),
+            'impact_button_link' => $f('Button link', 'link', '/leadership-impact', 'Leadership & Impact'),
+            'insights_eyebrow' => $f('Label', 'text', 'Featured insights', 'Featured insights'),
+            'insights_title' => $f('Heading', 'rich', 'Ideas worth *building on.*', 'Featured insights', 'The featured article is chosen under Blog & Insights.'),
+            'speaking_eyebrow' => $f('Label', 'text', 'Speaking & leadership conversations', 'Speaking'),
+            'speaking_title' => $f('Heading', 'rich', 'Conversations that *move institutions.*', 'Speaking'),
+            'speaking_text' => $f('Text', 'textarea', 'Keynotes, panels, workshops and leadership retreats on building institutions that last and people who execute.', 'Speaking', 'Topics and formats are edited under Lists.'),
+            'mentorship_eyebrow' => $f('Label', 'text', 'The Mentorship Programme', 'Mentorship'),
+            'mentorship_title' => $f('Heading', 'rich', 'You already have the aspiration. *Are you ready to do the work?*', 'Mentorship'),
+            'mentorship_image' => $f('Image', 'image', 'images/generated/mentorship-home.webp', 'Mentorship'),
+            'testimonials_eyebrow' => $f('Label', 'text', 'Testimonials', 'Testimonials'),
+            'testimonials_title' => $f('Heading', 'rich', 'In their *words.*', 'Testimonials', 'Choose which testimonials appear with “Show on homepage”.'),
+            'book_text' => $f('Book text', 'textarea', 'How founders and leaders build law firms, and professional services organisations, that thrive beyond their founders and the current generation of leaders.', 'Book'),
+            'cta_eyebrow' => $f('Label', 'text', 'Stay connected', 'Closing invitation'),
+            'cta_title' => $f('Heading', 'rich', 'Let’s build something *that lasts.*', 'Closing invitation'),
+            'cta_text' => $f('Text', 'textarea', 'Speaking invitations, leadership sessions, partnerships and media requests are reviewed personally.', 'Closing invitation'),
+            'cta_primary_label' => $f('First button', 'text', 'Invite me to speak', 'Closing invitation'),
+            'cta_primary_link' => $f('First button link', 'link', '/contact?type=speaking', 'Closing invitation'),
+            'cta_secondary_label' => $f('Second button', 'text', 'Book a session', 'Closing invitation'),
+            'cta_secondary_link' => $f('Second button link', 'link', '/contact?type=session', 'Closing invitation'),
+        ],
+    ],
+
+    'about' => [
+        'label' => 'About', 'icon' => 'people', 'preview' => '/about',
+        'description' => 'The About page. The biography itself is under Profile; credentials and roles are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Modupe Olusoga is an institutional leader, professional services executive, author, speaker and certified coach.'),
+            'eyebrow' => $f('Label', 'text', 'About Modupe', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Institutions that last. *People who execute.*', 'Opening'),
+            'badge_title' => $f('Portrait badge', 'text', 'Chief Operating Officer', 'Opening'),
+            'badge_text' => $f('Portrait badge detail', 'text', 'Streamsowers & Köhn', 'Opening'),
+            'perspective_title' => $f('Biography heading', 'rich', 'Two connected *ideas.*', 'Biography'),
+            'idea1_title' => $f('Idea 1 heading', 'text', 'For institutions', 'Biography'),
+            'idea1_text' => $f('Idea 1 text', 'textarea', 'Governance, succession and the structures that let organisations thrive beyond their founders and the current generation of leaders.', 'Biography'),
+            'idea2_title' => $f('Idea 2 heading', 'text', 'For people', 'Biography'),
+            'idea2_text' => $f('Idea 2 text', 'textarea', 'Clarity, discipline and consistency for professionals ready to move from aspiration to intentional execution.', 'Biography'),
+            'show_credentials' => $f('Show credentials', 'toggle', '1', 'Sections'),
+            'credentials_title' => $f('Credentials heading', 'rich', 'Grounded in *practice.*', 'Sections'),
+            'show_roles' => $f('Show current roles', 'toggle', '1', 'Sections'),
+            'roles_title' => $f('Roles heading', 'rich', 'Where she *leads.*', 'Sections'),
+            'show_links' => $f('Show links to Speaking, Mentorship and Book', 'toggle', '1', 'Sections'),
+        ],
+    ],
+
+    'speaking' => [
+        'label' => 'Speaking', 'icon' => 'mic', 'preview' => '/speaking',
+        'description' => 'The Speaking page. Topics, formats, audiences, engagements and the speaker kit are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Invite Modupe Olusoga to speak on institution building, governance, succession, leadership and the future of professional services.'),
+            'eyebrow' => $f('Label', 'text', 'Speaking & leadership conversations', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Conversations that *move institutions.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Keynotes, panels, workshops and retreats for leaders who are building organisations to last, and for professionals ready to do the work.', 'Opening'),
+            'image' => $f('Image', 'image', 'images/generated/speaking-stage.webp', 'Opening'),
+            'cta_label' => $f('Button', 'text', 'Invite me to speak', 'Opening'),
+            'topics_title' => $f('Topics heading', 'rich', 'What we can *talk about.*', 'Sections'),
+            'topics_lede' => $f('Topics introduction', 'text', 'Each topic is tailored to the audience, from boards and managing partners to emerging leaders.', 'Sections'),
+            'formats_title' => $f('Formats heading', 'rich', 'Choose the setting that *fits your room.*', 'Sections'),
+            'audiences_title' => $f('Audiences heading', 'rich', 'Audiences *we serve.*', 'Sections'),
+            'engagements_title' => $f('Engagements heading', 'rich', 'Selected *engagements.*', 'Sections'),
+            'show_testimonials' => $f('Show speaking testimonials', 'toggle', '1', 'Sections'),
+            'show_process' => $f('Show “How invitations work”', 'toggle', '1', 'Sections'),
+            'cta_title' => $f('Closing heading', 'text', 'Have a stage, a panel or a retreat in mind?', 'Sections'),
+        ],
+    ],
+
+    'work' => [
+        'label' => 'Selected work', 'icon' => 'file', 'preview' => '/work',
+        'description' => 'The case studies page. The case studies themselves are under Lists → Selected work.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Selected work by Modupe Olusoga: transformation stories from law firms, professional services and the platforms she has built.'),
+            'eyebrow' => $f('Label', 'text', 'Selected work', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Strategy, made *structural.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Restructured firms, learning institutions, freed-up partners and an industry conversation: a record of the work, and what changed because of it.', 'Opening'),
+            'cta_title' => $f('Closing heading', 'text', 'Building something that has to last?', 'Sections'),
+        ],
+    ],
+
+    'programmes' => [
+        'label' => 'Programmes', 'icon' => 'steps', 'preview' => '/programmes',
+        'description' => 'The Programmes overview. Other offerings and principles are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Structured programmes that move professionals from aspiration to intentional execution.'),
+            'eyebrow' => $f('Label', 'text', 'Programmes', 'Opening'),
+            'title' => $f('Heading', 'rich', 'From aspiration to *intentional action.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Focused programmes built around clarity, accountability and consistent execution. Each one asks for commitment between sessions, because that is where the work happens.', 'Opening'),
+            'feature_image' => $f('Mentorship card image', 'image', 'images/generated/programme-community.webp', 'Featured programme'),
+            'feature_text' => $f('Mentorship card text', 'textarea', 'A six-month experience for professionals who already have the aspiration and are ready to do the work. Weekly sessions, real accountability and a deliberately limited cohort.', 'Featured programme'),
+            'principles_title' => $f('Principles heading', 'rich', 'Not motivation. *Execution.*', 'Sections'),
+            'more_title' => $f('Note heading', 'text', 'More programmes are in development.', 'Sections'),
+            'more_text' => $f('Note text', 'text', 'Leadership sessions and organisational workshops are available on request today.', 'Sections'),
+        ],
+    ],
+
+    'mentorship' => [
+        'label' => 'Mentorship', 'icon' => 'compass', 'preview' => '/programmes/mentorship',
+        'description' => 'The Mentorship page copy. Dates, fee, time zone and availability are under Cohort.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'A six-month mentorship programme for professionals ready to move from aspiration to intentional execution.'),
+            'title' => $f('Heading', 'rich', 'You already have the aspiration. *Are you ready to do the work?*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'A six-month programme for professionals who want clarity, structure and accountability, and who are prepared to act between sessions.', 'Opening'),
+            'image' => $f('Image', 'image', 'images/generated/mentorship-conversation.webp', 'Opening'),
+            'journey_title' => $f('Journey heading', 'rich', 'Five stages. *Six months.*', 'Sections'),
+            'audience_title' => $f('Audience heading', 'rich', 'Built for people *ready to commit.*', 'Sections'),
+            'audience_text' => $f('Audience introduction', 'textarea', 'This is not a motivational course. It is designed to create clarity, intentional action, accountability, consistency and execution.', 'Sections'),
+            'schedule_note' => $f('Schedule note', 'text', 'The year, time zone for weekly sessions and delivery details will be confirmed to the cohort.', 'Sections', 'Shown under the schedule cards. Clear it once everything is confirmed.'),
+            'apply_success' => $f('Message after applying', 'textarea', 'It will be reviewed personally. If you are accepted, you will receive payment and onboarding information by email.', 'Application'),
+            'privacy_text' => $f('Consent wording', 'text', 'I understand my application will be used only to assess my place in the programme, as described in the privacy notice.', 'Application'),
+            'show_testimonials' => $f('Show mentorship testimonials', 'toggle', '1', 'Sections'),
+        ],
+    ],
+
+    'impact' => [
+        'label' => 'Leadership & Impact', 'icon' => 'columns', 'preview' => '/leadership-impact',
+        'description' => 'The Leadership & Impact page. Organisations and focus areas are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Modupe Olusoga’s leadership roles and impact work, from Streamsowers & Köhn and ALAN to The Strides Platform and Project CHAM.'),
+            'eyebrow' => $f('Label', 'text', 'Leadership & Impact', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Leadership that builds *what lasts.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Executive leadership, professional bodies and community initiatives, each one an expression of the same idea: build structures that outlive the people who start them.', 'Opening'),
+            'image' => $f('Image', 'image', 'images/generated/impact-community.webp', 'Opening'),
+            'badge_title' => $f('Image badge', 'text', '2026–2029', 'Opening'),
+            'badge_text' => $f('Image badge detail', 'text', 'President, ALAN', 'Opening'),
+            'focus_title' => $f('Focus heading', 'rich', 'The work *across roles.*', 'Sections'),
+            'cta_title' => $f('Closing heading', 'text', 'Partner on work that outlasts us.', 'Sections'),
+        ],
+    ],
+
+    'media' => [
+        'label' => 'Media', 'icon' => 'video', 'preview' => '/media',
+        'description' => 'The Media page. Appearances and press materials are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Interviews, speaking appearances, podcasts and publications featuring Modupe Olusoga.'),
+            'eyebrow' => $f('Label', 'text', 'Media', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Interviews, talks *and appearances.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Conversations on institution building, leadership and the future of professional services.', 'Opening'),
+            'empty_title' => $f('Message when there is nothing yet', 'text', 'Appearances will be published here soon.', 'Sections'),
+            'press_title' => $f('Press kit heading', 'text', 'Biographies and approved portraits.', 'Sections'),
+            'press_text' => $f('Press kit text', 'textarea', 'Approved short and long biographies, portraits and speaker materials are available to organisers on request.', 'Sections'),
+        ],
+    ],
+
+    'book' => [
+        'label' => 'The Book', 'icon' => 'book', 'preview' => '/book',
+        'description' => 'The book page and homepage book card. Themes are under Lists; the waiting list is under Inbox.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Building the Transgenerational Law Firm by Modupe Olusoga. Join the waiting list.'),
+            'title' => $f('Book title', 'text', 'Building the Transgenerational Law Firm', 'Book'),
+            'cover_title' => $f('Title on the designed cover', 'rich', 'Building the *Transgenerational* Law Firm', 'Book', 'Used when no cover image is uploaded.'),
+            'cover' => $f('Cover image', 'image', 'images/generated/book-cover.webp', 'Book', 'Optional. Once the approved cover exists, upload it here.'),
+            'synopsis' => $f('Synopsis', 'textarea', 'How founders and leaders move from founder-dependent firms to institutions designed for longevity, with lessons for every professional services organisation.', 'Book'),
+            'audience' => $f('Who it is for', 'textarea', 'Written for founders, managing partners, partners, professional services executives and law firm business professionals.', 'Book'),
+            'release' => $f('Release', 'text', 'November 2027', 'Details'),
+            'formats' => $f('Formats', 'text', 'Print and digital', 'Details'),
+            'price' => $f('Price', 'text', 'To be confirmed', 'Details'),
+            'order_label' => $f('Order button', 'text', 'Preorder now', 'Details'),
+            'order_link' => $f('Order link', 'link', '', 'Details', 'Leave empty while only the waiting list is open. When set, an order button appears.'),
+            'waitlist_title' => $f('Waiting list heading', 'rich', 'Be the first *to know.*', 'Waiting list'),
+            'waitlist_text' => $f('Waiting list text', 'textarea', 'Get launch news, preorder details and early excerpts. We will only use your details for updates about the book.', 'Waiting list'),
+        ],
+    ],
+
+    'contact' => [
+        'label' => 'Contact', 'icon' => 'mail', 'preview' => '/contact',
+        'description' => 'The contact and Book a Session page.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Invite Modupe Olusoga to speak, request a leadership session or start a partnership. Every request is reviewed personally.'),
+            'eyebrow' => $f('Label', 'text', 'Contact · Book a session', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Let’s start a *conversation.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'Tell us what you have in mind. Every request is reviewed personally before anything is scheduled.', 'Opening'),
+            'steps' => $f('What happens next', 'lines', "Your request is saved and reviewed personally.\nWe reply by email, usually with a few questions.\nOnce agreed, the date is confirmed and the session tailored.", 'Sidebar'),
+            'success' => $f('Message after sending', 'textarea', 'It will be reviewed personally, and you will hear back by email about next steps.', 'Sidebar'),
+        ],
+    ],
+
+    'podcast' => [
+        'label' => 'Podcast', 'icon' => 'headphones', 'preview' => '/podcast',
+        'description' => 'The podcast page. Turn it on under Navigation when ready. Episodes and listening links are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Conversations on leadership, institutions and the future of professional services.'),
+            'eyebrow' => $f('Label', 'text', 'Podcast', 'Opening'),
+            'title' => $f('Show name', 'rich', 'Conversations on *what lasts.*', 'Opening'),
+            'lede' => $f('Show introduction', 'textarea', 'Honest conversations with leaders on building institutions, developing people and doing the work.', 'Opening'),
+            'artwork' => $f('Show artwork', 'image', 'images/generated/podcast-artwork.webp', 'Opening'),
+            'empty' => $f('Message before the first episode', 'text', 'The first episodes are being recorded.', 'Opening'),
+        ],
+    ],
+
+    'resources' => [
+        'label' => 'Resources', 'icon' => 'download', 'preview' => '/resources',
+        'description' => 'The resources page. Turn it on under Navigation when ready. Downloads are under Lists.',
+        'fields' => [
+            'meta' => $f('Search description', 'textarea', 'Approved downloads, presentations and supporting materials.'),
+            'eyebrow' => $f('Label', 'text', 'Resources', 'Opening'),
+            'title' => $f('Heading', 'rich', 'Tools for *the work.*', 'Opening'),
+            'lede' => $f('Introduction', 'textarea', 'White papers, presentations and materials to support leaders and institutions.', 'Opening'),
+            'empty' => $f('Message when there is nothing yet', 'text', 'Resources will be added here soon.', 'Opening'),
+        ],
+    ],
+
+    'privacy' => [
+        'label' => 'Privacy notice', 'icon' => 'lock', 'preview' => '/privacy',
+        'description' => 'The privacy notice. Have it reviewed before launch.',
+        'fields' => [
+            'title' => $f('Heading', 'rich', 'Privacy *notice.*'),
+            'body' => $f('Notice', 'longtext', "## What we collect\n\nWhen you send an enquiry, apply for the mentorship programme, join the book waiting list or subscribe to updates, we store the details you enter in the form, such as your name, email address and message.\n\n## How it is used\n\nEnquiries are used to respond to your request. Mentorship applications are used only to assess your place in the programme and, if you are accepted, to send payment and onboarding information. Waiting list details are used to send updates about the book.\n\n## Marketing\n\nWe only send wider updates if you opt in. Every update includes a link to unsubscribe.\n\n## Who can see it\n\nOnly the small team managing this website can access submissions. We do not sell your information.\n\n## Your choices\n\nYou can ask to see, correct or delete the information you have shared by contacting us."),
+            'updated' => $f('Last updated', 'text', 'October 2026'),
+        ],
+    ],
+
+    'footer' => [
+        'label' => 'Footer', 'icon' => 'columns', 'preview' => '/about',
+        'description' => 'The footer on every page, including the newsletter sign-up.',
+        'fields' => [
+            'cta_title' => $f('Column heading', 'text', 'Start a conversation'),
+            'cta_label' => $f('Button', 'text', 'Get in touch'),
+            'cta_link' => $f('Button link', 'link', '/contact'),
+            'newsletter_on' => $f('Show newsletter sign-up', 'toggle', '1', 'Newsletter'),
+            'newsletter_title' => $f('Newsletter heading', 'text', 'Insights by email', 'Newsletter'),
+            'newsletter_text' => $f('Newsletter text', 'text', 'Occasional ideas on leadership and institutions. Unsubscribe any time.', 'Newsletter'),
+            'copyright' => $f('Copyright name', 'text', 'Modupe Olusoga', 'Base'),
+        ],
+    ],
+
+    'seo' => [
+        'label' => 'Search & sharing', 'icon' => 'search', 'preview' => '/',
+        'description' => 'How the website appears in search results and when links are shared. Each page also has its own search description.',
+        'fields' => [
+            'site_name' => $f('Site name', 'text', 'Modupe Olusoga'),
+            'home_title' => $f('Homepage title', 'text', 'Modupe Olusoga — Clarity & Continuity'),
+            'share_image' => $f('Image when shared', 'image', 'images/generated/social-share.webp', null, 'Shown on LinkedIn, WhatsApp and similar. A wide 1200 × 630 image works best.'),
+            'allow_indexing' => $f('Allow search engines', 'toggle', '1', null, 'Turn off to keep the site out of search results before launch.'),
+        ],
+    ],
+
+    'navigation' => [
+        'label' => 'Navigation', 'icon' => 'menu', 'preview' => '/about',
+        'description' => 'Which pages exist, what they are called and which appear in the top menu. Pages switched off return “not found”.',
+        'fields' => [
+            'about_label' => $f('About: name', 'text', 'About', 'Main pages'),
+            'about_header' => $f('About: in top menu', 'toggle', '1', 'Main pages'),
+            'insights_label' => $f('Insights: name', 'text', 'Insights', 'Main pages'),
+            'insights_header' => $f('Insights: in top menu', 'toggle', '1', 'Main pages'),
+            'speaking_label' => $f('Speaking: name', 'text', 'Speaking', 'Main pages'),
+            'speaking_header' => $f('Speaking: in top menu', 'toggle', '1', 'Main pages'),
+            'programmes_label' => $f('Programmes: name', 'text', 'Programmes', 'Main pages'),
+            'programmes_header' => $f('Programmes: in top menu', 'toggle', '1', 'Main pages'),
+            'work_label' => $f('Selected work: name', 'text', 'Work', 'Main pages'),
+            'work_header' => $f('Selected work: in top menu', 'toggle', '1', 'Main pages'),
+            'impact_label' => $f('Leadership & Impact: name', 'text', 'Leadership & Impact', 'Main pages'),
+            'impact_header' => $f('Leadership & Impact: in top menu', 'toggle', '0', 'Main pages'),
+            'contact_label' => $f('Contact: name', 'text', 'Contact', 'Main pages'),
+            'contact_header' => $f('Contact: in top menu', 'toggle', '0', 'Main pages'),
+            'media_on' => $f('Media page is live', 'toggle', '1', 'Optional pages'),
+            'media_label' => $f('Media: name', 'text', 'Media', 'Optional pages'),
+            'media_header' => $f('Media: in top menu', 'toggle', '0', 'Optional pages'),
+            'book_on' => $f('Book page is live', 'toggle', '1', 'Optional pages'),
+            'book_label' => $f('Book: name', 'text', 'The Book', 'Optional pages'),
+            'book_header' => $f('Book: in top menu', 'toggle', '0', 'Optional pages'),
+            'podcast_on' => $f('Podcast page is live', 'toggle', '0', 'Optional pages'),
+            'podcast_label' => $f('Podcast: name', 'text', 'Podcast', 'Optional pages'),
+            'podcast_header' => $f('Podcast: in top menu', 'toggle', '0', 'Optional pages'),
+            'resources_on' => $f('Resources page is live', 'toggle', '0', 'Optional pages'),
+            'resources_label' => $f('Resources: name', 'text', 'Resources', 'Optional pages'),
+            'resources_header' => $f('Resources: in top menu', 'toggle', '0', 'Optional pages'),
+            'cta_label' => $f('Header button', 'text', 'Let’s connect', 'Header button'),
+            'cta_link' => $f('Header button link', 'link', '/contact', 'Header button'),
+        ],
+    ],
+];
+
+// Flatten to "group.field" keys so content('about.title') can find its definition.
+$fields = [];
+foreach ($groups as $group => $definition) {
+    foreach ($definition['fields'] as $name => $field) {
+        $fields[$group.'.'.$name] = $field + ['group' => $group];
+    }
+}
+
+return [
+    'groups' => $groups,
+    'fields' => $fields,
+    'home_sections' => [
+        'affiliations' => 'Affiliations band', 'proof' => 'Proof band', 'journey' => 'Career journey', 'work' => 'Selected work', 'offers' => 'Ways to work together', 'idea' => 'Big idea & recognition',
+        'moments' => 'Photo reel', 'meet' => 'Meet Modupe', 'impact' => 'Leadership & Impact', 'insights' => 'Featured insights',
+        'speaking' => 'Speaking', 'mentorship' => 'Mentorship', 'testimonials' => 'Testimonials',
+        'book' => 'The book', 'cta' => 'Closing invitation',
+    ],
+    'pages' => [
+        // key => [route, nav group]
+        'about' => 'about', 'work' => 'work.index', 'insights' => 'insights.index', 'speaking' => 'speaking', 'programmes' => 'programmes',
+        'impact' => 'impact', 'media' => 'media', 'book' => 'book', 'podcast' => 'podcast.index', 'resources' => 'resources', 'contact' => 'contact',
+    ],
+];
