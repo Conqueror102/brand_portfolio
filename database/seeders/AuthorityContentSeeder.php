@@ -301,15 +301,17 @@ class AuthorityContentSeeder extends Seeder
             'Association of Law Firm Administrators Nigeria' => ['alan', 'Elected by her peers to lead the body that professionalises the business side of Nigerian law firms.'],
             'International Bar Association' => ['iba', 'Invited to speak on the business of law at the world’s largest gathering of the legal profession.'],
             'IBA Law Firm Management Committee' => ['iba', 'Connecting African law firm leaders to the IBA’s global work on firm management.'],
-            'Harvard Business School Online' => ['harvard-business-school', 'Executive study in leading organisations through growth and change.'],
+            'Harvard Business School Online' => [null, 'Executive study in leading organisations through growth and change.'],
         ];
         foreach ($details as $org => [$slug, $story]) {
-            $file = collect(['svg', 'png', 'webp'])->map(fn ($ext) => "images/logos/{$slug}.{$ext}")
-                ->first(fn ($path) => is_file(public_path($path)));
+            $file = $slug ? collect(['svg', 'png', 'webp'])->map(fn ($ext) => "images/logos/{$slug}.{$ext}")
+                ->first(fn ($path) => is_file(public_path($path))) : null;
             $q = fn () => Item::where('type', 'recognition')->where('subtitle', $org);
             if ($file) $q()->where(fn ($w) => $w->whereNull('image')->orWhere('image', ''))->update(['image' => $file]);
             $q()->where(fn ($w) => $w->whereNull('body')->orWhere('body', ''))->update(['body' => $story]);
         }
+        // The Harvard wordmark is too wide to read at row size, so that row uses its icon instead.
+        Item::where('type', 'recognition')->where('image', 'images/logos/harvard-business-school.png')->update(['image' => null]);
         Item::where('type', 'recognition')->where('title', 'Award or honour to be added')
             ->where(fn ($w) => $w->whereNull('body')->orWhere('body', ''))
             ->update(['body' => 'Placeholder: add an award, fellowship or appointment here, with one line on why it matters.']);

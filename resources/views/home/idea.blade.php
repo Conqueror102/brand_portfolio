@@ -1,46 +1,50 @@
 @php($honours = items('recognition'))
-<section class="honours" id="idea" aria-label="Big idea and recognition">
-    @if (content_image('home.idea_band_art'))<img class="mf-art" src="{{ content_image('home.idea_band_art') }}" alt="" aria-hidden="true" loading="lazy">@endif
-    <div class="wrap">
-        {{-- The big idea, set like a manifesto. Words light up as you read down the page. --}}
-        <figure class="mf" data-mf>
-            <p class="mf-eyebrow"><span class="mf-rule" aria-hidden="true"></span>In her words</p>
-            <blockquote class="mf-quote" data-split="1" data-mf-quote><p>{{ content_html('home.idea_quote') }}</p></blockquote>
-            <figcaption class="mf-cap">
-                <x-brand-mark variant="plain" class="mf-mark" />
-                <span class="mf-source">{{ content('home.idea_source') }}</span>
-                @if (content('home.idea_link_label') && content('home.idea_link'))
-                    <a class="mf-link" href="{{ content_url('home.idea_link') }}" @if (str_starts_with(content('home.idea_link'), 'http')) target="_blank" rel="noopener noreferrer" @endif>{{ content('home.idea_link_label') }} <x-line-icon name="arrow-up-right" /></a>
-                @endif
-            </figcaption>
+<section class="idea" id="idea" aria-label="Big idea">
+    <div class="wrap idea-grid">
+        {{-- The quote card, after the Figma "Award recipient" card: photo fading into paper on the left, the quote set like a name on the right. --}}
+        <figure class="idea-quote is-feature">
+            @if (content_image('home.idea_photo'))
+                <span class="idea-side" aria-hidden="true"><img src="{{ content_image('home.idea_photo') }}" alt="" loading="lazy"></span>
+            @endif
+            <div class="idea-body">
+                <p class="idea-kicker"><x-line-icon name="star" /> The big idea</p>
+                <blockquote class="idea-text" data-split="1" data-mf-quote><p>{{ content_html('home.idea_quote') }}</p></blockquote>
+                <p class="idea-source">— {{ content('home.idea_source') }}</p>
+                @if (content('home.idea_context'))<p class="idea-context">{{ content('home.idea_context') }}</p>@endif
+                <div class="idea-meta">
+                    @if (content('home.idea_event'))<span>{{ content('home.idea_event') }}</span>@endif
+                    @if (content('home.idea_link_label') && content('home.idea_link'))
+                        <a class="idea-btn" href="{{ content_url('home.idea_link') }}" @if (str_starts_with(content('home.idea_link'), 'http')) target="_blank" rel="noopener noreferrer" @endif>{{ content('home.idea_link_label') }} <span><x-line-icon name="arrow-up-right" /></span></a>
+                    @endif
+                </div>
+            </div>
         </figure>
 
+        {{-- Recognition: a dated column. Each row shows the body's real logo; open a row to read the story behind it. --}}
         @if ($honours->isNotEmpty())
-            {{-- Recognition: each honour gets its own small editorial card, with the body's real logo where one exists. --}}
-            <div class="hon" aria-labelledby="recognition-title">
-                <header class="hon-head">
-                    <h2 id="recognition-title" class="hon-title" data-split="1">{{ content_html('home.recognition_title') }}</h2>
-                    <p class="hon-count"><b>{{ str_pad($honours->count(), 2, '0', STR_PAD_LEFT) }}</b> honours &amp; appointments</p>
+            <aside class="recognition" aria-labelledby="recognition-title">
+                <header class="recognition-head">
+                    <h2 id="recognition-title" class="display h-md">{{ content_html('home.recognition_title') }}</h2>
+                    <span class="recognition-count">{{ str_pad($honours->count(), 2, '0', STR_PAD_LEFT) }}</span>
                 </header>
-                <ol class="hon-list" style="--n: {{ $honours->count() }}">
+                <ul data-rec>
                     @foreach ($honours as $r)
-                        <li class="hon-card" data-hon style="--d: {{ $loop->index }}">
-                            <div class="hon-top">
+                        <li class="{{ $loop->first ? 'is-open' : '' }}" data-rec-item>
+                            <button type="button" class="rec-row" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" data-rec-toggle>
+                                <span class="recognition-year">{{ $r->category }}</span>
                                 @if ($r->imageUrl())
-                                    <span class="hon-plate"><img class="hon-logo" src="{{ $r->imageUrl() }}" alt="{{ $r->subtitle }}" loading="lazy"></span>
+                                    <span class="rec-logo"><img src="{{ $r->imageUrl() }}" alt="" loading="lazy"></span>
                                 @else
-                                    <span class="hon-icon"><x-line-icon :name="$r->icon ?: 'star'" /></span>
+                                    <span class="rec-logo is-icon"><x-line-icon :name="$r->icon ?: 'star'" /></span>
                                 @endif
-                                <span class="hon-no">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                            </div>
-                            <p class="hon-year">{{ $r->category }}</p>
-                            <h3>{{ $r->title }}</h3>
-                            @if ($r->subtitle)<p class="hon-org">{{ $r->subtitle }}</p>@endif
-                            @if ($r->body)<p class="hon-body">{{ $r->body }}</p>@endif
+                                <span class="recognition-text"><strong>{{ $r->title }}</strong><span>{{ $r->subtitle }}</span></span>
+                                @if ($r->body)<span class="rec-plus" aria-hidden="true"></span>@endif
+                            </button>
+                            @if ($r->body)<div class="rec-story"><p>{{ $r->body }}</p></div>@endif
                         </li>
                     @endforeach
-                </ol>
-            </div>
+                </ul>
+            </aside>
         @endif
     </div>
 </section>

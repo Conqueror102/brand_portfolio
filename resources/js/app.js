@@ -835,3 +835,18 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
     window.addEventListener('scroll', () => { if (! ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     update();
 })();
+
+// Recognition rows: one story open at a time.
+(() => {
+    const list = document.querySelector('[data-rec]');
+    if (! list) return;
+    const items = [...list.querySelectorAll('[data-rec-item]')];
+    items.forEach((item) => item.querySelector('[data-rec-toggle]').addEventListener('click', () => {
+        const opening = ! item.classList.contains('is-open');
+        items.forEach((el) => {
+            const on = el === item && opening;
+            el.classList.toggle('is-open', on);
+            el.querySelector('[data-rec-toggle]').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+    }));
+})();
