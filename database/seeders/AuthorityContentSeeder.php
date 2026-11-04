@@ -235,11 +235,11 @@ class AuthorityContentSeeder extends Seeder
     /** Give career stops and offers their engraved illustrations, unless one was already chosen in the admin. */
     private function careerArt(): void
     {
-        foreach (config('collections.offers.seed') as $row) {
+        foreach (config('collections.offers.seed', []) as $row) {
             Item::where('type', 'offers')->where('title', $row['title'])->where(fn ($q) => $q->whereNull('image')->orWhere('image', ''))
                 ->update(['image' => $row['image'] ?? null]);
         }
-        foreach (config('collections.career.seed') as $row) {
+        foreach (config('collections.career.seed', []) as $row) {
             Item::where('type', 'career')->where('subtitle', $row['subtitle'])->where(fn ($q) => $q->whereNull('image')->orWhere('image', ''))
                 ->update(['image' => $row['image'] ?? null]);
         }
