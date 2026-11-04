@@ -1,16 +1,38 @@
 <x-layouts.page :title="$case->title" :description="$case->category ? $case->category.' · '.$case->subtitle : $case->subtitle" og-type="article">
+    @php
+        $figure = null; $rest = $case->category;
+        if ($case->category && preg_match('/^([\d.,]+\s?(?:%|\+)?)\s+(.+)$/u', $case->category, $m)) { [$figure, $rest] = [$m[1], $m[2]]; }
+        [$org, $role] = array_pad(array_map('trim', explode('·', (string) $case->subtitle, 2)), 2, null);
+        $minutes = max(2, (int) ceil(str_word_count(strip_tags((string) $case->body)) / 220));
+    @endphp
     <article class="case">
-        <header class="wrap case-hero">
-            <a class="case-back link-arrow" href="{{ route('work.index') }}"><x-line-icon name="arrow" /> Selected work</a>
-            <p class="case-num" aria-hidden="true">{{ str_pad($number, 2, '0', STR_PAD_LEFT) }}</p>
-            <p class="eyebrow">{{ $case->subtitle }}</p>
-            <h1 class="display h-xxl">{{ $case->title }}</h1>
-            @if ($case->category)<p class="case-result"><span class="pulse-dot" aria-hidden="true"></span>{{ $case->category }}</p>@endif
+        <header class="cs-hero">
+            @if ($case->imageUrl())
+                <figure class="cs-hero-img"><img src="{{ $case->imageUrl() }}" alt="{{ $case->imageAlt() }}"></figure>
+            @endif
+            <p class="cs-num" aria-hidden="true">{{ str_pad($number, 2, '0', STR_PAD_LEFT) }}</p>
+            <div class="wrap cs-hero-inner">
+                <div>
+                    <a class="link-arrow cs-back" href="{{ route('work.index') }}"><x-line-icon name="arrow" /> All case studies</a>
+                    <p class="eyebrow">Case study {{ str_pad($number, 2, '0', STR_PAD_LEFT) }} · {{ $org }}</p>
+                    <h1 class="display cs-title">{{ $case->title }}</h1>
+                </div>
+                @if ($case->category)
+                    <div class="cs-result {{ $figure ? '' : 'is-claim' }}">
+                        <p>Headline result</p>
+                        @if ($figure)<strong data-count="{{ $figure }}">{{ $figure }}</strong>@endif
+                        <span>{{ $rest }}</span>
+                    </div>
+                @endif
+            </div>
+            <div class="wrap"><dl class="cs-meta">
+                <div><dt>Organisation</dt><dd>{{ $org }}</dd></div>
+                @if ($role)<div><dt>Her role</dt><dd>{{ $role }}</dd></div>@endif
+                @if ($case->date)<div><dt>Date</dt><dd>{{ $case->date->format('F Y') }}</dd></div>@endif
+                <div><dt>Reading time</dt><dd>{{ $minutes }} min</dd></div>
+            </dl></div>
         </header>
-        @if ($case->imageUrl())
-            <figure class="wrap case-figure" data-reveal="wipe-left"><img src="{{ $case->imageUrl() }}" alt="{{ $case->imageAlt() }}" data-parallax></figure>
-        @endif
-        <div class="wrap case-body">
+        <div class="wrap case-body" id="story">
             <aside class="case-meta">
                 <dl>
                     <div><dt>Organisation & role</dt><dd>{{ $case->subtitle }}</dd></div>

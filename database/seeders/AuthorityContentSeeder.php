@@ -25,6 +25,7 @@ class AuthorityContentSeeder extends Seeder
         $this->careerArt();
         $this->careerWording();
         $this->affiliationLogos();
+        $this->momentStories();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -290,5 +291,27 @@ class AuthorityContentSeeder extends Seeder
                     ->update(['image' => $file]);
             }
         }
+    }
+
+    /** Placeholder stories for the sample photos, so the back of each print has something to read until real ones are added. */
+    private function momentStories(): void
+    {
+        $stories = [
+            'keynote' => 'Placeholder story: a keynote on why firms that plan their succession early grow faster, and what managing partners can change this year. Replace with the real event, date and a line on what she said.',
+            'panel' => 'Placeholder story: a panel on succession planning with managing partners and HR leaders, on moving from founder-led decisions to shared governance. Replace with the real event.',
+            'cohort' => 'Placeholder story: the opening session of a mentorship cohort, setting goals and accountability partners for the six months ahead. Replace with the real cohort and date.',
+            'fireside' => 'Placeholder story: a fireside conversation with managing partners on building firms that outlast their founders. Replace with the real event.',
+            'workshop' => 'Placeholder story: a hands-on workshop on firm operations, mapping how work moves from instruction to delivery and where it stalls. Replace with the real event.',
+            'evening' => 'Placeholder story: an evening recognising excellence in law firm management. Replace with the real event, the award and the date.',
+        ];
+        Item::where('type', 'moments')->where(fn ($q) => $q->whereNull('body')->orWhere('body', ''))->get()->each(function (Item $item) use ($stories) {
+            foreach ($stories as $key => $story) {
+                if (str_contains((string) $item->image, $key)) {
+                    $item->update(['body' => $story]);
+
+                    return;
+                }
+            }
+        });
     }
 }

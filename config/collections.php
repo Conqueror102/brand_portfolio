@@ -158,8 +158,8 @@ return [
     ],
     'moments' => [
         'label' => 'Photo reel (in public)', 'group' => 'Homepage', 'icon' => 'eye',
-        'help' => 'Photos of Modupe speaking, hosting and meeting people. They scroll gently under the homepage hero. Landscape or portrait both work; add a short caption.',
-        'fields' => ['image' => 'Photo', 'title' => 'Caption', 'subtitle' => 'Event or place', 'date' => 'Date', 'url' => 'Link (optional)'],
+        'help' => 'Photos of Modupe speaking, hosting and meeting people, shown as a pile of prints on the homepage. Hovering a print flips it to show the story on the back; the enlarge button opens it full size.',
+        'fields' => ['image' => 'Photo', 'title' => 'Caption', 'subtitle' => 'Event or place', 'date' => 'Date', 'body' => 'The story behind it (back of the print)', 'url' => 'Link (optional)'],
         'required' => ['image'],
         'seed' => [],
     ],

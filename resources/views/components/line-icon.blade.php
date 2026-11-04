@@ -42,6 +42,8 @@
         'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/>',
         'menu' => '<path d="M4 7h16M4 12h16M4 17h10"/>',
         'close' => '<path d="M6 6l12 12M18 6 6 18"/>',
+        'expand' => '<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/>',
+        'flip' => '<path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/>',
     ];
 @endphp
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" {{ $attributes->class(['line-icon']) }}>{!! $paths[$name] ?? '' !!}</svg>

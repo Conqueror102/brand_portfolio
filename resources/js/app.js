@@ -669,3 +669,109 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
     }
     window.addEventListener('resize', setup);
 })();
+
+// Work page: results roll in the hero ticker, a warm lens follows the cursor over the blueprint, case files open as they arrive.
+(() => {
+    const hero = document.querySelector('[data-wk-hero]');
+    if (hero) {
+        const lens = hero.querySelector('[data-wk-lens]');
+        if (lens && finePointer) hero.addEventListener('pointermove', (e) => {
+            const r = lens.getBoundingClientRect();
+            lens.style.setProperty('--mx', `${e.clientX - r.left}px`);
+            lens.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+        const stats = [...hero.querySelectorAll('[data-wk-stat]')];
+        const bars = [...hero.querySelectorAll('[data-wk-bar]')];
+        const index = hero.querySelector('[data-wk-index]');
+        const dwell = 3800;
+        let at = 0;
+        const show = (next) => {
+            stats.forEach((s, i) => { s.classList.toggle('is-on', i === next); s.classList.toggle('is-off', i === at && i !== next); });
+            bars.forEach((b, i) => { b.classList.toggle('is-on', i === next); b.classList.toggle('is-done', i < next); });
+            if (index) index.textContent = String(next + 1).padStart(2, '0');
+            at = next;
+        };
+        if (stats.length > 1 && calm) {
+            hero.style.setProperty('--wk-dwell', `${dwell}ms`);
+            setInterval(() => { if (!document.hidden) show((at + 1) % stats.length); }, dwell);
+        }
+    }
+    const cases = document.querySelectorAll('[data-wk-case]');
+    if (cases.length) {
+        const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        }), { threshold: 0.25 });
+        cases.forEach((c) => (calm ? io.observe(c) : c.classList.add('is-in')));
+    }
+})();
+
+// "In the room": prints turn over on hover (tap on touch screens); the corner button opens a full-size viewer with next and previous.
+(() => {
+    const section = document.querySelector('[data-prints]');
+    if (!section) return;
+    const prints = [...section.querySelectorAll('[data-print]')];
+    const viewer = section.querySelector('[data-viewer]');
+    const el = (sel) => viewer.querySelector(sel);
+    const img = el('[data-viewer-img]');
+    let at = 0;
+    let lastFocus = null;
+    const fill = (i) => {
+        const d = prints[i].dataset;
+        img.src = d.src;
+        img.alt = d.title || '';
+        el('[data-viewer-title]').textContent = d.title || '';
+        el('[data-viewer-meta]').textContent = d.meta || '';
+        el('[data-viewer-body]').textContent = d.body || '';
+        const link = el('[data-viewer-link]');
+        link.hidden = !d.url;
+        if (d.url) link.href = d.url;
+        el('[data-viewer-index]').textContent = String(i + 1).padStart(2, '0');
+        at = i;
+    };
+    const go = (i) => {
+        const next = (i + prints.length) % prints.length;
+        if (!calm) { fill(next); return; }
+        viewer.classList.add('is-swapping');
+        setTimeout(() => { fill(next); requestAnimationFrame(() => viewer.classList.remove('is-swapping')); }, 220);
+    };
+    const open = (i) => {
+        lastFocus = document.activeElement;
+        fill(i);
+        viewer.hidden = false;
+        document.documentElement.classList.add('viewer-open');
+        el('[data-viewer-next]').focus();
+    };
+    const close = () => {
+        viewer.hidden = true;
+        document.documentElement.classList.remove('viewer-open');
+        lastFocus?.focus?.();
+    };
+    prints.forEach((print, i) => {
+        print.querySelector('[data-print-open]').addEventListener('click', (e) => { e.stopPropagation(); open(i); });
+        const card = print.querySelector('.print-card');
+        card.addEventListener('click', () => {
+            if (finePointer) { open(i); return; }
+            const was = print.classList.contains('is-flipped');
+            prints.forEach((p) => p.classList.remove('is-flipped'));
+            if (!was) print.classList.add('is-flipped');
+        });
+        card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+    });
+    viewer.querySelectorAll('[data-viewer-close]').forEach((b) => b.addEventListener('click', close));
+    el('[data-viewer-prev]').addEventListener('click', () => go(at - 1));
+    el('[data-viewer-next]').addEventListener('click', () => go(at + 1));
+    document.addEventListener('keydown', (e) => {
+        if (viewer.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') go(at + 1);
+        if (e.key === 'ArrowLeft') go(at - 1);
+    });
+    let sx = null;
+    viewer.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    viewer.addEventListener('touchend', (e) => {
+        if (sx === null) return;
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) go(at + (dx < 0 ? 1 : -1));
+        sx = null;
+    });
+})();
