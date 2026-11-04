@@ -41,8 +41,10 @@
 @layer components {
 .editorial-shell { min-height: 100svh; display: flex; flex-direction: column; background: var(--bg-editorial) center / cover no-repeat; }
 .editorial-header { flex: 0 0 90px; width: 100%; display: flex; align-items: center; gap: 44px; padding: 0 4.4%; position: relative; z-index: 5; }
-.editorial-brand { display: inline-flex; align-items: center; gap: 26px; text-decoration: none; font-family: var(--font-display); font-weight: 400; white-space: nowrap; }
-.brand-mark { font-size: 32px; letter-spacing: -.09em; border-right: 1px solid #99A4AF; padding-right: 26px; line-height: 1.3; }
+.editorial-brand { display: inline-flex; align-items: center; gap: 16px; text-decoration: none; font-family: var(--font-display); font-weight: 400; white-space: nowrap; }
+.mo-mark { display: block; flex-shrink: 0; }
+.editorial-brand .mo-mark { width: 46px; height: 46px; border-radius: 11px; box-shadow: 0 8px 18px -10px #10244099; transition: transform .5s var(--ease-spring, ease); }
+.editorial-brand:hover .mo-mark { transform: rotate(-6deg) scale(1.05); }
 .brand-name { font-size: 26px; letter-spacing: -.05em; }
 .editorial-nav { display: flex; gap: clamp(24px, 3.1vw, 50px); align-items: center; margin-left: auto; font-size: 16px; }
 .editorial-nav button { padding: 12px 0; position: relative; }
@@ -136,7 +138,7 @@ dialog::backdrop { background: #10244075; backdrop-filter: blur(5px); }
 .editorial-shell { background-position: 60% bottom; }
 .editorial-header { flex-basis: 68px; padding: 0 6%; }
 .editorial-brand { gap: 14px; }
-.brand-mark { font-size: 28px; padding-right: 14px; }
+.editorial-brand .mo-mark { width: 38px; height: 38px; border-radius: 9px; }
 .brand-name { font-size: 18px; }
 .hero-copy { width: 100%; padding: 24px 6% 0; }
 .hero-copy h1 { font-size: clamp(65px, 17vw, 100px); }

@@ -20,7 +20,7 @@
 <body class="admin-body">
 <div class="admin-shell">
     <aside class="admin-side" id="admin-side">
-        <a class="admin-brand" href="{{ route('admin.dashboard') }}"><span class="brand-mark">MO</span><span>Studio</span></a>
+        <a class="admin-brand" href="{{ route('admin.dashboard') }}"><x-brand-mark class="brand-mark" /><span>Studio</span></a>
         <nav class="admin-nav" aria-label="Admin">
             <a class="{{ $link('admin.dashboard', 'admin.dashboard') }}" href="{{ route('admin.dashboard') }}"><x-line-icon name="home" /> Overview</a>
             @can('manage-inbox')

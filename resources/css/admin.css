@@ -5,7 +5,7 @@
 .admin-shell { display: grid; grid-template-columns: 260px minmax(0, 1fr); min-height: 100vh; }
 .admin-side { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 24px; padding: 26px 18px; background: var(--ink); color: #D5DBE1; overflow-y: auto; }
 .admin-brand { display: flex; align-items: center; gap: 12px; padding: 0 10px; text-decoration: none; color: #F4F1EC; font-family: var(--font-display); font-size: 22px; letter-spacing: -.03em; }
-.admin-brand .brand-mark { font-size: 26px; padding-right: 12px; border-right: 1px solid #FFFFFF33; }
+.admin-brand .mo-mark { width: 36px; height: 36px; border-radius: 9px; box-shadow: inset 0 0 0 1px #FFFFFF22; }
 .admin-nav { display: grid; gap: 2px; }
 .admin-nav-label { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7D8B99; padding: 18px 12px 8px; }
 .admin-nav a, .admin-side-foot a, .admin-side-foot button { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: #C9D0D7; font-size: 14px; width: 100%; text-align: left; }
@@ -129,7 +129,7 @@
 .admin-login { background: var(--canvas); color: var(--ink); }
 .login-shell { display: grid; grid-template-columns: 1.1fr .9fr; min-height: 100vh; }
 .login-art { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 48px; color: #F4F1EC; background: radial-gradient(60% 50% at 80% 20%, #D9AD9355, transparent 70%), linear-gradient(180deg, #102440B3, #0B1A30F0), var(--bg-terraces) center / cover; }
-.login-art .brand-mark { font-family: var(--font-display); font-size: 34px; }
+.login-art .mo-mark { width: auto; height: 56px; color: #F4F1EC; }
 .login-art .display { font-size: clamp(36px, 4vw, 60px); max-width: 11em; }
 .login-art .display em { color: #E9C7B0; }
 .login-panel { display: grid; place-items: center; padding: 40px 24px; }

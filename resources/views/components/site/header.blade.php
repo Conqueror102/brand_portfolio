@@ -1,7 +1,7 @@
 @php($pages = site_pages())
 <header class="page-header">
     <div class="editorial-header">
-        <a class="editorial-brand" href="{{ route('home') }}" aria-label="{{ content('seo.site_name') }} home"><span class="brand-mark">{{ mb_substr(content('profile.given_name'), 0, 1) }}{{ mb_substr(content('profile.surname'), 0, 1) }}</span><span class="brand-name">{{ content('profile.given_name') }} {{ content('profile.surname') }}</span></a>
+        <a class="editorial-brand" href="{{ route('home') }}" aria-label="{{ content('seo.site_name') }} home"><x-brand-mark class="brand-mark" /><span class="brand-name">{{ content('profile.given_name') }} {{ content('profile.surname') }}</span></a>
         <nav class="editorial-nav" aria-label="Main navigation">
             @foreach ($pages as $page)
                 @if ($page['header'])<a href="{{ $page['url'] }}" @if ($page['active']) aria-current="page" @endif>{{ $page['label'] }}</a>@endif

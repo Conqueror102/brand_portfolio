@@ -13,7 +13,7 @@
 <body class="admin-login">
 <main class="login-shell">
     <section class="login-art" aria-hidden="true">
-        <span class="brand-mark">MO</span>
+        <x-brand-mark variant="plain" class="brand-mark" />
         <p class="display">Clarity for people. <em>Continuity for institutions.</em></p>
     </section>
     <section class="login-panel">

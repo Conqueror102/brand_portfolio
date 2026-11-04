@@ -7,6 +7,7 @@
 <footer class="site-footer">
     <div class="site-footer-top">
         <div class="site-footer-brand">
+            <a class="site-footer-mark" href="{{ route('home') }}" aria-label="{{ content('seo.site_name') }} home"><x-brand-mark variant="plain" /></a>
             <p class="site-footer-name">{{ content('profile.given_name') }} <em>{{ content('profile.surname') }}</em><span class="name-dot">.</span></p>
             <p class="site-footer-line">{{ content('profile.tagline') }}</p>
             @if ($linkedin || $instagram)

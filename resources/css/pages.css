@@ -152,6 +152,9 @@ a.tag:hover, .tag.is-active { background: var(--ink); color: #FFFFFF; border-col
 /* Site footer */
 .site-footer { background: var(--ink); color: #E7E9EC; padding: clamp(60px, 7vw, 100px) var(--gutter) 28px; margin-top: clamp(40px, 5vw, 80px); }
 .site-footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; max-width: 1440px; margin: 0 auto; padding-bottom: 50px; border-bottom: 1px solid #FFFFFF1F; }
+.site-footer-mark { display: inline-block; margin-bottom: 26px; color: #FCFAF7; }
+.site-footer-mark .mo-mark { height: 58px; width: auto; transition: transform .6s var(--ease-spring, ease); }
+.site-footer-mark:hover .mo-mark { transform: translateY(-3px) rotate(-4deg); }
 .site-footer-name { font-family: var(--font-display); font-size: clamp(36px, 3.6vw, 56px); letter-spacing: -.06em; line-height: 1; }
 .site-footer-name em { color: #AEB8C2; }
 .site-footer-line { color: #AEB8C2; margin-top: 16px; font-family: var(--font-display); font-style: italic; font-size: 19px; }

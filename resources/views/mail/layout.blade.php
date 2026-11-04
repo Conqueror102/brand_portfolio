@@ -5,7 +5,7 @@
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 12px;">
     <tr><td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#FFFFFF;border-radius:18px;overflow:hidden;">
-            <tr><td style="background:#102440;color:#F4F1EC;padding:24px 32px;font-family:Georgia,serif;font-size:22px;">{{ content('profile.given_name') }} {{ content('profile.surname') }}</td></tr>
+            <tr><td style="background:#102440;color:#F4F1EC;padding:22px 32px;font-family:Georgia,serif;font-size:22px;"><img src="{{ asset('images/brand/mo-mark-tile-96.png') }}" width="40" height="40" alt="" style="display:inline-block;vertical-align:middle;border:0;border-radius:9px;margin-right:14px;">{{ content('profile.given_name') }} {{ content('profile.surname') }}</td></tr>
             <tr><td style="padding:32px;font-size:15px;line-height:1.6;">@yield('body')</td></tr>
             <tr><td style="padding:20px 32px;background:#FCFAF7;color:#526170;font-size:12px;">{{ content('profile.tagline') }}</td></tr>
         </table>
