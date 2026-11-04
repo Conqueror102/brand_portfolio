@@ -14,6 +14,7 @@
 <meta property="og:type" content="{{ $ogType ?? 'website' }}">
 <meta property="og:url" content="{{ url()->current() }}">
 @if ($shareImage)<meta property="og:image" content="{{ $shareImage }}"><meta name="twitter:card" content="summary_large_image">@endif
+@include('partials.favicon')
 <link rel="canonical" href="{{ url()->current() }}">
 <title>{{ $pageTitle }}</title>
 @fonts
