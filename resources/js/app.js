@@ -376,17 +376,20 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         track.style.transform = '';
         distance = 0;
         if (!wide.matches) return;
-        const overflow = track.scrollWidth - window.innerWidth;
-        if (overflow < 40) return;
-        if (!calm) { section.classList.add('is-swipe'); return; }
+        // Measure with the pinned layout applied, because pinning adds the wide left padding to the track.
         section.classList.add('is-pinned');
+        const viewport = document.documentElement.clientWidth;
+        const overflow = track.getBoundingClientRect().left + track.scrollWidth - viewport;
+        if (overflow < 40) { section.classList.remove('is-pinned'); return; }
+        if (!calm) { section.classList.remove('is-pinned'); section.classList.add('is-swipe'); return; }
         // Pin only when the whole chapter view fits on screen; otherwise let the rail scroll sideways by itself.
         const cs = getComputedStyle(sticky);
         const part = (sel) => sticky.querySelector(sel)?.offsetHeight || 0;
         const needed = Math.max(part('.career-head'), part('.career-rail')) + part('.career-progress') + 40 + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
         if (needed > window.innerHeight) { section.classList.remove('is-pinned'); section.classList.add('is-swipe'); return; }
         distance = overflow;
-        section.style.setProperty('--journey-height', `${window.innerHeight + distance}px`);
+        // A short hold at the end so the last chapter rests fully on screen before the page moves on.
+        section.style.setProperty('--journey-height', `${window.innerHeight + distance + window.innerHeight * 0.3}px`);
     };
     const update = () => {
         const box = section.getBoundingClientRect();
@@ -415,6 +418,7 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
     document.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener('resize', () => { layout(); update(); });
     window.addEventListener('load', () => { layout(); update(); });
+    document.fonts?.ready.then(() => { layout(); update(); });
 })();
 
 // Selected work: a photo follows the cursor over each row.
@@ -496,11 +500,33 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         });
     };
     const scrollSpan = () => window.innerHeight * 0.75;
+    // Size the cards to their longest story, so nothing is clipped. If the screen is too short, tighten the type first.
+    const fit = () => {
+        stage.style.removeProperty('--H');
+        section.classList.remove('is-tight');
+        const tallest = () => {
+            section.classList.add('is-measuring');
+            const h = Math.max(...cards.map((card) => card.querySelector('.stack-copy')?.offsetHeight || 0));
+            section.classList.remove('is-measuring');
+            return h;
+        };
+        const base = stage.offsetHeight;
+        const others = wide.matches && calm ? [...section.querySelector('.stack-sticky').children]
+            .filter((el) => el !== stage && !el.classList.contains('stack-glow'))
+            .reduce((sum, el) => sum + el.offsetHeight, 0) + 120 : 0;
+        const room = others ? window.innerHeight - others : Infinity;
+        const share = wide.matches ? 1 : 0.6; // on phones the story sits under the photo, in the lower 60% of the card
+        let need = tallest() / share;
+        if (need > room) { section.classList.add('is-tight'); need = tallest() / share; }
+        const H = Math.max(base, Math.min(need, room));
+        if (H > base) stage.style.setProperty('--H', `${Math.ceil(H)}px`);
+    };
     const layout = () => {
         section.classList.remove('is-pinned');
         section.style.removeProperty('--stack-height');
         pinned = false;
         geo = null;
+        fit();
         if (wide.matches && calm && n > 1) {
             section.classList.add('is-pinned');
             const sticky = section.querySelector('.stack-sticky');
@@ -558,6 +584,7 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
     document.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(fromScroll); }, { passive: true });
     window.addEventListener('resize', () => { layout(); fromScroll(); });
     window.addEventListener('load', () => { layout(); fromScroll(); });
+    document.fonts?.ready.then(() => { layout(); fromScroll(); });
     layout();
     fromScroll();
 })();

@@ -339,14 +339,14 @@
     will-change: transform, clip-path; }
 .stack:not(.is-scrubbing) .stack-card { transition: transform .8s var(--ease-calm), clip-path .8s var(--ease-calm), opacity .6s ease; }
 .stack-link { position: absolute; inset: 0; display: block; color: inherit; text-decoration: none; background: #FFFFFF; border-radius: 26px; box-shadow: 0 50px 80px -50px #10244055; }
-.stack-copy { position: absolute; left: 0; top: 0; bottom: 0; width: 52%; padding: clamp(26px, 3vw, 44px); display: flex; flex-direction: column; opacity: calc(1 - var(--t, 0) * 1.8); transform: translateX(calc(var(--t, 0) * -30px)); }
-.stack-metric { font-family: var(--font-display); font-size: clamp(30px, 3vw, 46px); line-height: 1; letter-spacing: -.05em; color: var(--ink); }
+.stack-copy { position: absolute; left: 0; top: 0; bottom: 0; width: 54%; overflow: hidden; padding: clamp(26px, 3vw, 44px); display: flex; flex-direction: column; opacity: calc(1 - var(--t, 0) * 1.8); transform: translateX(calc(var(--t, 0) * -30px)); }
+.stack-metric { font-family: var(--font-display); font-size: clamp(28px, min(2.8vw, 5vh), 44px); line-height: 1; letter-spacing: -.05em; color: var(--ink); }
 .stack-metric::after { content: ''; display: block; width: 38px; height: 2px; margin-top: 16px; background: var(--apricot); }
 .stack-copy h3 { margin-top: 18px; font-size: 15px; line-height: 1.5; font-weight: 500; color: var(--slate); max-width: 26em; }
-.stack-copy blockquote { margin-top: auto; font-family: var(--font-display); font-size: clamp(19px, 1.7vw, 26px); line-height: 1.25; letter-spacing: -.03em; color: var(--ink); }
+.stack-copy blockquote { margin-top: auto; font-family: var(--font-display); font-size: clamp(18px, min(1.6vw, 2.9vh), 25px); line-height: 1.25; letter-spacing: -.03em; color: var(--ink); }
 .stack-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
 .stack-meta span { font-size: 11.5px; letter-spacing: .02em; color: var(--muted); padding: 6px 10px; border-radius: 8px; background: #F3EFEA; }
-.stack-img { position: absolute; top: 0; bottom: 0; right: 0; margin: 0; left: calc((1 - var(--t, 0)) * 52%); overflow: hidden; border-radius: 0 26px 26px 0; background: var(--sand); }
+.stack-img { position: absolute; top: 0; bottom: 0; right: 0; margin: 0; left: calc((1 - var(--t, 0)) * 54%); overflow: hidden; border-radius: 0 26px 26px 0; background: var(--sand); }
 .stack-card.is-side .stack-img { border-radius: 26px; }
 .stack-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.04 + var(--t, 0) * .06)); transition: transform 1.2s var(--ease-calm); }
 .stack-card.is-active .stack-link:hover .stack-img img { transform: scale(1.09); }
@@ -385,4 +385,12 @@
     .stack-controls .stack-all { position: static; transform: none; flex-basis: 100%; justify-content: center; }
     .stack-controls { flex-wrap: wrap; }
 }
+/* Measuring pass: let the story take its natural height (see fit() in app.js). */
+.stack.is-measuring .stack-copy { bottom: auto; overflow: visible; }
+.stack.is-measuring .stack-copy blockquote { margin-top: 18px; }
+/* Short screens: tighter type so the story still fits the card. */
+.stack.is-tight .stack-metric { font-size: clamp(24px, 2.2vw, 34px); }
+.stack.is-tight .stack-copy h3 { margin-top: 12px; font-size: 14px; }
+.stack.is-tight .stack-copy blockquote { font-size: clamp(16px, 1.3vw, 20px); }
+.stack.is-tight .stack-meta { margin-top: 12px; }
 @media (prefers-reduced-motion: reduce) { .stack-card, .stack-img img, .stack-dot { transition: none !important; } }
