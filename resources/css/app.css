@@ -9,6 +9,7 @@
 @import './extras.css';
 @import './moments.css';
 @import './authority.css';
+@import './tome.css';
 @import './motion.css';
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

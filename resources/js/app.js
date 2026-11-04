@@ -588,3 +588,94 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
     layout();
     fromScroll();
 })();
+
+// The book: on wide screens the section pins, the book turns to face you, the cover swings open and the pages riffle
+// past before it settles on the opening spread. On phones it plays once when it comes into view.
+(() => {
+    const section = document.querySelector('[data-tome]');
+    if (!section) return;
+    const book = section.querySelector('[data-tome-book]');
+    const cover = section.querySelector('[data-tome-cover]');
+    const leaves = [...section.querySelectorAll('[data-tome-leaf]')];
+    const wide = window.matchMedia('(min-width: 901px)');
+    const clamp = (v) => Math.min(Math.max(v, 0), 1);
+    const phase = (p, a, b) => clamp((p - a) / (b - a));
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    let pinned = false;
+    let played = false;
+
+    const draw = (p) => {
+        const pw = book.offsetWidth / 2;
+        const open = ease(phase(p, 0.1, 0.36));
+        const settle = ease(phase(p, 0.78, 1));
+        // closed: standing at the right, turned to show the spine; open: centred and tilted back a little
+        const closedShift = pinned ? Math.min(window.innerWidth * 0.06, 90) : -pw / 2;
+        book.style.setProperty('--open', open.toFixed(4));
+        book.style.setProperty('--shift', `${lerp(closedShift, 0, open).toFixed(1)}px`);
+        book.style.setProperty('--ry', `${lerp(24, 0, open).toFixed(2)}deg`);
+        book.style.setProperty('--rx', `${lerp(6, 16 - settle * 4, open).toFixed(2)}deg`);
+        book.style.setProperty('--rz', `${lerp(-3, 0, open).toFixed(2)}deg`);
+        book.style.setProperty('--sc', lerp(pinned ? 0.92 : 0.9, 1, open).toFixed(4));
+        cover.style.setProperty('--ca', `${(-180 * open).toFixed(2)}deg`);
+        cover.style.setProperty('--sheen', phase(p, 0, 0.12).toFixed(3));
+        // the riffle: each leaf starts a little after the last, so they fan over in a wave
+        const r = phase(p, 0.3, 0.86);
+        const n = leaves.length;
+        leaves.forEach((leaf, i) => {
+            const last = i === n - 1;
+            const start = last ? 0.62 : (i / (n - 1)) * 0.5;
+            const t = ease(clamp((r - start) / (last ? 0.38 : 0.42)));
+            const a = -180 * t;
+            leaf.style.setProperty('--a', `${a.toFixed(2)}deg`);
+            leaf.style.setProperty('--lift', `${(Math.sin(t * Math.PI) * (last ? 6 : 14)).toFixed(2)}px`);
+            leaf.style.setProperty('--sh', Math.abs(Math.sin(t * Math.PI)).toFixed(3));
+            if (!last) leaf.style.setProperty('--bend', `${(Math.sin(t * Math.PI) * 38).toFixed(2)}deg`);
+        });
+        section.style.setProperty('--magic', Math.sin(Math.PI * phase(p, 0.26, 0.95)).toFixed(3));
+        section.style.setProperty('--intro-out', ease(phase(p, 0.06, 0.24)).toFixed(3));
+        section.style.setProperty('--cta', ease(phase(p, 0.86, 0.98)).toFixed(3));
+    };
+
+    const layout = () => {
+        section.classList.remove('is-pinned');
+        section.style.removeProperty('--tome-height');
+        pinned = wide.matches && calm;
+        if (pinned) {
+            section.classList.add('is-pinned');
+            section.style.setProperty('--tome-height', `${Math.round(window.innerHeight * 3.4)}px`);
+        }
+    };
+    const fromScroll = () => {
+        if (!pinned) return;
+        const box = section.getBoundingClientRect();
+        const span = box.height - window.innerHeight;
+        draw(span > 0 ? clamp(-box.top / span) : 1);
+    };
+    const play = () => {
+        if (played) return;
+        played = true;
+        const start = performance.now();
+        const step = (now) => {
+            const p = Math.min((now - start) / 3600, 1);
+            draw(p);
+            if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+    const setup = () => {
+        layout();
+        if (pinned) fromScroll();
+        else if (!calm) draw(1);
+        else if (!played) draw(0);
+    };
+    setup();
+    if (calm) {
+        new IntersectionObserver((entries) => {
+            entries.forEach((e) => { if (e.isIntersecting && !pinned) play(); });
+        }, { threshold: 0.45 }).observe(book);
+    }
+    let raf = 0;
+    document.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(fromScroll); }, { passive: true });
+    window.addEventListener('resize', () => { setup(); if (!pinned && played) draw(1); });
+})();
