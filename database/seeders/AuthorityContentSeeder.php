@@ -23,6 +23,8 @@ class AuthorityContentSeeder extends Seeder
         $this->credentials();
         $this->homeOrder();
         $this->careerArt();
+        $this->careerWording();
+        $this->affiliationLogos();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -251,5 +253,42 @@ class AuthorityContentSeeder extends Seeder
             return;
         }
         $saved->update(['value' => config('content.groups.home.fields.sections.default') ?? $saved->value]);
+    }
+
+    /** Update the first-draft career highlights to the figure-led wording, only where the text is still the original. */
+    private function careerWording(): void
+    {
+        $from = ['from its eight partners,', 'restructured delivery and digitised the firm’s workflows.'];
+        $to = ['from its 8 partners,', 'restructured delivery, digitised the firm’s workflows and lifted productivity by 82%.'];
+        Item::where('type', 'career')->get()->each(function (Item $item) use ($from, $to) {
+            $body = str_replace($from, $to, (string) $item->body);
+            if ($body !== $item->body) {
+                $item->update(['body' => $body]);
+            }
+        });
+    }
+
+    /** Attach logos saved in public/images/logos to affiliations that have no logo yet. */
+    private function affiliationLogos(): void
+    {
+        $logos = [
+            'Streamsowers & Köhn' => 'ssk',
+            'Association of Law Firm Administrators Nigeria' => 'alan',
+            'International Bar Association' => 'iba',
+            'KPMG Nigeria' => 'kpmg',
+            'Olajide Oyewole LLP · DLA Piper Africa' => 'dla-piper',
+            'Harvard Business School' => 'harvard-business-school',
+            'MIT Sloan' => 'mit-sloan',
+            'The George Washington University' => 'gwu',
+        ];
+        foreach ($logos as $title => $slug) {
+            $file = collect(['svg', 'png', 'webp'])->map(fn ($ext) => "images/logos/{$slug}.{$ext}")
+                ->first(fn ($path) => is_file(public_path($path)));
+            if ($file) {
+                Item::where('type', 'affiliations')->where('title', $title)
+                    ->where(fn ($q) => $q->whereNull('image')->orWhere('image', ''))
+                    ->update(['image' => $file]);
+            }
+        }
     }
 }
