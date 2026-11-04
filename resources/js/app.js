@@ -637,45 +637,35 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         section.style.setProperty('--cta', ease(phase(p, 0.86, 0.98)).toFixed(3));
     };
 
+    // Wide screens get the full-screen stage (intro beside the closed book); phones stack it.
+    // Either way the opening plays by itself, once, as soon as the book is in view.
     const layout = () => {
-        section.classList.remove('is-pinned');
-        section.style.removeProperty('--tome-height');
         pinned = wide.matches && calm;
-        if (pinned) {
-            section.classList.add('is-pinned');
-            section.style.setProperty('--tome-height', `${Math.round(window.innerHeight * 3.4)}px`);
-        }
-    };
-    const fromScroll = () => {
-        if (!pinned) return;
-        const box = section.getBoundingClientRect();
-        const span = box.height - window.innerHeight;
-        draw(span > 0 ? clamp(-box.top / span) : 1);
+        section.classList.toggle('is-pinned', pinned);
+        section.style.removeProperty('--tome-height');
     };
     const play = () => {
         if (played) return;
         played = true;
+        section.classList.add('is-playing');
         const start = performance.now();
         const step = (now) => {
-            const p = Math.min((now - start) / 3600, 1);
+            const p = Math.min((now - start) / 3800, 1);
             draw(p);
             if (p < 1) requestAnimationFrame(step);
+            else section.classList.remove('is-playing');
         };
         requestAnimationFrame(step);
     };
     const setup = () => {
         layout();
-        if (pinned) fromScroll();
-        else if (!calm) draw(1);
-        else if (!played) draw(0);
+        draw(played || !calm ? 1 : 0);
     };
     setup();
     if (calm) {
         new IntersectionObserver((entries) => {
-            entries.forEach((e) => { if (e.isIntersecting && !pinned) play(); });
-        }, { threshold: 0.45 }).observe(book);
+            entries.forEach((e) => { if (e.isIntersecting) play(); });
+        }, { threshold: 0.55 }).observe(book);
     }
-    let raf = 0;
-    document.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(fromScroll); }, { passive: true });
-    window.addEventListener('resize', () => { setup(); if (!pinned && played) draw(1); });
+    window.addEventListener('resize', setup);
 })();

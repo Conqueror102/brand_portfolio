@@ -135,8 +135,7 @@
 .tome-actions .link-arrow { color: #F5EFE6; border-color: #F5EFE655; }
 
 /* pinned, scroll-driven layout on wide screens */
-.tome.is-pinned { height: var(--tome-height, 320vh); }
-.tome.is-pinned .tome-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; padding-top: clamp(24px, 5vh, 56px); padding-bottom: clamp(24px, 5vh, 56px); grid-template-rows: 1fr auto; }
+.tome.is-pinned .tome-sticky { height: 100vh; height: 100svh; min-height: 600px; padding-top: clamp(24px, 5vh, 56px); padding-bottom: clamp(24px, 5vh, 56px); grid-template-rows: 1fr auto; }
 .tome.is-pinned .tome-intro { position: absolute; left: var(--gutter); top: 50%; width: min(34rem, 36vw); transform: translateY(calc(-50% - var(--intro-out, 0) * 40px)); opacity: calc(1 - var(--intro-out, 0)); pointer-events: none; }
 .tome.is-pinned .tome-intro .actions, .tome.is-pinned .tome-intro a { pointer-events: auto; }
 .tome.is-pinned .tome-scene { grid-row: 1; }
