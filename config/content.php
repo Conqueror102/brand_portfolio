@@ -51,6 +51,7 @@ $groups = [
             'idea_quote' => $f('Quote', 'rich', 'Growth is an outcome. *Scaling is a capability.*', 'Big idea'),
             'idea_source' => $f('Source', 'text', 'Modupe Olusoga, Managing Partners’ Roundtable 5.0', 'Big idea'),
             'idea_image' => $f('Line illustration', 'image', 'images/authority/lineart-institution.webp', 'Big idea', 'A transparent line drawing works best.'),
+            'idea_band_art' => $f('Background line art (navy band)', 'image', 'images/authority/work-blueprint.webp', 'Big idea', 'A light line drawing on a transparent background, shown faintly behind the quote.'),
             'idea_link_label' => $f('Link', 'text', 'Read the white paper', 'Big idea'),
             'idea_link' => $f('Link destination', 'link', 'http://bit.ly/ALANMPR5', 'Big idea'),
             'recognition_title' => $f('Heading', 'rich', 'Recognition & *appointments.*', 'Big idea', 'Shown beside the big idea. The items are under Lists → Recognition.'),

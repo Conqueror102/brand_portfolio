@@ -258,7 +258,7 @@ return [
     'recognition' => [
         'label' => 'Recognition & appointments', 'group' => 'Profile', 'icon' => 'star',
         'help' => 'Awards, elected roles and notable appointments, shown on the homepage and About page. Remove the placeholder once real awards are added.',
-        'fields' => ['category' => 'Year', 'title' => 'Recognition', 'subtitle' => 'Awarding or appointing body', 'icon' => 'Icon'],
+        'fields' => ['category' => 'Year', 'title' => 'Recognition', 'subtitle' => 'Awarding or appointing body', 'body' => 'The story in a line or two', 'image' => 'Logo of the awarding body (optional)', 'icon' => 'Icon (used when there is no logo)'],
         'seed' => [
             ['category' => '2026', 'title' => 'Elected President, 2026–2029 term', 'subtitle' => 'Association of Law Firm Administrators Nigeria', 'icon' => 'star'],
             ['category' => '2026', 'title' => 'Speaker, IBA Annual Conference, Copenhagen', 'subtitle' => 'International Bar Association', 'icon' => 'mic'],

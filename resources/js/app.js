@@ -800,3 +800,38 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         item.addEventListener('mouseleave', () => clearTimeout(timer));
     });
 })();
+
+// Manifesto quote: split into words and light them as the reader scrolls through.
+(() => {
+    const quote = document.querySelector('[data-mf-quote]');
+    if (! quote) return;
+    const words = [];
+    const walk = (node) => [...node.childNodes].forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+            const frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach((part) => {
+                if (! part) return;
+                if (/^\s+$/.test(part)) { frag.append(part); return; }
+                const span = document.createElement('span');
+                span.className = 'mf-w';
+                span.textContent = part;
+                words.push(span);
+                frag.append(span);
+            });
+            child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE) walk(child);
+    });
+    walk(quote);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { words.forEach((w) => w.classList.add('is-lit')); return; }
+    let ticking = false;
+    const update = () => {
+        ticking = false;
+        const box = quote.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const p = Math.min(1, Math.max(0, (vh * .9 - box.top) / (box.height + vh * .35)));
+        const lit = Math.round(p * words.length * 1.15);
+        words.forEach((w, i) => w.classList.toggle('is-lit', i < lit));
+    };
+    window.addEventListener('scroll', () => { if (! ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+})();

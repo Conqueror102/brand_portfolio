@@ -26,6 +26,7 @@ class AuthorityContentSeeder extends Seeder
         $this->careerWording();
         $this->affiliationLogos();
         $this->momentStories();
+        $this->recognitionDetails();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -291,6 +292,27 @@ class AuthorityContentSeeder extends Seeder
                     ->update(['image' => $file]);
             }
         }
+    }
+
+    /** Logos and short stories for the recognition cards, only where the admin has not set them. */
+    private function recognitionDetails(): void
+    {
+        $details = [
+            'Association of Law Firm Administrators Nigeria' => ['alan', 'Elected by her peers to lead the body that professionalises the business side of Nigerian law firms.'],
+            'International Bar Association' => ['iba', 'Invited to speak on the business of law at the world’s largest gathering of the legal profession.'],
+            'IBA Law Firm Management Committee' => ['iba', 'Connecting African law firm leaders to the IBA’s global work on firm management.'],
+            'Harvard Business School Online' => ['harvard-business-school', 'Executive study in leading organisations through growth and change.'],
+        ];
+        foreach ($details as $org => [$slug, $story]) {
+            $file = collect(['svg', 'png', 'webp'])->map(fn ($ext) => "images/logos/{$slug}.{$ext}")
+                ->first(fn ($path) => is_file(public_path($path)));
+            $q = fn () => Item::where('type', 'recognition')->where('subtitle', $org);
+            if ($file) $q()->where(fn ($w) => $w->whereNull('image')->orWhere('image', ''))->update(['image' => $file]);
+            $q()->where(fn ($w) => $w->whereNull('body')->orWhere('body', ''))->update(['body' => $story]);
+        }
+        Item::where('type', 'recognition')->where('title', 'Award or honour to be added')
+            ->where(fn ($w) => $w->whereNull('body')->orWhere('body', ''))
+            ->update(['body' => 'Placeholder: add an award, fellowship or appointment here, with one line on why it matters.']);
     }
 
     /** Placeholder stories for the sample photos, so the back of each print has something to read until real ones are added. */
