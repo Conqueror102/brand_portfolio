@@ -1,6 +1,6 @@
 @php($honours = items('recognition'))
 <section class="idea" id="idea" aria-label="Big idea">
-    <div class="wrap idea-grid">
+    <div class="wrap idea-grid {{ $honours->isEmpty() ? 'is-solo' : '' }}">
         {{-- The quote card, after the Figma "Award recipient" card: photo fading into paper on the left, the quote set like a name on the right. --}}
         <figure class="idea-quote is-feature">
             @if (content_image('home.idea_photo'))

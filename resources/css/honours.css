@@ -56,3 +56,4 @@ li.is-open .rec-story > p { padding-bottom: 16px; }
     .rec-story > p { padding-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .mf-w { opacity: 1; } .rec-story { transition: none; } }
+.idea .idea-grid.is-solo { grid-template-columns: 1fr; }
