@@ -62,7 +62,7 @@
 .surname { display: block; font-style: italic; font-weight: 400; color: #435565; margin-left: .55em; margin-top: -.01em; }
 .name-dot { color: #D9AD93; }
 .hero-copy h2 { font-family: var(--font-display); font-size: clamp(28px, min(3.5vw, 5.8vh), 55px); font-weight: 400; line-height: 1.13; letter-spacing: -.05em; margin-top: 28px; }
-.hero-summary { font-size: clamp(14px, 1.45vw, 22px); color: var(--color-brand-muted); margin-top: 12px; line-height: 1.5; max-width: 620px; }
+.hero-summary { font-size: clamp(14px, 1.12vw, 18px); color: var(--color-brand-muted); margin-top: 12px; line-height: 1.55; max-width: 640px; }
 .hero-actions { display: flex; align-items: center; gap: 32px; margin-top: 30px; }
 .speaking-button { display: inline-flex; align-items: center; gap: 26px; justify-content: space-between; border-radius: 99px; background: var(--color-brand-navy); color: white; padding: 14px 28px; font-size: 14px; min-height: 48px; }
 .speaking-button:hover { background: var(--color-brand-blue-hover); }

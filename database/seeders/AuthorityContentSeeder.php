@@ -27,6 +27,8 @@ class AuthorityContentSeeder extends Seeder
         $this->affiliationLogos();
         $this->momentStories();
         $this->recognitionDetails();
+        // New hero introduction (Nov 2026). Only replaces the old default, never text edited in the admin.
+        Content::where('key', 'home.hero_summary')->where('value', 'Two decades turning strategy into structure, and structure into results, for law firms and professional services organisations in Nigeria and beyond.')->update(['value' => 'Modupe Olusoga is a seasoned strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.']);
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
