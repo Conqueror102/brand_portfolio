@@ -110,7 +110,8 @@ dialog::backdrop { background: #10244075; backdrop-filter: blur(5px); }
 .enquiry-form textarea { resize: vertical; }
 .field-error { color: #9A322A !important; }
 .form-success { background: #E7EFE7; border: 1px solid #99AD99; padding: 12px; }
-@media (min-width: 1000px) { .editorial-shell { height: 100svh; overflow: hidden; } }
+/* The hero fills the screen but grows when its content needs more room, so nothing is ever clipped. */
+@media (min-width: 1000px) { .editorial-shell { min-height: 100svh; height: auto; overflow: visible; } }
 @media (min-width: 1000px) and (max-height: 700px) {
 .editorial-header { flex-basis: 66px; }
 .hero-copy { padding-top: 18px; }
@@ -196,7 +197,7 @@ dialog { padding: 20px; }
 .hero-actions .speaking-button, .hero-actions .insights-button { font-size: 13px; }
 .hero-figure > img { width: 100%; height: auto; top: 0; }
 }
-@media (min-width: 1000px) and (min-height: 701px) and (max-height: 820px) {
+@media (min-width: 1000px) and (min-height: 701px) and (max-height: 960px) {
 .hero-copy { padding-top: 14px; }
 .hero-copy h1 { font-size: clamp(86px, min(10vw, 16.5vh), 150px); }
 .hero-copy h2 { margin-top: 18px; }
@@ -226,13 +227,6 @@ dialog { padding: 20px; }
 .hero-copy h1 { line-height: .82; }
 .hero-actions .speaking-button { font-size: 13px; padding: 12px 22px; gap: 26px; }
 .connect-button { font-size: 13px; }
-}
-@media (min-width: 1000px) and (min-height: 701px) and (max-height: 820px) {
-.hero-copy { padding-top: 14px; }
-.hero-copy h1 { font-size: clamp(86px, min(10vw, 16.5vh), 150px); }
-.hero-copy h2 { margin-top: 18px; }
-.hero-titles { margin-bottom: 12px; }
-.hero-actions { margin-top: 22px; }
 }
 @media (min-width: 1000px) and (max-height: 560px) { .hero-copy { padding-top: 16px; } }
 }
