@@ -10,7 +10,7 @@
             </div>
         </div>
         <figure class="frame frame-portrait" data-reveal>
-            <img src="{{ content_image('profile.portrait') }}" alt="{{ content('profile.portrait_alt') }}" width="1100" height="1429">
+            <img src="{{ content_image('profile.portrait_second') }}" alt="{{ content('profile.portrait_alt') }}" width="1100" height="1429">
             @if (content('profile.portrait_note'))<figcaption class="frame-note">{{ content('profile.portrait_note') }}</figcaption>@endif
             @if (content('about.badge_title'))<div class="frame-badge"><x-line-icon name="columns" /><div><strong>{{ content('about.badge_title') }}</strong>{{ content('about.badge_text') }}</div></div>@endif
         </figure>

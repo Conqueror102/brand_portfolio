@@ -6,7 +6,7 @@
         <a class="meet-pill" href="{{ content_url('home.meet_button_link') }}">{{ content('home.meet_button_label') }} <x-icon name="arrow-right-white" /></a>
     </div>
     <figure class="meet-portrait">
-        <img src="{{ content_image('profile.portrait') }}" alt="{{ content('profile.portrait_alt') }}" loading="lazy" width="1100" height="1429">
+        <img src="{{ content_image('profile.portrait_second') }}" alt="{{ content('profile.portrait_alt') }}" loading="lazy" width="1100" height="1429">
         @if (content('profile.portrait_note'))<figcaption>{{ content('profile.portrait_note') }}</figcaption>@endif
     </figure>
     <div class="meet-photo">

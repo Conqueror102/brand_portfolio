@@ -28,6 +28,7 @@ class AuthorityContentSeeder extends Seeder
         $this->momentStories();
         $this->recognitionDetails();
         $this->clientFeedbackNov11();
+        $this->realPhotos();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -277,6 +278,32 @@ class AuthorityContentSeeder extends Seeder
         if ($saved && ! str_contains((string) $saved->value, 'pillars:')) {
             $value = preg_replace('/(meet:[01])/', '$1,pillars:1', (string) $saved->value, 1, $count);
             $saved->update(['value' => $count ? $value : $saved->value.',pillars:1']);
+        }
+    }
+
+    /** Real photographs of Modupe (11 Nov 2026) replace the generated placeholders, only where the admin still has the old image. */
+    private function realPhotos(): void
+    {
+        $replace = [
+            'profile.portrait' => [['images/editorial-portrait.png'], 'images/portraits/hero-cutout.webp'],
+            'profile.portrait_alt' => [['Generated concept portrait for design preview; to be replaced with Modupe’s photograph'], 'Portrait of Modupe Olusoga'],
+            'home.idea_photo' => [['images/generated/reel-keynote.webp'], 'images/portraits/alan-investiture-crop.webp'],
+            'home.mentorship_image' => [['images/generated/mentorship-home.webp'], 'images/portraits/mentorship-portrait.webp'],
+            'mentorship.image' => [['images/generated/mentorship-conversation.webp'], 'images/portraits/mentorship-portrait.webp'],
+        ];
+        foreach ($replace as $key => [$old, $new]) {
+            Content::where('key', $key)->whereIn('value', $old)->update(['value' => $new]);
+        }
+
+        $photo = 'images/portraits/alan-investiture.webp';
+        if (! Item::where('type', 'moments')->where('image', $photo)->exists()) {
+            Item::where('type', 'moments')->increment('sort_order');
+            Item::create([
+                'type' => 'moments', 'image' => $photo, 'sort_order' => 0, 'is_published' => true,
+                'title' => 'ALAN investiture ceremony',
+                'subtitle' => 'Association of Law Firm Administrators Nigeria',
+                'body' => 'Reading the programme at the Association of Law Firm Administrators Nigeria investiture ceremony.',
+            ]);
         }
     }
 
