@@ -1,6 +1,6 @@
 @php
     $email = \App\Models\Setting::get('contact_email');
-    $eventTypes = 'speaking,panel,session,retreat,workshop,book';
+    $eventTypes = 'speaking,panel,workshop,retreat';
 @endphp
 <x-layouts.page :title="content('navigation.contact_label')" :description="content('contact.meta')">
     <section class="wrap page-hero-simple">
@@ -26,15 +26,45 @@
                     <form class="form" method="POST" action="{{ route('enquiries.store') }}" data-once>
                         @csrf
                         <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-                        <label class="field">
-                            <span>What is this about?</span>
-                            <select name="type" required>
-                                @foreach (config('site.enquiry_types') as $value => $label)
-                                    <option value="{{ $value }}" @selected(old('type', $selectedType) === $value)>{{ $label }}</option>
+                        @php
+                            $cards = ['speaking' => 'mic', 'panel' => 'panel', 'workshop' => 'workshop', 'retreat' => 'retreat'];
+                            $chosen = old('type', $selectedType);
+                            $isOther = $chosen && ! array_key_exists($chosen, $cards);
+                            $others = \Illuminate\Support\Arr::except(config('site.enquiry_types'), array_keys($cards));
+                            $option = fn ($key) => array_pad(array_map('trim', explode('|', (string) content('contact.type_'.$key), 2)), 2, '');
+                        @endphp
+                        <fieldset class="field engage-types">
+                            <legend>{{ content('contact.type_question') }}</legend>
+                            <div class="engage-grid">
+                                @foreach ($cards as $value => $icon)
+                                    @php([$title, $line] = $option($value))
+                                    <label class="engage-card">
+                                        <input type="radio" name="type" value="{{ $value }}" required @checked($chosen === $value)>
+                                        <span class="engage-icon"><x-line-icon :name="$icon" /></span>
+                                        <strong>{{ $title }}</strong>
+                                        @if ($line)<small>{{ $line }}</small>@endif
+                                        <i class="engage-tick" aria-hidden="true"><x-line-icon name="check" /></i>
+                                    </label>
                                 @endforeach
-                            </select>
+                                @php([$title, $line] = $option('other'))
+                                <label class="engage-card engage-card-other">
+                                    <input type="radio" name="type" value="other" @checked($isOther)>
+                                    <span class="engage-icon"><x-line-icon name="spark" /></span>
+                                    <strong>{{ $title }}</strong>
+                                    @if ($line)<small>{{ $line }}</small>@endif
+                                    <i class="engage-tick" aria-hidden="true"><x-line-icon name="check" /></i>
+                                </label>
+                            </div>
+                            <label class="field engage-other">
+                                <span>Please choose</span>
+                                <select name="type_other">
+                                    @foreach ($others as $value => $label)
+                                        <option value="{{ $value }}" @selected($isOther && $chosen === $value)>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                            </label>
                             @error('type')<span class="field-error">{{ $message }}</span>@enderror
-                        </label>
+                        </fieldset>
                         <div class="form-row">
                             <x-field name="name" label="Your name" autocomplete="name" required maxlength="150" />
                             <x-field name="email" label="Email address" type="email" autocomplete="email" required maxlength="254" />

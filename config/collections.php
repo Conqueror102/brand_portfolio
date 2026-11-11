@@ -9,6 +9,16 @@
 $icons = ['columns', 'relay', 'compass', 'people', 'steps', 'spark', 'mic', 'panel', 'workshop', 'retreat', 'book', 'scale', 'globe', 'heart', 'star', 'calendar', 'clock', 'mail', 'eye', 'video', 'headphones', 'file', 'download', 'play', 'check', 'home', 'pin', 'lock', 'quote', 'search', 'settings', 'inbox'];
 
 return [
+    'pillars' => [
+        'label' => 'Key pillars', 'group' => 'Homepage', 'icon' => 'columns',
+        'help' => 'The three pillars of her work, shown on the homepage after “Meet Modupe”. Three works best.',
+        'fields' => ['title' => 'Pillar', 'body' => 'Short description', 'subtitle' => 'Focus areas (separate with commas)', 'icon' => 'Icon'],
+        'seed' => [
+            ['icon' => 'columns', 'title' => 'Institution Building & Sustainability', 'subtitle' => 'Governance, Succession, Structures that last', 'body' => 'I help firms and organisations build the governance, succession and operating structures that let them thrive beyond any one individual.'],
+            ['icon' => 'people', 'title' => 'Executive Leadership & Organisational Excellence', 'subtitle' => 'Operations, People strategy, Performance', 'body' => 'I lead the business behind the practice: the people, systems and performance rhythms that let professionals do their best work.'],
+            ['icon' => 'steps', 'title' => 'Intentional Growth & Execution', 'subtitle' => 'Clarity, Discipline, Consistency', 'body' => 'I help leaders and professionals turn aspiration into deliberate, measurable progress, and keep going when motivation fades.'],
+        ],
+    ],
     'speaking_topics' => [
         'label' => 'Speaking topics', 'group' => 'Speaking', 'icon' => 'mic',
         'help' => 'Shown on the Speaking page; the first four also appear on the homepage.',

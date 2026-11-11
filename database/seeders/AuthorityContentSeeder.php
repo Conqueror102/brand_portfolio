@@ -27,8 +27,7 @@ class AuthorityContentSeeder extends Seeder
         $this->affiliationLogos();
         $this->momentStories();
         $this->recognitionDetails();
-        // New hero introduction (Nov 2026). Only replaces the old default, never text edited in the admin.
-        Content::where('key', 'home.hero_summary')->where('value', 'Two decades turning strategy into structure, and structure into results, for law firms and professional services organisations in Nigeria and beyond.')->update(['value' => 'Modupe Olusoga is a seasoned strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.']);
+        $this->clientFeedbackNov11();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -244,6 +243,40 @@ class AuthorityContentSeeder extends Seeder
         foreach (config('collections.career.seed', []) as $row) {
             Item::where('type', 'career')->where('subtitle', $row['subtitle'])->where(fn ($q) => $q->whereNull('image')->orWhere('image', ''))
                 ->update(['image' => $row['image'] ?? null]);
+        }
+    }
+
+    /**
+     * Client feedback of 11 Nov 2026: title line, tagline and first-person intro in the hero, a clearer mentorship audience,
+     * and the Key pillars section after Meet Modupe. Only replaces old defaults, never text edited in the admin.
+     */
+    private function clientFeedbackNov11(): void
+    {
+        $intro = 'I am a strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.';
+        $replace = [
+            'home.hero_line1' => [['Building institutions'], 'Clarity for people.'],
+            'home.hero_line2' => [['that outlast their founders.'], 'Continuity for institutions.'],
+            'home.hero_summary' => [[
+                'Two decades turning strategy into structure, and structure into results, for law firms and professional services organisations in Nigeria and beyond.',
+                'Modupe Olusoga is a seasoned strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.',
+            ], $intro],
+            'mentorship.audience_title' => [['Built for people *ready to commit.*'], 'Who this programme *is for.*'],
+            'mentorship.audience_text' => [['This is not a motivational course. It is designed to create clarity, intentional action, accountability, consistency and execution.'], config('content.groups.mentorship.fields.audience_text.default')],
+        ];
+        foreach ($replace as $key => [$old, $new]) {
+            Content::where('key', $key)->whereIn('value', $old)->update(['value' => $new]);
+        }
+
+        if (! Item::where('type', 'pillars')->exists()) {
+            foreach (config('collections.pillars.seed', []) as $position => $row) {
+                Item::create($row + ['type' => 'pillars', 'sort_order' => $position, 'is_published' => true]);
+            }
+        }
+
+        $saved = Content::find('home.sections');
+        if ($saved && ! str_contains((string) $saved->value, 'pillars:')) {
+            $value = preg_replace('/(meet:[01])/', '$1,pillars:1', (string) $saved->value, 1, $count);
+            $saved->update(['value' => $count ? $value : $saved->value.',pillars:1']);
         }
     }
 

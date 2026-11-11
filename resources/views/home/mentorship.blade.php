@@ -6,6 +6,18 @@
             <span class="status-pill status-{{ $status }}">{{ mentorship_status_label($status) }}</span>
         </div>
         <h2 id="mentorship-title" class="display h-lg">{{ content_html('home.mentorship_title') }}</h2>
+        @php($who = array_slice(array_filter(array_map('trim', explode("\n", (string) content('mentorship.audience_profiles')))), 0, 3))
+        @if ($who)
+            <div class="mentor-for">
+                <p class="mentor-for-label">{{ content('home.mentorship_for_label') }}</p>
+                <ul>
+                    @foreach ($who as $row)
+                        @php([$person, $why] = array_pad(array_map('trim', explode('|', $row, 2)), 2, ''))
+                        <li><strong>{{ $person }}</strong>@if ($why)<span>{{ $why }}</span>@endif</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <ol class="journey" aria-label="The programme journey" style="--steps: {{ max(1, items('journey')->count()) }}">
             @foreach (items('journey') as $i => $stage)
                 <li><i class="journey-icon"><x-line-icon :name="$stage->icon ?: (['star', 'eye', 'steps', 'calendar', 'check'][$i] ?? 'check')" /></i><span>{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>{{ $stage->title }}</li>

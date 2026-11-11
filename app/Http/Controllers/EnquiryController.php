@@ -18,6 +18,11 @@ class EnquiryController extends Controller
             return back()->with('enquiry_saved', true);
         }
 
+        // "Something else" on the form sends its choice in type_other.
+        if ($request->input('type') === 'other') {
+            $request->merge(['type' => $request->input('type_other')]);
+        }
+
         $data = $request->validate([
             'type' => ['required', Rule::in(array_keys(config('site.enquiry_types')))],
             'name' => ['required', 'string', 'max:150'],

@@ -24,6 +24,9 @@
 </header>
 <main id="main" class="editorial-hero">
     <div class="hero-copy">
+        @if (content('home.hero_title_line'))
+            <p class="hero-titles"><span class="hero-titles-row">@foreach (array_filter(array_map('trim', explode('|', (string) content('home.hero_title_line')))) as $title)<span>{{ $title }}</span>@endforeach</span></p>
+        @endif
         <h1><span class="given-name">{{ content('profile.given_name') }}</span><span class="surname">{{ content('profile.surname') }}<span class="name-dot">.</span></span></h1>
         <h2>{{ content('home.hero_line1') }}<br><em>{{ content('home.hero_line2') }}</em></h2>
         <p class="hero-summary">{{ content('home.hero_summary') }}</p>

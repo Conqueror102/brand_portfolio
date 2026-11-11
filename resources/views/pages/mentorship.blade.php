@@ -17,7 +17,7 @@
                 @else
                     <a class="btn" href="{{ route('contact', ['type' => 'mentorship']) }}">Register your interest <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
                 @endif
-                <a class="link-arrow" href="#how">How it works <x-line-icon name="arrow" /></a>
+                <a class="link-arrow" href="#who">Who it is for <x-line-icon name="arrow" /></a>
             </div>
         </div>
         <figure class="frame" data-reveal>
@@ -25,6 +25,36 @@
             <div class="frame-badge frame-badge-top"><x-line-icon name="people" /><div><strong>{{ cohort('capacity') ?: 'Limited cohort' }}</strong>Application based</div></div>
             <div class="frame-badge"><x-line-icon name="calendar" /><div><strong>{{ cohort('period') }}{{ cohort('year') ? ' '.cohort('year') : '' }}</strong>{{ cohort('sessions') }}</div></div>
         </figure>
+    </section>
+
+    {{-- Who it is for: first thing after the opening, so visitors can tell straight away whether it is meant for them. --}}
+    <section class="wrap section mentor-who" id="who" aria-labelledby="who-title">
+        <div class="split">
+            <div class="sticky-col" data-reveal>
+                <p class="eyebrow">Is this for you?</p>
+                <h2 id="who-title" class="display h-lg" style="margin-top: 18px">{{ content_html('mentorship.audience_title') }}</h2>
+                <p class="lede" style="margin-top: 18px">{{ content('mentorship.audience_text') }}</p>
+            </div>
+            <div>
+                @php($profiles = array_filter(array_map('trim', explode("\n", (string) content('mentorship.audience_profiles')))))
+                @if ($profiles)
+                    <ol class="mentor-profiles" data-reveal>
+                        @foreach ($profiles as $i => $row)
+                            @php([$person, $why] = array_pad(array_map('trim', explode('|', $row, 2)), 2, ''))
+                            <li><span class="num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span><div><h3>{{ $person }}</h3>@if ($why)<p>{{ $why }}</p>@endif</div></li>
+                        @endforeach
+                    </ol>
+                @endif
+                @if (items('mentorship_audience')->isNotEmpty())
+                    <p class="mentor-fit-title">{{ content('mentorship.audience_fit_title') }}</p>
+                    <ul class="check-list" data-reveal>
+                        @foreach (items('mentorship_audience') as $line)
+                            <li><span class="check-dot"><x-line-icon name="check" /></span>{{ $line->title }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+        </div>
     </section>
 
     <section class="wrap section" id="how">
@@ -45,20 +75,6 @@
         </ol>
     </section>
 
-    <section class="wrap section-tight">
-        <div class="split">
-            <div class="sticky-col" data-reveal>
-                <p class="eyebrow">Is this for you?</p>
-                <h2 class="display h-lg" style="margin-top: 18px">{{ content_html('mentorship.audience_title') }}</h2>
-                <p class="lede" style="margin-top: 18px">{{ content('mentorship.audience_text') }}</p>
-            </div>
-            <ul class="check-list" data-reveal>
-                @foreach (items('mentorship_audience') as $line)
-                    <li><span class="check-dot"><x-line-icon name="check" /></span>{{ $line->title }}</li>
-                @endforeach
-            </ul>
-        </div>
-    </section>
 
     <section class="wrap section-tight">
         <div class="grid-4">

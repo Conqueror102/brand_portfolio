@@ -10,7 +10,7 @@
         </ul>
         <div class="actions">
             <a class="btn btn-light" href="{{ route('contact', ['type' => 'speaking']) }}">{{ content('speaking.cta_label') }} <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
-            <a class="link-arrow" href="{{ route('speaking') }}">All topics <x-line-icon name="arrow" /></a>
+            <a class="link-arrow" href="{{ route('speaking') }}#profile">Speaker profile <x-line-icon name="arrow" /></a>
         </div>
     </div>
     <div class="home-topics">

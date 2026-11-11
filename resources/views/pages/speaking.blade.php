@@ -18,6 +18,38 @@
         </figure>
     </section>
 
+    @if (content('speaking.profile_bio'))
+        {{-- Speaker profile: the short bio organisers ask for, beside a studio portrait. --}}
+        <section class="wrap section speaker-profile" id="profile" aria-labelledby="profile-title">
+            <figure class="speaker-portrait" data-reveal>
+                <img src="{{ content_image('speaking.profile_image') }}" alt="Portrait of {{ content('profile.given_name') }} {{ content('profile.surname') }}" loading="lazy" width="1100" height="1458">
+            </figure>
+            <div class="speaker-copy">
+                <p class="eyebrow">{{ content('speaking.profile_eyebrow') }}</p>
+                <h2 id="profile-title" class="display h-xl">{{ content_html('speaking.profile_title') }}</h2>
+                @if (content('speaking.profile_role'))<p class="speaker-role">{{ content('speaking.profile_role') }}</p>@endif
+                <div class="speaker-bio">
+                    @foreach (preg_split('/\n\s*\n/', trim((string) content('speaking.profile_bio'))) as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
+                </div>
+                @php($facts = array_filter(array_map('trim', explode("\n", (string) content('speaking.profile_facts')))))
+                @if ($facts)
+                    <dl class="speaker-facts">
+                        @foreach ($facts as $fact)
+                            @php([$role, $org] = array_pad(array_map('trim', explode('|', $fact, 2)), 2, ''))
+                            <div><dt>{{ $role }}</dt>@if ($org)<dd>{{ $org }}</dd>@endif</div>
+                        @endforeach
+                    </dl>
+                @endif
+                <div class="actions">
+                    <a class="btn" href="{{ route('contact', ['type' => 'speaking']) }}">{{ content('speaking.cta_label') }} <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
+                    @if (content('speaking.profile_link'))<a class="link-arrow" href="{{ content_url('speaking.profile_link') }}" target="_blank" rel="noopener">{{ content('speaking.profile_link_label') }} <x-line-icon name="download" /></a>@endif
+                </div>
+            </div>
+        </section>
+    @endif
+
     <section class="wrap section" id="topics">
         <header class="section-head">
             <div>
