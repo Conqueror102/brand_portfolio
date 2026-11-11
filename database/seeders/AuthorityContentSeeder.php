@@ -253,13 +253,13 @@ class AuthorityContentSeeder extends Seeder
      */
     private function clientFeedbackNov11(): void
     {
-        $intro = 'I am a strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.';
+        $intro = 'Modupe Olusoga is a seasoned strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.';
         $replace = [
             'home.hero_line1' => [['Building institutions'], 'Clarity for people.'],
             'home.hero_line2' => [['that outlast their founders.'], 'Continuity for institutions.'],
             'home.hero_summary' => [[
                 'Two decades turning strategy into structure, and structure into results, for law firms and professional services organisations in Nigeria and beyond.',
-                'Modupe Olusoga is a seasoned strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.',
+                'I am a strategy and organisational development professional with over 20 years of experience helping law firms and professional services organisations build sustainable structures, strengthen leadership and achieve measurable growth.',
             ], $intro],
             'mentorship.audience_title' => [['Built for people *ready to commit.*'], 'Who this programme *is for.*'],
             'mentorship.audience_text' => [['This is not a motivational course. It is designed to create clarity, intentional action, accountability, consistency and execution.'], config('content.groups.mentorship.fields.audience_text.default')],
