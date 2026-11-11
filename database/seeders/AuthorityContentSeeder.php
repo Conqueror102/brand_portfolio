@@ -288,8 +288,8 @@ class AuthorityContentSeeder extends Seeder
             'profile.portrait' => [['images/editorial-portrait.png'], 'images/portraits/hero-cutout.webp'],
             'profile.portrait_alt' => [['Generated concept portrait for design preview; to be replaced with Modupe’s photograph'], 'Portrait of Modupe Olusoga'],
             'home.idea_photo' => [['images/generated/reel-keynote.webp'], 'images/portraits/alan-investiture-crop.webp'],
-            'home.mentorship_image' => [['images/generated/mentorship-home.webp'], 'images/portraits/mentorship-portrait.webp'],
-            'mentorship.image' => [['images/generated/mentorship-conversation.webp'], 'images/portraits/mentorship-portrait.webp'],
+            'home.mentorship_image' => [['images/generated/mentorship-home.webp', 'images/portraits/mentorship-portrait.webp'], 'images/portraits/mentorship-blue-suit.webp'],
+            'mentorship.image' => [['images/generated/mentorship-conversation.webp', 'images/portraits/mentorship-portrait.webp'], 'images/portraits/mentorship-blue-suit.webp'],
         ];
         foreach ($replace as $key => [$old, $new]) {
             Content::where('key', $key)->whereIn('value', $old)->update(['value' => $new]);
