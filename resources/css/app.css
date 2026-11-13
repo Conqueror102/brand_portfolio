@@ -16,6 +16,7 @@
 @import './honours.css';
 @import './pillars.css';
 @import './motion.css';
+@import './typography.css';
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 

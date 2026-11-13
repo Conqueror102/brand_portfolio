@@ -1,0 +1,24 @@
+/*
+ * Body copy standard (client review, Nov 13):
+ * every running paragraph is 16px, DM Sans Light (300) and pure black on light
+ * backgrounds. Paragraphs on navy/dark panels keep their light colour.
+ * Unlayered and imported last so it wins over section styles.
+ */
+:is(.editorial-page, .site-page) :is(main, section, article, aside, footer, .editorial-shell) p:not(
+    [class*="eyebrow"], [class*="label"], [class*="kicker"], [class*="title"], [class*="caption"],
+    [class*="meta"], [class*="note"], [class*="stat"], [class*="value"], [class*="num"],
+    [class*="role"], [class*="quote"], [class*="credit"], .hero-titles, .muted-note
+) {
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+}
+
+/* Dark surfaces: keep size and weight, restore readable light text. */
+:is(.editorial-page, .site-page) :is(.card-navy, .on-dark, .proof, .meet-connect, .viewer-frame, .career, .career-card, .eng-tone-lead, .tome, .tome-face, .waitlist, .wk-hero, .wk-ticker, .site-footer) p:not(
+    [class*="eyebrow"], [class*="label"], [class*="kicker"], [class*="title"], [class*="caption"],
+    [class*="meta"], [class*="note"], [class*="stat"], [class*="value"], [class*="num"],
+    [class*="role"], [class*="quote"], [class*="credit"], .hero-titles, .muted-note
+) {
+    color: inherit;
+}
