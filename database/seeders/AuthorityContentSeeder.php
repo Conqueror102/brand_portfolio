@@ -289,8 +289,8 @@ class AuthorityContentSeeder extends Seeder
             'profile.portrait' => [['images/editorial-portrait.png', 'images/portraits/hero-cutout.webp'], 'images/portraits/hero-blue-suit.webp'],
             'profile.portrait_alt' => [['Generated concept portrait for design preview; to be replaced with Modupe’s photograph'], 'Portrait of Modupe Olusoga'],
             'home.idea_photo' => [['images/generated/reel-keynote.webp'], 'images/portraits/alan-investiture-crop.webp'],
-            'home.mentorship_image' => [['images/generated/mentorship-home.webp', 'images/portraits/mentorship-portrait.webp', 'images/portraits/mentorship-blue-suit.webp'], 'images/portraits/mentorship-portrait-dark.webp'],
-            'mentorship.image' => [['images/generated/mentorship-conversation.webp', 'images/portraits/mentorship-portrait.webp', 'images/portraits/mentorship-blue-suit.webp'], 'images/portraits/mentorship-portrait-dark.webp'],
+            'home.mentorship_image' => [['images/generated/mentorship-home.webp', 'images/portraits/mentorship-portrait.webp', 'images/portraits/mentorship-blue-suit.webp', 'images/portraits/mentorship-portrait-dark.webp'], 'images/portraits/mentorship-cream-blazer.webp'],
+            'mentorship.image' => [['images/generated/mentorship-conversation.webp', 'images/portraits/mentorship-portrait.webp', 'images/portraits/mentorship-blue-suit.webp', 'images/portraits/mentorship-portrait-dark.webp'], 'images/portraits/mentorship-cream-blazer.webp'],
         ];
         foreach ($replace as $key => [$old, $new]) {
             Content::where('key', $key)->whereIn('value', $old)->update(['value' => $new]);
