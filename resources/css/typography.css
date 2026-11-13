@@ -1,24 +1,44 @@
 /*
- * Body copy standard (client review, Nov 13):
- * every running paragraph is 16px, DM Sans Light (300) and pure black on light
- * backgrounds. Paragraphs on navy/dark panels keep their light colour.
+ * Body copy standard (client review, Nov 13): running paragraphs are 16px,
+ * DM Sans Light (300) and pure black on light backgrounds.
+ *
+ * This is an explicit list of body-copy paragraphs, not a blanket `p` rule:
+ * a blanket rule also shrank display text (quotes, metrics, years) and turned
+ * text on photo/navy panels black. Add new body-copy classes here.
  * Unlayered and imported last so it wins over section styles.
  */
-:is(.editorial-page, .site-page) :is(main, section, article, aside, footer, .editorial-shell) p:not(
-    [class*="eyebrow"], [class*="label"], [class*="kicker"], [class*="title"], [class*="caption"],
-    [class*="meta"], [class*="note"], [class*="stat"], [class*="value"], [class*="num"],
-    [class*="role"], [class*="quote"], [class*="credit"], .hero-titles, .muted-note
+:is(.editorial-page, .site-page) :is(
+    .hero-summary,
+    .lede, .body-copy,
+    .meet-intro > p, .meet-perspective > p,
+    .pillar > p,
+    .eng-body,
+    .idea-context,
+    .rec-story > p,
+    .card > p:not([class]),
+    .impact-row p,
+    .insight-feature-body > p,
+    .mentor-profiles p, .check-list > li, .faq-item > p,
+    .speaker-bio > p,
+    .engagement > p:not(.engagement-sub),
+    .process-steps p,
+    .prose > p
 ) {
     font-size: 16px;
     font-weight: 300;
     color: #000;
 }
 
-/* Dark surfaces: keep size and weight, restore readable light text. */
-:is(.editorial-page, .site-page) :is(.card-navy, .on-dark, .proof, .meet-connect, .viewer-frame, .career, .career-card, .eng-tone-lead, .tome, .tome-face, .waitlist, .wk-hero, .wk-ticker, .site-footer) p:not(
-    [class*="eyebrow"], [class*="label"], [class*="kicker"], [class*="title"], [class*="caption"],
-    [class*="meta"], [class*="note"], [class*="stat"], [class*="value"], [class*="num"],
-    [class*="role"], [class*="quote"], [class*="credit"], .hero-titles, .muted-note
+/* Anything on a navy, photo or otherwise dark surface keeps its own colour. */
+:is(.editorial-page, .site-page) :is(
+    .card-navy, .on-dark, .proof, .meet-connect, .viewer-frame, .career, .career-card,
+    .eng-tone-lead, .tome, .tome-face, .waitlist, .wk-hero, .wk-ticker, .site-footer,
+    .impact-story, .print-face, .cta-band, .page-hero-copy.on-dark
+) :is(
+    .hero-summary, .lede, .body-copy, .meet-intro > p, .meet-perspective > p, .pillar > p,
+    .eng-body, .idea-context, .rec-story > p, .card > p:not([class]), .impact-row p,
+    .insight-feature-body > p, .mentor-profiles p, .check-list > li, .faq-item > p,
+    .speaker-bio > p, .engagement > p:not(.engagement-sub), .process-steps p, .prose > p
 ) {
     color: inherit;
 }
