@@ -286,7 +286,7 @@ class AuthorityContentSeeder extends Seeder
     private function realPhotos(): void
     {
         $replace = [
-            'profile.portrait' => [['images/editorial-portrait.png'], 'images/portraits/hero-cutout.webp'],
+            'profile.portrait' => [['images/editorial-portrait.png', 'images/portraits/hero-cutout.webp'], 'images/portraits/hero-blue-suit.webp'],
             'profile.portrait_alt' => [['Generated concept portrait for design preview; to be replaced with Modupe’s photograph'], 'Portrait of Modupe Olusoga'],
             'home.idea_photo' => [['images/generated/reel-keynote.webp'], 'images/portraits/alan-investiture-crop.webp'],
             'home.mentorship_image' => [['images/generated/mentorship-home.webp', 'images/portraits/mentorship-portrait.webp'], 'images/portraits/mentorship-blue-suit.webp'],
