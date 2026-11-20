@@ -304,12 +304,16 @@ class AuthorityContentSeeder extends Seeder
             $saved->update(['value' => $count ? $value : $saved->value.',video:1']);
         }
 
+        // Her coaching certificate (CTA-CPC, Coach Transformation Academy, 6 July 2025), replacing the placeholder.
         Item::where('type', 'credentials')->where('title', 'Certified Coach')
-            ->where('subtitle', 'Professional coaching certification')
-            ->update(['subtitle' => 'Certificate name to be confirmed', 'icon' => 'award']);
+            ->whereIn('subtitle', ['Professional coaching certification', 'Certificate name to be confirmed'])
+            ->update(['title' => 'Certified Professional Coach (CTA-CPC)', 'subtitle' => 'Coach Transformation Academy, 2025', 'icon' => 'award']);
 
-        if (trim((string) Setting::get('linkedin_url')) === '') {
-            Setting::put(['linkedin_url' => config('site.settings.linkedin_url')]);
+        // Her social profiles, sent 20 Nov. Only fills a slot the admin has left empty.
+        foreach (['linkedin_url', 'instagram_url', 'facebook_url'] as $key) {
+            if (trim((string) Setting::get($key)) === '') {
+                Setting::put([$key => config('site.settings.'.$key)]);
+            }
         }
     }
 

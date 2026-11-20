@@ -74,7 +74,7 @@ return [
         'seed' => [
             ['icon' => 'book', 'title' => 'MSc, Industrial & Labour Relations', 'subtitle' => 'Postgraduate degree'],
             ['icon' => 'scale', 'title' => 'SPHRi', 'subtitle' => 'Senior Professional in Human Resources – International'],
-            ['icon' => 'award', 'title' => 'Certified Coach', 'subtitle' => 'Certificate name to be confirmed'],
+            ['icon' => 'award', 'title' => 'Certified Professional Coach (CTA-CPC)', 'subtitle' => 'Coach Transformation Academy, 2025'],
             ['icon' => 'globe', 'title' => 'Executive education', 'subtitle' => 'Harvard, MIT Sloan and George Washington University'],
         ],
     ],

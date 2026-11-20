@@ -24,9 +24,9 @@ return [
         'send_receipts' => '1',
         'contact_email' => '',
         'linkedin_url' => 'https://www.linkedin.com/in/modupe-olusoga-msc-sphri/',
-        'instagram_url' => '',
+        'instagram_url' => 'https://www.instagram.com/modupeifeoluwasimi',
         'x_url' => '',
-        'facebook_url' => '',
+        'facebook_url' => 'https://www.facebook.com/dupe.oluso',
         'youtube_url' => '',
     ],
 
