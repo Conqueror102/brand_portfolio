@@ -14,10 +14,18 @@
         <section class="admin-panel form">
             <header><h2>Contact and social</h2></header>
             <div class="form-row">
-                <x-field name="contact_email" label="Public contact email" type="email" optional :value="$settings['contact_email']" hint="Shown on the contact page and footer." />
+                <x-field name="contact_email" label="Public contact email" type="email" optional :value="$settings['contact_email']" hint="Shown on the Contact page and in the footer. Hidden while empty." />
                 <x-field name="linkedin_url" label="LinkedIn URL" type="url" optional :value="$settings['linkedin_url']" />
             </div>
-            <x-field name="instagram_url" label="Instagram URL" type="url" optional :value="$settings['instagram_url']" />
+            <div class="form-row">
+                <x-field name="instagram_url" label="Instagram URL" type="url" optional :value="$settings['instagram_url']" />
+                <x-field name="x_url" label="X (Twitter) URL" type="url" optional :value="$settings['x_url']" />
+            </div>
+            <div class="form-row">
+                <x-field name="facebook_url" label="Facebook URL" type="url" optional :value="$settings['facebook_url']" />
+                <x-field name="youtube_url" label="YouTube URL" type="url" optional :value="$settings['youtube_url']" />
+            </div>
+            <p class="field-hint">Each link appears in the footer and on the Contact page. Leave one empty to hide it.</p>
         </section>
         <div><button class="btn" type="submit">Save settings <span class="btn-icon"><x-line-icon name="check" /></span></button></div>
     </form>

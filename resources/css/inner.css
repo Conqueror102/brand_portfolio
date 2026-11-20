@@ -228,3 +228,11 @@ a.pager-btn:hover { background: var(--ink); color: #FFFFFF; border-color: var(--
 .page-hero-simple > *, .article-head > * { max-width: 1000px; }
 .article-head .display { font-size: clamp(40px, 4.6vw, 72px); line-height: 1.02; }
 }
+
+/* Contact page: social profiles card */
+@layer components {
+.contact-social-list { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 8px; }
+.contact-social-list a { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--color-brand-navy); border-bottom: 1px solid var(--color-brand-border); padding-bottom: 2px; }
+.contact-social-list a:hover { border-color: var(--color-brand-navy); }
+.contact-social-list .line-icon { width: 18px; height: 18px; }
+}

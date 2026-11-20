@@ -94,3 +94,12 @@
 .mentor-profiles h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 1.9vw, 28px); letter-spacing: -.025em; line-height: 1.15; }
 .mentor-profiles p { margin-top: 6px; font-size: 15px; color: var(--color-brand-muted); }
 .mentor-fit-title { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-brand-muted); margin-bottom: 14px; }
+
+/* Speaking: "Download speaker profile" buttons */
+@layer components {
+.btn-line { background: transparent; color: var(--color-brand-navy); border: 1px solid var(--color-brand-navy); }
+.btn-line:hover { background: var(--color-brand-navy); color: #FFFFFF; }
+.btn-line .btn-icon { background: var(--color-brand-navy); color: #FFFFFF; }
+.btn-line:hover .btn-icon { background: #FFFFFF; color: var(--color-brand-navy); }
+.btn-ghost-dark.btn-download .btn-icon { background: #FFFFFF1F; color: #F4F1EC; }
+}

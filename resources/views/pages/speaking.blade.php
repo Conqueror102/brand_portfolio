@@ -8,7 +8,11 @@
             <p class="lede" style="color: #C9D0D7">{{ content('speaking.lede') }}</p>
             <div class="actions">
                 <a class="btn btn-light" href="{{ route('contact', ['type' => 'speaking']) }}">{{ content('speaking.cta_label') }} <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
-                <a class="link-arrow link-arrow-light" href="#topics">See the topics <x-line-icon name="arrow" /></a>
+                @if (content('speaking.profile_link'))
+                    <a class="btn btn-ghost-dark btn-download" href="{{ content_url('speaking.profile_link') }}" download>{{ content('speaking.profile_link_label') }} <span class="btn-icon"><x-line-icon name="download" /></span></a>
+                @else
+                    <a class="link-arrow link-arrow-light" href="#topics">See the topics <x-line-icon name="arrow" /></a>
+                @endif
             </div>
         </div>
         <figure class="frame" data-reveal>
@@ -44,7 +48,7 @@
                 @endif
                 <div class="actions">
                     <a class="btn" href="{{ route('contact', ['type' => 'speaking']) }}">{{ content('speaking.cta_label') }} <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
-                    @if (content('speaking.profile_link'))<a class="link-arrow" href="{{ content_url('speaking.profile_link') }}" target="_blank" rel="noopener">{{ content('speaking.profile_link_label') }} <x-line-icon name="download" /></a>@endif
+                    @if (content('speaking.profile_link'))<a class="btn btn-line btn-download" href="{{ content_url('speaking.profile_link') }}" download>{{ content('speaking.profile_link_label') }} <span class="btn-icon"><x-line-icon name="download" /></span></a>@endif
                 </div>
             </div>
         </section>

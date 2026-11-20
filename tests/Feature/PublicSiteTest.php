@@ -21,7 +21,7 @@ test('the homepage shows published articles and testimonials', function () {
 
 test('published articles open and drafts return 404', function () {
     $published = Article::published()->first();
-    $draft = Article::create(['title' => 'Hidden draft', 'category' => 'leadership', 'excerpt' => 'Draft', 'body' => 'Body text', 'status' => 'draft']);
+    $draft = Article::create(['title' => 'Hidden draft', 'category' => 'leadership-execution', 'excerpt' => 'Draft', 'body' => 'Body text', 'status' => 'draft']);
 
     $this->get(route('insights.show', $published))->assertOk()->assertSee($published->title);
     $this->get(route('insights.show', $draft))->assertNotFound();
@@ -29,12 +29,12 @@ test('published articles open and drafts return 404', function () {
 });
 
 test('insights can be filtered and searched', function () {
-    $this->get(route('insights.index', ['category' => 'governance-succession']))->assertSee('Succession is a system')->assertDontSee('Leading with quiet confidence');
+    $this->get(route('insights.index', ['category' => 'institutional-sustainability']))->assertSee('Succession is a system')->assertDontSee('Leading with quiet confidence');
     $this->get(route('insights.index', ['q' => 'nothing-matches-this']))->assertSee('No insights found');
 });
 
 test('article bodies are escaped', function () {
-    $article = Article::create(['title' => 'Safe', 'category' => 'leadership', 'excerpt' => 'x', 'body' => "<script>alert(1)</script>\n\n## Heading", 'status' => 'published']);
+    $article = Article::create(['title' => 'Safe', 'category' => 'leadership-execution', 'excerpt' => 'x', 'body' => "<script>alert(1)</script>\n\n## Heading", 'status' => 'published']);
 
     $this->get(route('insights.show', $article))->assertDontSee('<script>alert(1)</script>', false)->assertSee('<h2>Heading</h2>', false);
 });

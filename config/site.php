@@ -23,8 +23,11 @@ return [
         'notification_email' => '',
         'send_receipts' => '1',
         'contact_email' => '',
-        'linkedin_url' => '',
+        'linkedin_url' => 'https://www.linkedin.com/in/modupe-olusoga-msc-sphri/',
         'instagram_url' => '',
+        'x_url' => '',
+        'facebook_url' => '',
+        'youtube_url' => '',
     ],
 
     'enquiry_types' => [
@@ -55,13 +58,12 @@ return [
 
     'payment_statuses' => ['not_requested' => 'Not requested', 'pending' => 'Pending', 'confirmed' => 'Confirmed'],
 
+    // Insights categories, as set by the client (Nov 20).
     'article_categories' => [
-        'institution-building' => 'Institution Building',
-        'governance-succession' => 'Governance & Succession',
-        'leadership' => 'Leadership',
-        'professional-services' => 'Professional Services',
-        'people-performance' => 'People & Performance',
-        'intentional-execution' => 'Intentional Execution',
+        'institutional-sustainability' => 'Institutional Sustainability',
+        'business-of-professional-services' => 'The Business of Professional Services',
+        'leadership-execution' => 'Leadership and Execution',
+        'future-of-work' => 'The Future of Work',
     ],
 
     'roles' => [

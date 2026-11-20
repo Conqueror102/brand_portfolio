@@ -213,3 +213,56 @@ if (! function_exists('home_sections')) {
         return array_values($sections);
     }
 }
+
+if (! function_exists('social_links')) {
+    /**
+     * Social profiles set in Admin → Settings, in display order. Empty ones are skipped.
+     *
+     * @return array<string, array{label: string, url: string, icon: string}>
+     */
+    function social_links(): array
+    {
+        $networks = [
+            'linkedin_url' => ['LinkedIn', 'linkedin'],
+            'instagram_url' => ['Instagram', 'instagram'],
+            'x_url' => ['X', 'x'],
+            'facebook_url' => ['Facebook', 'facebook'],
+            'youtube_url' => ['YouTube', 'youtube'],
+        ];
+        $links = [];
+        foreach ($networks as $key => [$label, $icon]) {
+            $url = trim((string) \App\Models\Setting::get($key));
+            if ($url !== '') {
+                $links[$key] = ['label' => $label, 'url' => $url, 'icon' => $icon];
+            }
+        }
+
+        return $links;
+    }
+}
+
+if (! function_exists('video_embed')) {
+    /**
+     * Turn a pasted video link into something the page can play.
+     *
+     * @return array{type: 'youtube'|'vimeo'|'file', src: string}|null
+     */
+    function video_embed(?string $url): ?array
+    {
+        $url = trim((string) $url);
+        if ($url === '') {
+            return null;
+        }
+        if (preg_match('~(?:youtube\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/)|youtu\.be/)([A-Za-z0-9_-]{11})~', $url, $m)) {
+            return ['type' => 'youtube', 'src' => 'https://www.youtube-nocookie.com/embed/'.$m[1].'?autoplay=1&rel=0&modestbranding=1'];
+        }
+        if (preg_match('~vimeo\.com/(?:video/)?(\d+)~', $url, $m)) {
+            return ['type' => 'vimeo', 'src' => 'https://player.vimeo.com/video/'.$m[1].'?autoplay=1&dnt=1'];
+        }
+        if (preg_match('~\.(mp4|webm|mov)(\?.*)?$~i', $url) || str_starts_with($url, '/')) {
+            return ['type' => 'file', 'src' => str_starts_with($url, '/') ? url($url) : $url];
+        }
+
+        return null;
+    }
+}

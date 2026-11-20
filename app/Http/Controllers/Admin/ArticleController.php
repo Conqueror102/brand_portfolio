@@ -25,7 +25,7 @@ class ArticleController extends Controller
 
     public function create(): View
     {
-        return view('admin.articles.form', ['article' => new Article(['status' => 'draft', 'category' => 'institution-building'])]);
+        return view('admin.articles.form', ['article' => new Article(['status' => 'draft', 'category' => array_key_first(config('site.article_categories'))])]);
     }
 
     public function store(Request $request): RedirectResponse

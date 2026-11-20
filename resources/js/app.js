@@ -850,3 +850,27 @@ document.querySelectorAll('.media-filter').forEach((nav) => {
         });
     }));
 })();
+
+// Homepage short video: load the player only when the visitor presses play.
+(() => {
+    document.querySelectorAll('[data-video]').forEach((screen) => {
+        const button = screen.querySelector('.home-video-play');
+        if (! button || ! screen.dataset.video) return;
+        button.addEventListener('click', () => {
+            const video = JSON.parse(screen.dataset.video);
+            let player;
+            if (video.type === 'file') {
+                player = document.createElement('video');
+                Object.assign(player, { src: video.src, controls: true, autoplay: true, playsInline: true });
+            } else {
+                player = document.createElement('iframe');
+                player.src = video.src;
+                player.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+                player.allowFullscreen = true;
+                player.title = button.getAttribute('aria-label') || 'Video';
+            }
+            screen.append(player);
+            button.remove();
+        });
+    });
+})();

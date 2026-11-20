@@ -1,7 +1,6 @@
 @php
     $email = \App\Models\Setting::get('contact_email');
-    $linkedin = \App\Models\Setting::get('linkedin_url');
-    $instagram = \App\Models\Setting::get('instagram_url');
+    $socials = social_links();
     $pages = site_pages();
 @endphp
 <footer class="site-footer">
@@ -10,10 +9,9 @@
             <a class="site-footer-mark" href="{{ route('home') }}" aria-label="{{ content('seo.site_name') }} home"><x-brand-mark variant="plain" /></a>
             <p class="site-footer-name">{{ content('profile.given_name') }} <em>{{ content('profile.surname') }}</em><span class="name-dot">.</span></p>
             <p class="site-footer-line">{{ content('profile.tagline') }}</p>
-            @if ($linkedin || $instagram)
+            @if ($socials)
                 <div class="site-footer-social">
-                    @if ($linkedin)<a href="{{ $linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><x-line-icon name="linkedin" /></a>@endif
-                    @if ($instagram)<a href="{{ $instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><x-line-icon name="instagram" /></a>@endif
+                    @foreach ($socials as $social)<a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $social['label'] }}"><x-line-icon :name="$social['icon']" /></a>@endforeach
                 </div>
             @endif
         </div>

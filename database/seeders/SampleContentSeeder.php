@@ -15,12 +15,12 @@ class SampleContentSeeder extends Seeder
     public function run(): void
     {
         $articles = [
-            ['From founder-dependent to future-ready: building a firm that outlasts its founders', 'institution-building', 'Most professional services firms are built around remarkable individuals. The harder work is designing an institution that can thrive without them.', true, 'images/generated/article-institutions.webp'],
-            ['Succession is a system, not a moment', 'governance-succession', 'Leadership transitions fail when they are treated as events. They succeed when they are designed years in advance.', false, 'images/generated/article-succession.webp'],
-            ['The quiet operations behind exceptional client service', 'people-performance', 'Clients see the advice. They feel the operations: the responsiveness, the consistency and the people behind both.', false, 'images/generated/article-operations.webp'],
-            ['Why aspiration stalls, and the discipline that moves it', 'intentional-execution', 'Most goals do not fail for lack of desire. They fail for lack of clarity, structure and consistent action.', false, 'images/generated/article-execution.webp'],
-            ['What the next generation of lawyers expects from the firm', 'professional-services', 'Talent now evaluates firms the way firms evaluate clients: on purpose, development and the quality of leadership.', false, 'images/generated/article-next-generation.webp'],
-            ['Leading with quiet confidence', 'leadership', 'Substance outlasts visibility. The leaders institutions remember are the ones who built what others could continue.', false, 'images/generated/article-confidence.webp'],
+            ['From founder-dependent to future-ready: building a firm that outlasts its founders', 'institutional-sustainability', 'Most professional services firms are built around remarkable individuals. The harder work is designing an institution that can thrive without them.', true, 'images/generated/article-institutions.webp'],
+            ['Succession is a system, not a moment', 'institutional-sustainability', 'Leadership transitions fail when they are treated as events. They succeed when they are designed years in advance.', false, 'images/generated/article-succession.webp'],
+            ['The quiet operations behind exceptional client service', 'business-of-professional-services', 'Clients see the advice. They feel the operations: the responsiveness, the consistency and the people behind both.', false, 'images/generated/article-operations.webp'],
+            ['Why aspiration stalls, and the discipline that moves it', 'leadership-execution', 'Most goals do not fail for lack of desire. They fail for lack of clarity, structure and consistent action.', false, 'images/generated/article-execution.webp'],
+            ['What the next generation of lawyers expects from the firm', 'future-of-work', 'Talent now evaluates firms the way firms evaluate clients: on purpose, development and the quality of leadership.', false, 'images/generated/article-next-generation.webp'],
+            ['Leading with quiet confidence', 'leadership-execution', 'Substance outlasts visibility. The leaders institutions remember are the ones who built what others could continue.', false, 'images/generated/article-confidence.webp'],
         ];
 
         foreach ($articles as $i => [$title, $category, $excerpt, $featured, $cover]) {

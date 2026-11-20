@@ -66,7 +66,7 @@ test('articles can be created with a cover, published and deleted', function () 
     $this->actingAs(owner());
 
     $this->post(route('admin.articles.store'), [
-        'title' => 'Designing for succession', 'category' => 'governance-succession', 'excerpt' => 'Why it matters.',
+        'title' => 'Designing for succession', 'category' => 'institutional-sustainability', 'excerpt' => 'Why it matters.',
         'body' => "Opening.\n\n## Next", 'status' => 'published', 'is_featured' => '1',
         'cover' => sampleImage('cover.jpg'),
     ])->assertRedirect();
@@ -83,9 +83,9 @@ test('articles can be created with a cover, published and deleted', function () 
 
 test('only one article is featured at a time', function () {
     $this->actingAs(owner());
-    $first = Article::create(['title' => 'One', 'category' => 'leadership', 'excerpt' => 'x', 'body' => 'x', 'status' => 'published', 'is_featured' => true]);
+    $first = Article::create(['title' => 'One', 'category' => 'leadership-execution', 'excerpt' => 'x', 'body' => 'x', 'status' => 'published', 'is_featured' => true]);
 
-    $this->post(route('admin.articles.store'), ['title' => 'Two', 'category' => 'leadership', 'excerpt' => 'x', 'body' => 'x', 'status' => 'published', 'is_featured' => '1']);
+    $this->post(route('admin.articles.store'), ['title' => 'Two', 'category' => 'leadership-execution', 'excerpt' => 'x', 'body' => 'x', 'status' => 'published', 'is_featured' => '1']);
 
     expect($first->fresh()->is_featured)->toBeFalse();
 });

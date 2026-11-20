@@ -1,5 +1,6 @@
 @php
     $email = \App\Models\Setting::get('contact_email');
+    $socials = social_links();
     $eventTypes = 'speaking,panel,workshop,retreat';
 @endphp
 <x-layouts.page :title="content('navigation.contact_label')" :description="content('contact.meta')">
@@ -110,6 +111,19 @@
                         @endif
                     </div>
                 </div>
+                @if ($socials)
+                    <div class="card card-white contact-direct contact-socials" data-reveal>
+                        <span class="icon-chip"><x-line-icon name="share" /></span>
+                        <div>
+                            <p class="stat-label">Follow her work</p>
+                            <ul class="contact-social-list">
+                                @foreach ($socials as $social)
+                                    <li><a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer"><x-line-icon :name="$social['icon']" /> {{ $social['label'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
                 <a class="card card-mist-soft contact-direct link-card" href="{{ route('mentorship') }}" data-reveal>
                     <span class="icon-chip"><x-line-icon name="steps" /></span>
                     <div>

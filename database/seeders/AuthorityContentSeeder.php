@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Article;
 use App\Models\Content;
 use App\Models\Item;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class AuthorityContentSeeder extends Seeder
         $this->recognitionDetails();
         $this->clientFeedbackNov11();
         $this->realPhotos();
+        $this->clientFeedbackNov20();
         Content::where('key', 'profile.portrait_note')->where('value', 'Concept portrait')->update(['value' => '']);
         Cache::forget('contents');
     }
@@ -38,7 +40,7 @@ class AuthorityContentSeeder extends Seeder
         $articles = [
             [
                 'title' => 'Transgenerational law firm practice in Nigeria',
-                'category' => 'institution-building',
+                'category' => 'institutional-sustainability',
                 'cover' => 'images/generated/article-institutions.webp',
                 'featured' => true,
                 'date' => '2026-06-10',
@@ -68,7 +70,7 @@ class AuthorityContentSeeder extends Seeder
             ],
             [
                 'title' => 'From billable hours to value: client retention in the age of AI',
-                'category' => 'professional-services',
+                'category' => 'future-of-work',
                 'cover' => 'images/generated/article-operations.webp',
                 'featured' => false,
                 'date' => '2026-10-12',
@@ -98,7 +100,7 @@ class AuthorityContentSeeder extends Seeder
             ],
             [
                 'title' => 'Sustainable growth is designed. It does not happen by accident.',
-                'category' => 'governance-succession',
+                'category' => 'institutional-sustainability',
                 'cover' => 'images/authority/case-roundtable.webp',
                 'featured' => false,
                 'date' => '2026-09-10',
@@ -128,7 +130,7 @@ class AuthorityContentSeeder extends Seeder
             ],
             [
                 'title' => 'Growth is an outcome. Scaling is a capability.',
-                'category' => 'institution-building',
+                'category' => 'business-of-professional-services',
                 'cover' => 'images/authority/case-journal.webp',
                 'featured' => false,
                 'date' => '2026-10-28',
@@ -154,7 +156,7 @@ class AuthorityContentSeeder extends Seeder
             ],
             [
                 'title' => 'What law firms really look for when they hire',
-                'category' => 'people-performance',
+                'category' => 'leadership-execution',
                 'cover' => 'images/generated/article-next-generation.webp',
                 'featured' => false,
                 'date' => '2026-08-27',
@@ -279,6 +281,35 @@ class AuthorityContentSeeder extends Seeder
         if ($saved && ! str_contains((string) $saved->value, 'pillars:')) {
             $value = preg_replace('/(meet:[01])/', '$1,pillars:1', (string) $saved->value, 1, $count);
             $saved->update(['value' => $count ? $value : $saved->value.',pillars:1']);
+        }
+    }
+
+    /**
+     * Client feedback, 20 Nov 2026: speaker profile download, short video section, coaching certificate
+     * placeholder and her LinkedIn. Only fills values the admin has not already set.
+     */
+    private function clientFeedbackNov20(): void
+    {
+        $replace = [
+            'speaking.profile_link_label' => [['Download the speaker bio', ''], 'Download speaker profile'],
+            'speaking.profile_link' => [[''], '/files/speaker-profile.pdf'],
+        ];
+        foreach ($replace as $key => [$old, $new]) {
+            Content::where('key', $key)->where(fn ($q) => $q->whereIn('value', $old)->orWhereNull('value'))->update(['value' => $new]);
+        }
+
+        $saved = Content::find('home.sections');
+        if ($saved && ! str_contains((string) $saved->value, 'video:')) {
+            $value = preg_replace('/(speaking:[01])/', '$1,video:1', (string) $saved->value, 1, $count);
+            $saved->update(['value' => $count ? $value : $saved->value.',video:1']);
+        }
+
+        Item::where('type', 'credentials')->where('title', 'Certified Coach')
+            ->where('subtitle', 'Professional coaching certification')
+            ->update(['subtitle' => 'Certificate name to be confirmed', 'icon' => 'award']);
+
+        if (trim((string) Setting::get('linkedin_url')) === '') {
+            Setting::put(['linkedin_url' => config('site.settings.linkedin_url')]);
         }
     }
 
