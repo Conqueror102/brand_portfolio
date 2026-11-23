@@ -26,7 +26,7 @@ return [
         'linkedin_url' => 'https://www.linkedin.com/in/modupe-olusoga-msc-sphri/',
         'instagram_url' => 'https://www.instagram.com/modupeifeoluwasimi',
         'x_url' => '',
-        'facebook_url' => 'https://www.facebook.com/dupe.oluso',
+        'facebook_url' => 'https://www.facebook.com/dupe.olusoga.5',
         'youtube_url' => '',
     ],
 

@@ -309,6 +309,11 @@ class AuthorityContentSeeder extends Seeder
             ->whereIn('subtitle', ['Professional coaching certification', 'Certificate name to be confirmed'])
             ->update(['title' => 'Certified Professional Coach (CTA-CPC)', 'subtitle' => 'Coach Transformation Academy, 2025', 'icon' => 'award']);
 
+        // 23 Nov: the Facebook link first sent was cut short.
+        if (Setting::get('facebook_url') === 'https://www.facebook.com/dupe.oluso') {
+            Setting::put(['facebook_url' => config('site.settings.facebook_url')]);
+        }
+
         // Her social profiles, sent 20 Nov. Only fills a slot the admin has left empty.
         foreach (['linkedin_url', 'instagram_url', 'facebook_url'] as $key) {
             if (trim((string) Setting::get($key)) === '') {
@@ -321,7 +326,7 @@ class AuthorityContentSeeder extends Seeder
     private function realPhotos(): void
     {
         $replace = [
-            'profile.portrait' => [['images/editorial-portrait.png', 'images/portraits/hero-cutout.webp'], 'images/portraits/hero-blue-suit.webp'],
+            'profile.portrait' => [['images/editorial-portrait.png', 'images/portraits/hero-cutout.webp', 'images/portraits/hero-blue-suit.webp'], 'images/portraits/hero-navy.webp'],
             'profile.portrait_alt' => [['Generated concept portrait for design preview; to be replaced with Modupe’s photograph'], 'Portrait of Modupe Olusoga'],
             'home.idea_photo' => [['images/generated/reel-keynote.webp'], 'images/portraits/alan-investiture-crop.webp'],
             'home.mentorship_image' => [['images/generated/mentorship-home.webp', 'images/portraits/mentorship-portrait.webp', 'images/portraits/mentorship-blue-suit.webp', 'images/portraits/mentorship-portrait-dark.webp'], 'images/portraits/mentorship-cream-blazer.webp'],
