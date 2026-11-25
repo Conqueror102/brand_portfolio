@@ -254,6 +254,12 @@ test('the photo reel shows public photos under the hero and needs a photo', func
     $this->actingAs(editor())->post(route('admin.items.store', 'moments'), ['title' => 'Keynote in Lagos', 'is_published' => '1'])->assertSessionHasErrors('image');
 
     Item::create(['type' => 'moments', 'title' => 'Keynote in Lagos', 'subtitle' => 'Business Forum', 'image' => 'images/scenes/light.jpg', 'is_published' => true]);
+    $html = $this->get(route('home'))->getContent();
+    expect($html)->not->toContain('id="moments"'); // a single print stays hidden until there are three
+
+    foreach (['Panel in Abuja', 'Cohort opening'] as $title) {
+        Item::create(['type' => 'moments', 'title' => $title, 'image' => 'images/scenes/light.jpg', 'is_published' => true]);
+    }
     $html = $this->get(route('home'))->assertSee('Keynote in Lagos')->getContent();
     expect(strpos($html, 'id="moments"'))->toBeLessThan(strpos($html, 'id="meet"'));
 });

@@ -27,7 +27,7 @@
             </div>
             <div class="wrap"><dl class="cs-meta">
                 <div><dt>Organisation</dt><dd>{{ $org }}</dd></div>
-                @if ($role)<div><dt>Her role</dt><dd>{{ $role }}</dd></div>@endif
+                @if ($role)<div><dt>My role</dt><dd>{{ $role }}</dd></div>@endif
                 @if ($case->date)<div><dt>Date</dt><dd>{{ $case->date->format('F Y') }}</dd></div>@endif
                 <div><dt>Reading time</dt><dd>{{ $minutes }} min</dd></div>
             </dl></div>

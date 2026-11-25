@@ -27,6 +27,7 @@
                 <x-field name="mentorship_fee" label="Fee" optional :value="$v('mentorship_fee')" placeholder="Leave blank to hide" />
                 <x-field name="mentorship_capacity" label="Places" optional :value="$v('mentorship_capacity')" placeholder="e.g. 20 places" />
             </div>
+            <x-field name="mentorship_start" label="First weekly session (with the year)" optional :value="$v('mentorship_start')" placeholder="e.g. Thursday 4 February 2027" />
         </section>
         <aside class="admin-form-side">
             <section class="admin-panel form">

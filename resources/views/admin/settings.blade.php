@@ -27,6 +27,10 @@
             </div>
             <p class="field-hint">Each link appears in the footer and on the Contact page. Leave one empty to hide it.</p>
         </section>
+        <section class="admin-panel form">
+            <header><h2>Analytics</h2><p class="field-hint">Counts visits, button clicks to the Contact page, speaker-profile downloads and every form sent (as “generate_lead”).</p></header>
+            <x-field name="analytics_id" label="Google Analytics 4 measurement ID" optional :value="$settings['analytics_id']" placeholder="G-XXXXXXXXXX" hint="From Google Analytics → Admin → Data streams. Leave blank to turn analytics off." />
+        </section>
         <div><button class="btn" type="submit">Save settings <span class="btn-icon"><x-line-icon name="check" /></span></button></div>
     </form>
 </x-admin-layout>

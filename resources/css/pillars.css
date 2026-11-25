@@ -11,7 +11,7 @@
 
 .pillar { position: relative; display: flex; flex-direction: column; gap: 14px; padding: clamp(28px, 3vw, 44px) clamp(22px, 2.6vw, 44px) clamp(32px, 3.4vw, 52px); border-left: 1px solid var(--color-brand-border); transition: background .5s var(--ease-calm, ease); overflow: hidden; }
 .pillar:first-child { border-left: 0; }
-.pillar-numeral { font-family: var(--font-display); font-size: clamp(56px, 6vw, 96px); line-height: .9; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1px #D9AD93; }
+.pillar-numeral { font-family: var(--font-display); font-size: clamp(56px, 6vw, 96px); line-height: .9; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1px #E8742A; }
 .pillar-icon { position: absolute; top: clamp(28px, 3vw, 44px); right: clamp(22px, 2.6vw, 44px); width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--color-brand-border); color: var(--color-brand-navy); transition: background .5s, color .5s, border-color .5s; }
 .pillar-icon svg { width: 20px; height: 20px; }
 .pillar h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.1vw, 32px); line-height: 1.12; letter-spacing: -.03em; max-width: 13em; margin-top: 6px; }
@@ -19,9 +19,9 @@
 .pillar-focus-wrap { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--color-brand-border); overflow: hidden; }
 .pillar-focus { display: flex; flex-wrap: wrap; row-gap: 6px; list-style: none; padding: 0; margin: 0 0 0 -22px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-brand-navy); }
 .pillar-focus li { white-space: nowrap; }
-.pillar-focus li::before { content: '·'; display: inline-block; width: 22px; text-align: center; color: #D9AD93; }
+.pillar-focus li::before { content: '·'; display: inline-block; width: 22px; text-align: center; color: #E8742A; }
 /* The apricot shaft rises from the base when the section comes into view, and fills on hover. */
-.pillar-shaft { position: absolute; left: 0; bottom: 0; width: 3px; height: 100%; background: #D9AD93; transform: scaleY(0); transform-origin: bottom; transition: transform 1.2s var(--ease-calm, ease); }
+.pillar-shaft { position: absolute; left: 0; bottom: 0; width: 3px; height: 100%; background: #E8742A; transform: scaleY(0); transform-origin: bottom; transition: transform 1.2s var(--ease-calm, ease); }
 .pillar:first-child .pillar-shaft { left: 0; }
 .pillar:hover { background: #F4EEE8; }
 .pillar:hover .pillar-shaft { transform: scaleY(1); transition-delay: 0s; }
@@ -43,7 +43,7 @@
 /* Speaker profile on the Speaking page. */
 .speaker-profile { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(36px, 6vw, 110px); align-items: center; }
 .speaker-portrait { position: relative; margin: 0; }
-.speaker-portrait::before { content: ''; position: absolute; inset: 22px -22px -22px 22px; border: 1px solid #D9AD93; border-radius: 4px; }
+.speaker-portrait::before { content: ''; position: absolute; inset: 22px -22px -22px 22px; border: 1px solid #E8742A; border-radius: 4px; }
 .speaker-portrait img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 4px; box-shadow: 0 30px 60px -30px #10244055; }
 .speaker-copy h2 { margin-top: 18px; }
 .speaker-role { margin-top: 16px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-brand-muted); }
@@ -75,7 +75,7 @@
 .engage-card:hover { border-color: var(--color-brand-control); }
 .engage-card:has(input:checked) { border-color: var(--color-brand-navy); box-shadow: inset 0 0 0 1px var(--color-brand-navy); background: #FCFAF7; }
 .engage-card:has(input:checked) .engage-icon { background: var(--color-brand-navy); color: #FCFAF7; }
-.engage-card:has(input:checked) .engage-tick { background: #D9AD93; border-color: #D9AD93; color: var(--color-brand-navy); }
+.engage-card:has(input:checked) .engage-tick { background: #E8742A; border-color: #E8742A; color: var(--color-brand-navy); }
 .engage-card:has(input:focus-visible) { outline: 2px solid var(--color-brand-blue); outline-offset: 3px; }
 .engage-other { display: none; margin-top: 12px; }
 .engage-types:has(input[value="other"]:checked) .engage-other { display: grid; }
@@ -85,7 +85,7 @@
 .mentor-for-label { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-brand-muted); margin-bottom: 10px; }
 .mentor-for ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .mentor-for li { display: grid; grid-template-columns: 14px 1fr; column-gap: 10px; font-size: 14px; line-height: 1.45; }
-.mentor-for li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #D9AD93; margin-top: 7px; grid-row: span 2; }
+.mentor-for li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #E8742A; margin-top: 7px; grid-row: span 2; }
 .mentor-for strong { font-weight: 600; color: var(--color-brand-navy); }
 .mentor-for span { color: var(--color-brand-muted); }
 .mentor-profiles { list-style: none; padding: 0; margin: 0 0 40px; border-top: 1px solid var(--color-brand-navy); }

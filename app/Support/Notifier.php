@@ -16,7 +16,8 @@ class Notifier
 {
     public static function send(Mailable $mail): void
     {
-        $to = Setting::get('notification_email');
+        // Falls back to the public contact email, so enquiries reach her once that address exists.
+        $to = Setting::get('notification_email') ?: Setting::get('contact_email');
         if (! $to) {
             return;
         }

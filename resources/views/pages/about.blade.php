@@ -42,21 +42,52 @@
         </div>
     </section>
 
+    @php($practice = items('practice'))
+    @if (content_on('about.show_practice') && $practice->isNotEmpty())
+        <section class="wrap section-tight practice" aria-labelledby="practice-title">
+            <header class="section-head">
+                <div>
+                    <p class="eyebrow">{{ content('about.practice_eyebrow') }}</p>
+                    <h2 id="practice-title" class="display h-lg">{{ content_html('about.practice_title') }}</h2>
+                </div>
+                @if (content('about.practice_text'))<p class="body-copy practice-intro">{{ content('about.practice_text') }}</p>@endif
+            </header>
+            <ol class="practice-list">
+                @foreach ($practice as $i => $item)
+                    <li class="practice-item" data-reveal>
+                        <span class="practice-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <div>
+                            <h3>{{ $item->title }}</h3>
+                            @if ($item->subtitle)<p class="practice-where">{{ $item->subtitle }}</p>@endif
+                            <p class="body-copy">{{ $item->body }}</p>
+                        </div>
+                    </li>
+                @endforeach
+            </ol>
+        </section>
+    @endif
+
     @if (content_on('about.show_credentials') && items('credentials')->isNotEmpty())
-        <section class="wrap section-tight">
+        @php($groups = items('credentials')->groupBy(fn ($c) => $c->category === 'education' ? 'education' : 'development'))
+        <section class="wrap section-tight" aria-labelledby="credentials-title">
             <header class="section-head">
                 <div>
                     <p class="eyebrow">Education &amp; credentials</p>
-                    <h2 class="display h-lg">{{ content_html('about.credentials_title') }}</h2>
+                    <h2 id="credentials-title" class="display h-lg">{{ content_html('about.credentials_title') }}</h2>
                 </div>
             </header>
-            <div class="grid-4">
-                @foreach (items('credentials') as $i => $credential)
-                    <article class="card feature-card credential-card {{ ['card-white', 'card-cream', 'card-mist-soft', 'card-sand'][$i % 4] }}" data-reveal>
-                        <span class="icon-chip"><x-line-icon :name="$credential->icon ?: 'book'" /></span>
-                        <h3>{{ $credential->title }}</h3>
-                        <p>{{ $credential->subtitle }}</p>
-                    </article>
+            <div class="cred-columns" data-reveal>
+                @foreach (['education' => content('about.education_label'), 'development' => content('about.development_label')] as $key => $label)
+                    @if (($groups[$key] ?? collect())->isNotEmpty())
+                        <div class="cred-col">
+                            <h3 class="cred-col-title">{{ $label }}</h3>
+                            <ul class="cred-list">
+                                @foreach ($groups[$key] as $credential)
+                                    <li><strong>{{ $credential->title }}</strong><span>{{ $credential->subtitle }}</span></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </section>
@@ -79,26 +110,50 @@
         </section>
     @endif
 
+    @php($milestones = items('recognition'))
+    @if (content_on('about.show_milestones') && $milestones->isNotEmpty())
+        <section class="wrap section-tight" aria-labelledby="milestones-title">
+            <header class="section-head">
+                <div>
+                    <p class="eyebrow">{{ content('about.milestones_eyebrow') }}</p>
+                    <h2 id="milestones-title" class="display h-lg">{{ content_html('about.milestones_title') }}</h2>
+                </div>
+            </header>
+            <ol class="milestones" data-reveal>
+                @foreach ($milestones->reject(fn ($m) => str_contains((string) $m->title, 'to be added')) as $m)
+                    <li><span class="milestone-year">{{ $m->category }}</span><strong>{{ $m->title }}</strong><span>{{ $m->subtitle }}</span></li>
+                @endforeach
+                <li class="milestone-next"><span class="milestone-year">{{ content('about.milestones_next_year') }}</span><strong>{{ content('about.milestones_next') }}</strong></li>
+            </ol>
+        </section>
+    @endif
+
+    @if (content('about.closing'))
+        <section class="wrap section-tight">
+            <blockquote class="about-closing" data-reveal><p>{{ content_html('about.closing') }}</p></blockquote>
+        </section>
+    @endif
+
     @if (content_on('about.show_links'))
         <section class="wrap section-tight">
             <div class="grid-3">
                 <a class="card card-white link-card" href="{{ route('speaking') }}" data-reveal>
                     <span class="icon-chip"><x-line-icon name="mic" /></span>
                     <h3 class="display h-sm">{{ content('navigation.speaking_label') }}</h3>
-                    <p class="body-copy">Keynotes, panels, workshops and leadership retreats.</p>
+                    <p class="body-copy">Talks, panels, workshops and leadership retreats.</p>
                     <span class="link-card-arrow"><x-line-icon name="arrow-up-right" /></span>
                 </a>
                 <a class="card card-cream link-card" href="{{ route('mentorship') }}" data-reveal>
                     <span class="icon-chip"><x-line-icon name="steps" /></span>
                     <h3 class="display h-sm">Mentorship</h3>
-                    <p class="body-copy">A {{ strtolower((string) cohort('duration')) }} programme from aspiration to results.</p>
+                    <p class="body-copy">{{ cohort('duration') }} from aspiration to results.</p>
                     <span class="link-card-arrow"><x-line-icon name="arrow-up-right" /></span>
                 </a>
                 @if (page_live('book'))
                     <a class="card card-mist link-card" href="{{ route('book') }}" data-reveal>
                         <span class="icon-chip"><x-line-icon name="book" /></span>
                         <h3 class="display h-sm">{{ content('navigation.book_label') }}</h3>
-                        <p class="body-copy">{{ content('book.title') }}, {{ content('book.release') }}.</p>
+                        <p class="body-copy">{{ content('book.title') }}@if (content_on('book.show_release') && content('book.release')), {{ content('book.release') }}@endif.</p>
                         <span class="link-card-arrow"><x-line-icon name="arrow-up-right" /></span>
                     </a>
                 @else

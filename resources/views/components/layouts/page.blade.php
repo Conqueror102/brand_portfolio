@@ -1,8 +1,8 @@
-@props(['title', 'description' => null, 'bodyClass' => '', 'ogType' => 'website'])
+@props(['title', 'description' => null, 'bodyClass' => '', 'ogType' => 'website', 'image' => null])
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('partials.head', ['title' => $title, 'description' => $description ?? content('home.meta'), 'ogType' => $ogType])
+    @include('partials.head', ['title' => $title, 'description' => $description ?? content('home.meta'), 'ogType' => $ogType, 'image' => $image])
 </head>
 <body class="site-page {{ $bodyClass }}">
 @include('partials.preview-bar')

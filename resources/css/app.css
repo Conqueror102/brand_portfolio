@@ -16,6 +16,7 @@
 @import './honours.css';
 @import './pillars.css';
 @import './video.css';
+@import './refine.css';
 @import './motion.css';
 @import './typography.css';
 @source '../views';
@@ -26,11 +27,11 @@
     --color-brand-blue: #435565;
     --color-brand-blue-hover: #273D53;
     --color-brand-mist: #EDF1F4;
-    --color-brand-silver: #BFC7CE;
+    --color-brand-silver: #C3CAD2;
     --color-brand-ash: #FCFAF7;
     --color-brand-white: #FFFFFF;
     --color-brand-ink: #102440;
-    --color-brand-muted: #526170;
+    --color-brand-muted: #3B4857;
     --color-brand-border: #C1C7CF;
     --color-brand-control: #7A8795;
     --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
@@ -62,24 +63,25 @@
 .hero-copy { position: relative; z-index: 2; width: 64%; padding: 28px 0 40px 7%; }
 .hero-titles { overflow: hidden; margin-bottom: clamp(14px, 2.4vh, 26px); }
 /* Each title carries its own leading dash; dashes that wrap to the start of a line fall into the clipped margin, so none dangle. */
-.hero-titles-row { display: flex; flex-wrap: wrap; align-items: center; row-gap: 6px; margin-left: -34px; font-size: clamp(10.5px, .78vw, 13px); letter-spacing: .12em; text-transform: uppercase; color: #526170; }
+.hero-titles-row { display: flex; flex-wrap: wrap; align-items: center; row-gap: 6px; margin-left: -34px; font-size: clamp(10.5px, .78vw, 13px); letter-spacing: .12em; text-transform: uppercase; color: #3B4857; }
 .hero-titles-row span { display: inline-flex; align-items: center; white-space: nowrap; }
-.hero-titles-row span::before { content: ''; width: 16px; height: 1px; background: #D9AD93; margin: 0 9px; }
+.hero-titles-row span::before { content: ''; width: 16px; height: 1px; background: #E8742A; margin: 0 9px; }
 .hero-copy h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(86px, min(11vw, 20vh), 180px); line-height: .84; letter-spacing: -.075em; }
 .given-name { display: block; }
 .surname { display: block; font-style: italic; font-weight: 400; color: #435565; margin-left: .55em; margin-top: -.01em; }
-.name-dot { color: #D9AD93; }
+.name-dot { color: #E8742A; }
 .hero-copy h2 { font-family: var(--font-display); font-size: clamp(28px, min(3.5vw, 5.8vh), 55px); font-weight: 400; line-height: 1.13; letter-spacing: -.05em; margin-top: 28px; }
 .hero-summary { font-size: clamp(14px, 1.45vw, 22px); color: var(--color-brand-muted); margin-top: 12px; line-height: 1.5; max-width: 620px; }
 .hero-actions { display: flex; align-items: center; gap: 32px; margin-top: 30px; }
-.speaking-button { display: inline-flex; align-items: center; gap: 26px; justify-content: space-between; border-radius: 99px; background: var(--color-brand-navy); color: white; padding: 14px 28px; font-size: 14px; min-height: 48px; }
-.speaking-button:hover { background: var(--color-brand-blue-hover); }
+.speaking-button { display: inline-flex; align-items: center; gap: 26px; justify-content: space-between; border-radius: 99px; background: #E8742A; color: var(--color-brand-navy); font-weight: 500; padding: 14px 28px; font-size: 14px; min-height: 48px; }
+.speaking-button:hover { background: #F28A3F; }
+.speaking-button .icon { filter: brightness(0); opacity: .85; }
 .insights-button { display: inline-flex; align-items: center; gap: 30px; padding: 7px 0; border-bottom: 1px solid #96A1AC; font-size: 14px; }
 .hero-actions .insights-button { position: relative; margin-left: 30px; }
 .hero-actions .insights-button::before { content: ''; position: absolute; left: -32px; top: 2px; bottom: 2px; width: 1px; background: #A9B1BA; }
 .hero-figure { position: absolute; right: 0; bottom: 0; width: 44%; height: 100%; margin: 0; z-index: 1; pointer-events: none; }
 .hero-figure > img { position: absolute; height: 100%; width: auto; max-width: none; right: -3%; bottom: 0; }
-.hero-figure figcaption { position: absolute; right: 5%; top: 36%; font-size: 9px; color: #526170; background: #FCFAF780; padding: 4px; }
+.hero-figure figcaption { position: absolute; right: 5%; top: 36%; font-size: 9px; color: #3B4857; background: #FCFAF780; padding: 4px; }
 .editorial-footer { display: flex; align-items: center; gap: 36px; border-top: 1px solid var(--color-brand-border); padding: 0 3%; flex: 0 0 76px; position: relative; z-index: 3; background: #FCFAF7E8; }
 .editorial-footer > p { font-family: var(--font-display); font-size: 27px; letter-spacing: -.055em; white-space: nowrap; }
 .footer-rule { width: 150px; height: 1px; background: var(--color-brand-border); }

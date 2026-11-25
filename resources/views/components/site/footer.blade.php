@@ -52,6 +52,7 @@
                         <input id="news-email" type="email" name="email" placeholder="Your email address" required autocomplete="email" value="{{ old('email') }}">
                         <button class="btn btn-light btn-plain" type="submit">Subscribe</button>
                     </div>
+                    <p class="site-footer-news-privacy">We only use your email to send these updates. <a href="{{ route('privacy') }}">Privacy notice</a></p>
                     <fieldset class="site-footer-news-interests">
                         <legend class="sr-only">Interested in</legend>
                         @foreach (config('site.interests') as $value => $label)

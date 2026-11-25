@@ -31,7 +31,7 @@
 .rec-logo { width: 46px; height: 46px; border-radius: 12px; background: #FFFFFF; display: grid; place-items: center; overflow: hidden; box-shadow: 0 6px 14px -10px #10244066; }
 .rec-logo img { max-width: 38px; max-height: 30px; object-fit: contain; }
 .rec-logo.is-icon .line-icon { width: 19px; height: 19px; }
-.idea .recognition-text { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; color: var(--muted, #6B7A8E); line-height: 1.4; }
+.idea .recognition-text { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; color: var(--muted, #4A5768); line-height: 1.4; }
 .idea .recognition-text strong { font-weight: 500; font-size: 14.5px; color: var(--ink, #102440); }
 .rec-plus { position: relative; width: 14px; height: 14px; }
 .rec-plus::before, .rec-plus::after { content: ''; position: absolute; left: 0; top: 50%; width: 14px; height: 1.5px; background: var(--ink, #102440); transition: transform .4s ease; }
@@ -41,7 +41,7 @@ li.is-open .rec-plus::after { transform: rotate(0deg); }
 .rec-story > p { overflow: hidden; margin: 0; padding-left: 120px; font-size: 13.5px; line-height: 1.55; color: #3E4C5E; }
 li.is-open .rec-story { grid-template-rows: 1fr; }
 li.is-open .rec-story > p { padding-bottom: 16px; }
-.rec-row:hover strong { text-decoration: underline; text-decoration-color: #D9AD93; text-underline-offset: 4px; }
+.rec-row:hover strong { text-decoration: underline; text-decoration-color: #E8742A; text-underline-offset: 4px; }
 
 @media (max-width: 1100px) { .idea .idea-quote { min-height: 0; } }
 @media (max-width: 900px) {

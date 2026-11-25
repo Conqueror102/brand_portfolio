@@ -78,7 +78,7 @@
 
     <section class="wrap section-tight">
         <div class="grid-4">
-            @foreach (array_filter([['calendar', 'Opening session', cohort('opening')], ['clock', 'Weekly sessions', trim(cohort('sessions').' '.(cohort('timezone') ?? ''))], ['heart', 'Closing session', cohort('closing')], ['star', 'Investment', cohort('fee') ? cohort('fee').', after acceptance' : null], ['globe', 'Delivery', cohort('delivery')], ['people', 'Cohort size', cohort('capacity')]], fn ($row) => filled($row[2])) as $i => [$icon, $title, $text])
+            @foreach (array_filter([['pin', 'Applications close', $deadline ? nice_date($deadline) : null], ['steps', 'Programme starts', cohort('start')], ['calendar', 'Opening session', cohort('opening')], ['clock', 'Weekly sessions', trim(cohort('sessions').' '.(cohort('timezone') ?? ''))], ['heart', 'Closing session', cohort('closing')], ['star', 'Investment', cohort('fee') ? cohort('fee').', after acceptance' : null], ['globe', 'Delivery', cohort('delivery')], ['people', 'Cohort size', cohort('capacity')]], fn ($row) => filled($row[2])) as $i => [$icon, $title, $text])
                 <article class="card stat-card {{ ['card-white', 'card-mist-soft', 'card-white', 'card-sand'][$loop->index % 4] }}" data-reveal>
                     <span class="icon-chip"><x-line-icon :name="$icon" /></span>
                     <p class="stat-label">{{ $title }}</p>
@@ -88,6 +88,26 @@
         </div>
         @if (content('mentorship.schedule_note'))<p class="fine-print">{{ content('mentorship.schedule_note') }}</p>@endif
     </section>
+
+    @if (content('mentorship.separate_title'))
+        <section class="wrap section-tight">
+            <div class="mentor-separate" data-reveal>
+                <div class="mentor-separate-col">
+                    <p class="eyebrow">{{ content('mentorship.separate_programme_label') }}</p>
+                    <h2 class="display h-md">{{ content_html('mentorship.separate_title') }}</h2>
+                    <p class="body-copy">{{ content('mentorship.separate_programme_text') }}</p>
+                </div>
+                <div class="mentor-separate-col is-alt">
+                    <p class="eyebrow">{{ content('mentorship.separate_sessions_label') }}</p>
+                    <p class="body-copy">{{ content('mentorship.separate_sessions_text') }}</p>
+                    <div class="actions">
+                        <a class="btn btn-light" href="{{ route('contact', ['type' => 'session']) }}">Ask about one-to-one sessions <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
+                        <a class="link-arrow" href="{{ route('contact', ['type' => 'mentorship']) }}">Ask a question about the programme <x-line-icon name="arrow" /></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
     @if (items('mentorship_includes')->isNotEmpty())
         <section class="wrap section-tight">

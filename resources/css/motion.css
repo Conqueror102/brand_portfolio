@@ -35,7 +35,7 @@ html, body:not(.admin-body) { overflow-x: clip; }
 [data-tilt].is-tilting { --lift: -8px; transition: transform .12s ease-out, box-shadow .4s var(--ease-calm); box-shadow: 0 40px 70px -40px #10244088; z-index: 2; }
 [data-tilt]::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), #FFFFFF40, transparent 45%); opacity: 0; transition: opacity .4s ease; z-index: 3; }
 [data-tilt].is-tilting::after { opacity: 1; }
-.card-navy[data-tilt]::after, .home-speaking-card[data-tilt]::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), #D9AD9333, transparent 50%); }
+.card-navy[data-tilt]::after, .home-speaking-card[data-tilt]::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), #E8742A33, transparent 50%); }
 .article-card:hover .article-card-art { transform: scale(1.07); }
 .article-card-art, .programme-card-img, .moment img, .resource-card img, .engagement img { transition: transform 1.2s var(--ease-calm); }
 .resource-card:hover img, .engagement:hover img { transform: scale(1.05); }
@@ -44,7 +44,7 @@ html, body:not(.admin-body) { overflow-x: clip; }
 .btn, .speaking-button, .connect-button { position: relative; overflow: hidden; isolation: isolate; translate: var(--mag-x, 0px) var(--mag-y, 0px); transition: translate .5s var(--ease-spring), background-color .35s ease, color .35s ease, border-color .35s ease; }
 .btn.is-magnet, .speaking-button.is-magnet, .connect-button.is-magnet { transition: translate .12s ease-out, background-color .35s ease, color .35s ease, border-color .35s ease; }
 .btn::before, .speaking-button::before, .connect-button::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, #FFFFFF38 50%, transparent 70%); transform: translateX(-120%); transition: transform .9s var(--ease-calm); }
-.connect-button::before { background: linear-gradient(110deg, transparent 30%, #D9AD9340 50%, transparent 70%); }
+.connect-button::before { background: linear-gradient(110deg, transparent 30%, #E8742A40 50%, transparent 70%); }
 .btn:hover::before, .speaking-button:hover::before, .connect-button:hover::before { transform: translateX(120%); }
 .btn .btn-icon, .speaking-button .icon, .connect-button .icon, .insights-button .icon, .link-arrow .line-icon, .insights-all .icon { transition: transform .5s var(--ease-spring); }
 .btn:hover .btn-icon { transform: translateX(4px) rotate(-45deg) scale(1.08); }
@@ -58,9 +58,9 @@ html, body:not(.admin-body) { overflow-x: clip; }
 [data-tilt]:hover .icon-chip { transform: rotate(-8deg) scale(1.12); }
 
 /* Cursor companion (desktop only). */
-.cursor-ring { position: fixed; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 1.5px solid #D9AD93; pointer-events: none; z-index: 9999; opacity: 0; transition: width .35s var(--ease-calm), height .35s var(--ease-calm), margin .35s var(--ease-calm), background-color .35s ease, opacity .3s ease, border-color .3s ease; }
+.cursor-ring { position: fixed; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 1.5px solid #E8742A; pointer-events: none; z-index: 9999; opacity: 0; transition: width .35s var(--ease-calm), height .35s var(--ease-calm), margin .35s var(--ease-calm), background-color .35s ease, opacity .3s ease, border-color .3s ease; }
 .cursor-ring.is-on { opacity: 1; }
-.cursor-ring.is-hover { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: #D9AD9326; border-color: transparent; }
+.cursor-ring.is-hover { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: #E8742A26; border-color: transparent; }
 .cursor-ring.is-down { width: 24px; height: 24px; margin: -12px 0 0 -12px; }
 
 /* Homepage hero: name from the left, portrait from the right. It settles into exactly the same layout. */

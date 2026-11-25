@@ -121,9 +121,11 @@
                     <article class="engagement" data-reveal>
                         @if ($engagement->imageUrl())<img src="{{ $engagement->imageUrl() }}" alt="{{ $engagement->imageAlt() }}" loading="lazy">@endif
                         <time>{{ $engagement->date?->format('M Y') }}</time>
+                        @php([$engRole, $engEvent] = array_pad(array_map('trim', explode('·', (string) $engagement->subtitle, 2)), 2, ''))
                         <div>
+                            @if ($engRole)<p class="engagement-role">{{ $engRole }}</p>@endif
                             <h3>{{ $engagement->title }}</h3>
-                            @if ($engagement->subtitle)<p class="engagement-sub">{{ $engagement->subtitle }}</p>@endif
+                            @if ($engEvent)<p class="engagement-sub">{{ $engEvent }}</p>@endif
                             @if ($engagement->body)<p>{{ $engagement->body }}</p>@endif
                         </div>
                         @if ($engagement->url)<a class="insight-arrow" href="{{ $engagement->url }}" target="_blank" rel="noopener noreferrer" aria-label="More about {{ $engagement->title }}"><x-line-icon name="arrow-up-right" /></a>@endif
@@ -152,6 +154,46 @@
                         <li><span class="icon-chip"><x-line-icon :name="$step->icon ?: 'check'" /></span><strong>{{ $step->title }}</strong><p>{{ $step->body }}</p></li>
                     @endforeach
                 </ol>
+            </div>
+        </section>
+    @endif
+
+    @php($recordings = items('media_items')->whereIn('category', ['speaking', 'video'])->filter(fn ($m) => $m->url))
+    @if ($recordings->isNotEmpty())
+        <section class="wrap section-tight" aria-labelledby="recordings-title">
+            <header class="section-head">
+                <div>
+                    <p class="eyebrow">{{ content('speaking.recordings_eyebrow') }}</p>
+                    <h2 id="recordings-title" class="display h-lg">{{ content_html('speaking.recordings_title') }}</h2>
+                </div>
+            </header>
+            <div class="recordings">
+                @foreach ($recordings as $rec)
+                    <a class="recording" href="{{ $rec->url }}" target="_blank" rel="noopener noreferrer" data-reveal>
+                        <span class="recording-thumb" @if ($rec->imageUrl()) style="background-image: url('{{ $rec->imageUrl() }}')" @endif><x-line-icon name="play" /></span>
+                        <span class="recording-copy"><strong>{{ $rec->title }}</strong><small>{{ collect([$rec->subtitle, $rec->date?->format('Y')])->filter()->join(' · ') }}</small></span>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    @php($faqs = items('speaking_faqs'))
+    @if ($faqs->isNotEmpty())
+        <section class="wrap section-tight" aria-labelledby="booking-faq-title">
+            <div class="split">
+                <div class="sticky-col" data-reveal>
+                    <p class="eyebrow">{{ content('speaking.faq_eyebrow') }}</p>
+                    <h2 id="booking-faq-title" class="display h-lg" style="margin-top: 18px">{{ content_html('speaking.faq_title') }}</h2>
+                </div>
+                <div class="faq">
+                    @foreach ($faqs as $faq)
+                        <details class="faq-item" data-reveal>
+                            <summary>{{ $faq->title }}<span class="faq-toggle"><x-line-icon name="plus" /></span></summary>
+                            <p>{{ $faq->body }}</p>
+                        </details>
+                    @endforeach
+                </div>
             </div>
         </section>
     @endif

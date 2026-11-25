@@ -3,9 +3,9 @@
 .meet { --meet-radius: 18px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: minmax(360px, auto) minmax(250px, auto); gap: 16px; max-width: 1440px; margin: 0 auto; padding: clamp(56px, 7vw, 100px) 4.4%; }
 .meet > * { border-radius: var(--meet-radius); overflow: hidden; position: relative; }
 
-.meet-intro { grid-column: 1 / 7; background: #F4E8DE; padding: clamp(32px, 4vw, 56px); display: flex; flex-direction: column; }
+.meet-intro { grid-column: 1 / 7; background: #E9EDF1; padding: clamp(32px, 4vw, 56px); display: flex; flex-direction: column; }
 .meet-eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--color-brand-muted); display: flex; align-items: center; gap: 12px; }
-.meet-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #D9AD93; }
+.meet-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #E8742A; }
 .meet-intro h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(36px, 3.6vw, 58px); line-height: 1.02; letter-spacing: -.05em; margin-top: 22px; max-width: 12em; }
 .meet-intro > p:not(.meet-eyebrow) { font-size: 16px; line-height: 1.6; color: var(--color-brand-blue); margin-top: 16px; max-width: 30em; }
 .meet-pill { display: inline-flex; align-items: center; gap: 14px; align-self: flex-start; margin-top: auto; border-radius: 99px; background: var(--color-brand-navy); color: #FFFFFF; padding: 8px 8px 8px 22px; font-size: 14px; }
@@ -35,10 +35,10 @@
 .meet-perspective li { font-size: 12px; border: 1px solid #B7C0CA; border-radius: 99px; padding: 6px 12px; }
 
 .meet-connect { grid-column: 10 / 13; background: var(--color-brand-navy); color: #F4F1EC; padding: clamp(24px, 2.4vw, 32px); display: flex; flex-direction: column; }
-.meet-connect::before { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #D9AD9340, transparent 70%); }
+.meet-connect::before { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #E8742A40, transparent 70%); }
 .meet-connect h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2vw, 30px); letter-spacing: -.04em; line-height: 1.1; position: relative; }
 .meet-connect p { font-size: 14px; line-height: 1.6; color: #C9D0D7; margin: 10px 0 28px; position: relative; }
-.meet-pill-light { background: #F4E8DE; color: var(--color-brand-navy); margin-top: auto; position: relative; }
+.meet-pill-light { background: #E9EDF1; color: var(--color-brand-navy); margin-top: auto; position: relative; }
 .meet-connect .meet-pill-light { margin-top: auto; }
 .meet-pill-light:hover { background: #FFFFFF; }
 .meet-pill-light .icon { background: #10244014; }

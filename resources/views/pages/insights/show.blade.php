@@ -1,4 +1,4 @@
-<x-layouts.page :title="$article->title" :description="$article->seo_description ?: $article->excerpt" og-type="article">
+<x-layouts.page :title="$article->title" :description="$article->seo_description ?: $article->excerpt" og-type="article" :image="$article->coverUrl() ? url($article->coverUrl()) : null">
     @if ($article->status !== 'published')<div class="preview-bar" role="status"><x-line-icon name="eye" /> <span>Preview of an unpublished article. Visitors cannot see this page yet.</span><a href="{{ route('admin.articles.edit', $article) }}">Back to editing</a></div>@endif
     <article>
         <header class="wrap article-head">
@@ -17,18 +17,30 @@
         <div class="wrap article-layout">
             <div class="prose article-body">{!! $article->bodyHtml() !!}
                 @if ($article->references)<div class="references"><h2>References</h2>{{ block_text($article->references) }}</div>@endif
+                <aside class="author-card" aria-label="About the author">
+                    <img src="{{ content_image('speaking.profile_image') }}" alt="" loading="lazy">
+                    <div>
+                        <p class="author-label">About the author</p>
+                        <strong>{{ content('profile.given_name') }} {{ content('profile.surname') }}</strong>
+                        <p>{{ content('insights.author_bio') }}</p>
+                        <a class="link-arrow" href="{{ route('about') }}">More about me <x-line-icon name="arrow" /></a>
+                    </div>
+                </aside>
             </div>
             <aside class="article-aside">
                 <div class="card card-cream">
                     <p class="stat-label">Share</p>
                     <div class="share">
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><x-line-icon name="linkedin" /></a>
+                        <a href="https://x.com/intent/post?url={{ urlencode(url()->current()) }}&text={{ urlencode($article->title) }}" target="_blank" rel="noopener noreferrer" aria-label="Share on X"><x-line-icon name="x" /></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook"><x-line-icon name="facebook" /></a>
+                        <a href="https://wa.me/?text={{ rawurlencode($article->title.' '.url()->current()) }}" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp"><x-line-icon name="share" /></a>
                         <a href="mailto:?subject={{ rawurlencode($article->title) }}&body={{ rawurlencode(url()->current()) }}" aria-label="Share by email"><x-line-icon name="mail" /></a>
                     </div>
                 </div>
                 <div class="card card-navy card-glow">
                     <p class="eyebrow">Bring this to your team</p>
-                    <p style="margin-top: 12px">Invite Modupe to explore these ideas with your leaders.</p>
+                    <p style="margin-top: 12px">Invite me to explore these ideas with your leaders.</p>
                     <a class="btn btn-light" style="margin-top: 20px" href="{{ route('contact', ['type' => 'speaking']) }}">Invite me to speak <span class="btn-icon"><x-line-icon name="arrow" /></span></a>
                 </div>
             </aside>

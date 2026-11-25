@@ -1,14 +1,15 @@
 @php($open = \App\Models\Setting::flag('book_waitlist_open'))
 <x-layouts.page :title="content('navigation.book_label')" :description="content('book.meta')">
     <section class="wrap section-tight">
-        <div class="book-hero card card-sand" data-reveal>
-            <div class="book-hero-art">@include('partials.book-cover', ['large' => true])</div>
+        <div class="book-hero card card-sand {{ content_on('book.show_cover') ? '' : 'is-coverless' }}" data-reveal>
+            @if (content_on('book.show_cover'))<div class="book-hero-art">@include('partials.book-cover', ['large' => true])</div>@endif
             <div class="book-hero-copy">
-                <p class="eyebrow">{{ content('navigation.book_label') }} · {{ content('book.release') }}</p>
+                <p class="eyebrow">{{ content('navigation.book_label') }}@if (content_on('book.show_release') && content('book.release')) · {{ content('book.release') }}@endif</p>
                 <h1 class="display h-xl">{{ content('book.title') }}</h1>
+                @if (content('book.statement'))<p class="book-statement">{{ content_html('book.statement') }}</p>@endif
                 <p class="lede">{{ content('book.synopsis') }}</p>
                 <dl class="facts">
-                    <div><dt>Release</dt><dd>{{ content('book.release') }}</dd></div>
+                    @if (content_on('book.show_release') && content('book.release'))<div><dt>Release</dt><dd>{{ content('book.release') }}</dd></div>@endif
                     <div><dt>Formats</dt><dd>{{ content('book.formats') }}</dd></div>
                     <div><dt>Price</dt><dd>{{ content('book.price') }}</dd></div>
                 </dl>

@@ -1,12 +1,13 @@
+{{-- Shown once there are at least three real photographs, so a single print never sits alone. --}}
 @php($moments = items('moments')->filter(fn ($m) => $m->image)->values())
-@if ($moments->isNotEmpty())
+@if ($moments->count() >= 3)
 @php($tilts = [-7, 4, -3, 6, -5, 3, -6, 5, -2, 7])
 @php($drops = [18, -10, 26, 0, 14, -16, 22, 4, -8, 12])
 <section class="moments" id="moments" aria-labelledby="moments-title" data-prints>
     <header class="moments-head">
         <p class="moments-eyebrow">{{ content('home.moments_eyebrow') }}</p>
         <h2 id="moments-title">{{ content_html('home.moments_title') }}</h2>
-        <p class="prints-hint">Hover a print to turn it over · open it to see it full size</p>
+        <p class="prints-hint"><span class="hint-hover">{{ content('home.moments_hint') }}</span><span class="hint-touch">{{ content('home.moments_hint_touch') }}</span></p>
     </header>
 
     {{-- A loose pile of prints. Each lifts and turns over on hover; the corner button opens the viewer. --}}

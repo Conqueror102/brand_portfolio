@@ -12,7 +12,7 @@ class SettingsController extends Controller
 {
     public function edit(): View
     {
-        $settings = collect(['book_waitlist_open', 'notification_email', 'send_receipts', 'contact_email', 'linkedin_url', 'instagram_url', 'x_url', 'facebook_url', 'youtube_url'])->mapWithKeys(fn ($key) => [$key => Setting::get($key)]);
+        $settings = collect(['analytics_id', 'book_waitlist_open', 'notification_email', 'send_receipts', 'contact_email', 'linkedin_url', 'instagram_url', 'x_url', 'facebook_url', 'youtube_url'])->mapWithKeys(fn ($key) => [$key => Setting::get($key)]);
 
         return view('admin.settings', compact('settings'));
     }
@@ -22,6 +22,7 @@ class SettingsController extends Controller
         $data = $request->validate([
             'notification_email' => ['nullable', 'email', 'max:254'],
             'contact_email' => ['nullable', 'email', 'max:254'],
+            'analytics_id' => ['nullable', 'regex:/^G-[A-Z0-9]+$/', 'max:30'],
             'linkedin_url' => ['nullable', 'url', 'max:255'],
             'instagram_url' => ['nullable', 'url', 'max:255'],
             'x_url' => ['nullable', 'url', 'max:255'],

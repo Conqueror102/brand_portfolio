@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class CohortController extends Controller
 {
-    public const FIELDS = ['mentorship_status', 'mentorship_cohort', 'mentorship_year', 'mentorship_timezone', 'mentorship_period', 'mentorship_duration', 'mentorship_opening', 'mentorship_sessions', 'mentorship_closing', 'mentorship_fee', 'mentorship_capacity', 'mentorship_delivery', 'applications_open_on', 'applications_close_on'];
+    public const FIELDS = ['mentorship_status', 'mentorship_cohort', 'mentorship_year', 'mentorship_timezone', 'mentorship_period', 'mentorship_start', 'mentorship_duration', 'mentorship_opening', 'mentorship_sessions', 'mentorship_closing', 'mentorship_fee', 'mentorship_capacity', 'mentorship_delivery', 'applications_open_on', 'applications_close_on'];
 
     public function edit(): View
     {
@@ -28,6 +28,7 @@ class CohortController extends Controller
             'mentorship_year' => ['nullable', 'string', 'max:20'],
             'mentorship_timezone' => ['nullable', 'string', 'max:60'],
             'mentorship_period' => ['nullable', 'string', 'max:80'],
+            'mentorship_start' => ['nullable', 'string', 'max:80'],
             'mentorship_duration' => ['nullable', 'string', 'max:60'],
             'mentorship_opening' => ['nullable', 'string', 'max:120'],
             'mentorship_sessions' => ['nullable', 'string', 'max:120'],

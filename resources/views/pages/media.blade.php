@@ -13,7 +13,7 @@
     @if ($appearances->isEmpty())
         <section class="wrap section-tight">
             <div class="grid-4">
-                @foreach ([['mic', 'Speaking', 'Keynotes and panel appearances'], ['headphones', 'Podcasts', 'Long-form conversations'], ['video', 'Video', 'Recorded sessions and interviews'], ['file', 'Publications', 'Articles and features']] as $i => [$icon, $title, $text])
+                @foreach ([['mic', 'Speaking', 'Talks and panel appearances'], ['headphones', 'Podcasts', 'Long-form conversations'], ['video', 'Video', 'Recorded sessions and interviews'], ['file', 'Publications', 'Articles and features']] as $i => [$icon, $title, $text])
                     <article class="card feature-card media-type {{ ['card-white', 'card-cream', 'card-mist-soft', 'card-sand'][$i] }}" data-reveal>
                         <span class="icon-chip"><x-line-icon :name="$icon" /></span>
                         <h2>{{ $title }}</h2>

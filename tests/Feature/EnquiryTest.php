@@ -44,6 +44,6 @@ test('"something else" stores the type chosen from the dropdown', function () {
 test('the contact form offers keynote, panel, workshop and leadership retreat', function () {
     $this->get(route('contact', ['type' => 'panel']))
         ->assertOk()
-        ->assertSee('Keynote')->assertSee('Panel')->assertSee('Workshop')->assertSee('Leadership retreat')
+        ->assertSee('Conference talk')->assertSee('Panel')->assertSee('Workshop')->assertSee('Leadership retreat')
         ->assertSee('value="panel" required checked', false);
 });

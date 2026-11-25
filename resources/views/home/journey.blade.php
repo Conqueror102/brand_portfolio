@@ -25,7 +25,7 @@
                             </div>
                             @if ($kind === 'figure')
                                 <p class="career-figure" data-count="{{ $figure }}">{{ $figure }}</p>
-                                <p class="career-figure-label">{{ \Illuminate\Support\Str::limit($stop->body, 90) }}</p>
+                                <p class="career-figure-label">{{ $stop->body }}</p>
                             @elseif ($kind === 'scene' && $stop->imageUrl())
                                 <figure class="career-scene"><img src="{{ $stop->imageUrl() }}" alt="" loading="lazy">
                                     <span class="career-toast"><span class="career-toast-dot"></span><span><strong>{{ $stop->subtitle }}</strong><small>{{ $stop->category }}</small></span></span>

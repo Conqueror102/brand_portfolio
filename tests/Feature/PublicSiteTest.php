@@ -77,7 +77,7 @@ test('mentorship applications are stored when open', function () {
     expect($saved->status)->toBe('submitted')
         ->and($saved->payment_status)->toBe('not_requested')
         ->and($saved->marketing_consent)->toBeTrue()
-        ->and($saved->cohort)->toBe('Inaugural cohort');
+        ->and($saved->cohort)->toBe('2027 cohort');
 });
 
 test('applications require privacy consent', function () {

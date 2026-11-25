@@ -87,6 +87,7 @@
                         </div>
                         <x-field name="message" label="Topic, objectives and anything else we should know" type="textarea" required minlength="10" maxlength="5000" />
                         <button class="btn" type="submit">Send request <span class="btn-icon"><x-line-icon name="arrow" /></span></button>
+                        @if (content('contact.privacy_text'))<p class="form-privacy"><x-line-icon name="lock" /> <span>{{ content('contact.privacy_text') }} <a href="{{ route('privacy') }}">Privacy notice</a></span></p>@endif
                     </form>
                 @endif
             </div>
@@ -115,7 +116,7 @@
                     <div class="card card-white contact-direct contact-socials" data-reveal>
                         <span class="icon-chip"><x-line-icon name="share" /></span>
                         <div>
-                            <p class="stat-label">Follow her work</p>
+                            <p class="stat-label">Follow my work</p>
                             <ul class="contact-social-list">
                                 @foreach ($socials as $social)
                                     <li><a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer"><x-line-icon :name="$social['icon']" /> {{ $social['label'] }}</a></li>

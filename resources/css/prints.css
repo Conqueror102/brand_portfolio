@@ -1,6 +1,6 @@
 /* ── "In the room, on the stage": a pile of prints that turn over, plus a full-size viewer ── */
 .moments[data-prints] { overflow-x: clip; overflow-y: visible; padding-bottom: clamp(90px, 10vw, 150px); }
-.prints-hint { margin-top: 14px; font-size: 13px; color: var(--color-brand-muted, #6B7A8E); }
+.prints-hint { margin-top: 14px; font-size: 13px; color: var(--color-brand-muted, #4A5768); }
 .prints { --w: clamp(190px, 16.5vw, 268px); display: flex; justify-content: center; align-items: center; list-style: none; margin: clamp(30px, 4vw, 56px) 0 0; padding: 60px var(--gutter, 5%) 30px; perspective: 1800px; }
 .print { position: relative; flex-shrink: 0; width: var(--w); z-index: calc(10 + var(--i));
     transform: translateY(var(--drop)) rotate(var(--tilt)); transition: transform .7s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)), z-index 0s .35s; }
@@ -23,7 +23,7 @@
 .print-open { position: absolute; z-index: 5; right: -12px; top: -14px; width: 42px; height: 42px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer;
     background: var(--ink, #102440); color: #FFFFFF; box-shadow: 0 10px 24px -8px #10244099; opacity: 0; transform: scale(.6); transition: opacity .3s ease, transform .5s var(--ease-spring, ease); }
 .print-open .line-icon { width: 18px; height: 18px; }
-.print-open:hover { background: #D9AD93; color: var(--ink, #102440); }
+.print-open:hover { background: #E8742A; color: var(--ink, #102440); }
 
 /* lift, straighten, then turn over */
 .print:hover, .print:has(.print-card:focus-visible), .print.is-flipped { z-index: 60; transform: translateY(-34px) rotate(0deg) scale(1.16); transition: transform .7s var(--ease-spring, ease), z-index 0s; }
@@ -43,7 +43,7 @@
 .viewer-copy { position: relative; padding: clamp(28px, 3vw, 48px); display: flex; flex-direction: column; color: #F5EFE6; }
 .viewer-count { font-size: 12px; letter-spacing: .14em; color: #8FA0B6; }
 .viewer-count b { color: #F5EFE6; font-weight: 500; }
-.viewer-meta { margin-top: auto; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: #E9C9A8; }
+.viewer-meta { margin-top: auto; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: #F59A52; }
 .viewer-title { margin-top: 14px; font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 2.6vw, 42px); line-height: 1.05; letter-spacing: -.035em; color: #FFFFFF; }
 .viewer-body { margin-top: 16px; font-size: 15px; line-height: 1.65; color: #C9D2DE; }
 .viewer-link { margin-top: 18px; align-self: flex-start; color: #F5EFE6; border-color: #F5EFE655; }
@@ -71,3 +71,6 @@ html.viewer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
     .print, .print-card, .print-open, .viewer-frame, .viewer-backdrop, .viewer-img img { transition: none !important; animation: none !important; }
 }
+
+.prints-hint .hint-touch { display: none; }
+@media (hover: none), (pointer: coarse) { .prints-hint .hint-hover { display: none; } .prints-hint .hint-touch { display: inline; } }
