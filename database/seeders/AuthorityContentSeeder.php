@@ -376,7 +376,8 @@ class AuthorityContentSeeder extends Seeder
         }
 
         // Lists: update seeded rows that nobody has edited, matching on the fields the old seed set.
-        $new = config('collections');
+        // Read the file itself, so a stale config cache on the server can't hide new lists.
+        $new = require config_path('collections.php');
         foreach ($before['items'] as $type => $rows) {
             foreach ($rows as $i => $old) {
                 $target = collect($new[$type]['seed'])->firstWhere('title', $old['title'])
