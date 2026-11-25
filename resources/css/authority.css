@@ -233,7 +233,7 @@
 .case-back { margin-bottom: clamp(30px, 4vw, 60px); }
 .case-back .line-icon { transform: rotate(180deg); }
 .case-back:hover .line-icon { transform: rotate(180deg) translateX(4px); }
-.case-num { position: absolute; right: var(--gutter); top: 10px; font-family: var(--font-display); font-style: italic; font-size: clamp(120px, 16vw, 260px); line-height: 1; color: #E9DED2; z-index: -1; }
+.case-num { position: absolute; right: var(--gutter); top: 10px; font-family: var(--font-display); font-style: italic; font-size: clamp(120px, 16vw, 260px); line-height: 1; color: #DCE2E8; z-index: -1; }
 .case-hero .display { margin-top: 20px; max-width: 13em; }
 .case-result { display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 12px 20px 12px 16px; border-radius: 99px; background: var(--ink); color: #F4F1EC; font-size: 14px; }
 .case-figure { margin-top: 0; }

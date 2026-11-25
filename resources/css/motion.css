@@ -44,13 +44,12 @@ html, body:not(.admin-body) { overflow-x: clip; }
 .btn, .speaking-button, .connect-button { position: relative; overflow: hidden; isolation: isolate; translate: var(--mag-x, 0px) var(--mag-y, 0px); transition: translate .5s var(--ease-spring), background-color .35s ease, color .35s ease, border-color .35s ease; }
 .btn.is-magnet, .speaking-button.is-magnet, .connect-button.is-magnet { transition: translate .12s ease-out, background-color .35s ease, color .35s ease, border-color .35s ease; }
 .btn::before, .speaking-button::before, .connect-button::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, #FFFFFF38 50%, transparent 70%); transform: translateX(-120%); transition: transform .9s var(--ease-calm); }
-.connect-button::before { background: linear-gradient(110deg, transparent 30%, #E8742A40 50%, transparent 70%); }
 .btn:hover::before, .speaking-button:hover::before, .connect-button:hover::before { transform: translateX(120%); }
 .btn .btn-icon, .speaking-button .icon, .connect-button .icon, .insights-button .icon, .link-arrow .line-icon, .insights-all .icon { transition: transform .5s var(--ease-spring); }
 .btn:hover .btn-icon { transform: translateX(4px) rotate(-45deg) scale(1.08); }
 .speaking-button:hover .icon, .connect-button:hover .icon { transform: translateX(6px); }
 .insights-button:hover .icon, .link-arrow:hover .line-icon, .insights-all:hover .icon { transform: translateX(7px); }
-.connect-button:hover { border-color: var(--color-brand-navy); }
+.connect-button:hover { border-color: #F28A3F; }
 .link-arrow, .insights-button { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .6s var(--ease-calm); }
 .link-arrow:hover, .insights-button:hover { background-size: 100% 1px; }
 .tag, .status-pill, .icon-chip { transition: transform .45s var(--ease-spring), background-color .3s ease; }

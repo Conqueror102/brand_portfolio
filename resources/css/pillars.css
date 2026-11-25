@@ -90,7 +90,7 @@
 .mentor-for span { color: var(--color-brand-muted); }
 .mentor-profiles { list-style: none; padding: 0; margin: 0 0 40px; border-top: 1px solid var(--color-brand-navy); }
 .mentor-profiles li { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--color-brand-border); }
-.mentor-profiles .num { font-family: var(--font-display); font-size: 26px; color: #C99A7E; line-height: 1; }
+.mentor-profiles .num { font-family: var(--font-display); font-size: 26px; color: #E8742A; line-height: 1; }
 .mentor-profiles h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 1.9vw, 28px); letter-spacing: -.025em; line-height: 1.15; }
 .mentor-profiles p { margin-top: 6px; font-size: 15px; color: var(--color-brand-muted); }
 .mentor-fit-title { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-brand-muted); margin-bottom: 14px; }

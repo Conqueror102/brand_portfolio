@@ -23,7 +23,7 @@
 .status-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #3E7B52; }
 .status-forthcoming::before { background: var(--apricot); }
 .status-closed::before, .status-in_progress::before { background: #8E9AA6; }
-.journey { display: grid; grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr)); margin-top: 38px; border-top: 1px solid #D9C8B9; }
+.journey { display: grid; grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr)); margin-top: 38px; border-top: 1px solid #C3CAD2; }
 .journey li { position: relative; padding: 18px 12px 0 0; font-family: var(--font-display); font-size: clamp(16px, 1.35vw, 20px); letter-spacing: -.02em; }
 .journey li::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--apricot); }
 .journey li:last-child::before { background: var(--ink); }
@@ -58,7 +58,7 @@
 }
 @media (max-width: 650px) {
 .home-topics, .home-formats, .facts { grid-template-columns: 1fr; }
-.journey { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid #D9C8B9; margin-left: 4px; }
+.journey { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid #C3CAD2; margin-left: 4px; }
 .journey li { padding: 0 0 16px 22px; }
 .journey li::before { top: 6px; left: -5px; }
 .home-mentorship-art { min-height: 360px; }
